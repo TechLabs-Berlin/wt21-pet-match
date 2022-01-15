@@ -16,9 +16,8 @@ db.once("open", () => {
 
 // get all questionnaires from database
 app.get('/matchquiz', async(req, res) => {
-    const questions = await matchQuiz.find()
-//    console.log(questions)
-    res.json(questions)  
+    const questions = await matchQuiz.find().sort({'questionID': 1});
+    res.json(questions);  
 });
 
 app.listen(3001, () => {
