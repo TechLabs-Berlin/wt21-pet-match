@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Match | Cat Profile</title>
+
+    <!-- =================Google Fonts start================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Sans+Caption&family=Paytone+One&display=swap"
+        rel="stylesheet">
+    <!-- ==================Google Fonts end=================== -->
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../webdev/website/src/components/questionaire/Questionaire.css">
+</head>
+
+<body>
+
+    <!-- ====================Navbar start===================== -->
+    <nav class="navbar">
+        <a href="index.html"><img src="img/petmatch-dummy-logo.png" alt="petmatch logo" class="logo__img"></a>
+        <ul>
+            <li>
+                <a href="quiz.html">Match Quiz</a>
+            </li>
+            <li>
+                <a href="how-it-works.html">How it Works</a>
+            </li>
+            <li>
+                <a href="about-us.html">About Us</a>
+            </li>
+            <li>
+                <a href="shelter-area.html">Shelter Area</a>
+            </li>
+        </ul>
+
+        <a href="log-in.html"><button class="navbar__log_in" type="button">Log In</button></a>
+    </nav>
+    <!-- =====================Navbar end====================== -->
+
+    <!-- =================Questionnaire start================= -->
+    <main class="questionnaire">
+        <form action="">
+            <div class="container__top_questionnaire">
+                <div class="container__question_count">
+                    <p class="question_count">Question 01/15</p>
+                </div>
+                <div class="container__questionnaire_question">
+                    <p class="questionnaire_question">I see myself as someone who worries a lot</p>
+                </div>
+            </div>
+            <div class="container__bottom_questionnaire">
+                <div class="questionnaire_option">
+                    <input type="radio" id="option_1" name="options" value="strongly_agree">
+                    <label for="option_1">Strongly Agree</label>
+                </div>
+                <div class="questionnaire_option">
+                    <input type="radio" id="option_2" name="options" value="agree">
+                    <label for="option_2">Agree</label>
+                </div>
+                <div class="questionnaire_option">
+                    <input type="radio" id="option_3" name="options" value="neutral">
+                    <label for="option_3">Neutral</label>
+                </div>
+                <div class="questionnaire_option">
+                    <input type="radio" id="option_4" name="options" value="disagree">
+                    <label for="option_4">Disagree</label>
+                </div>
+                <div class="questionnaire_option">
+                    <input type="radio" id="option_5" name="options" value="strongly_disagree">
+                    <label for="option_5">Strongly Disagree</label>
+                </div>
+            </div>
+        </form>
+        <div class="container__back_next">
+            <button class="button__questionnaire_back">&#60; Back</button>
+            <button class="button__questionnaire_next">Next</button>
+        </div>
+    </main>
+    <!-- ==================Questionnaire end================== -->
+
+    <!-- ====================Footer start===================== -->
+    <footer>
+        <ul class="footer__social">
+            <li>
+                <a href="#insta">
+                    <img src="" alt="">
+                    <img src="icons/instagram.svg" alt="instagram icon" id="icon__insta">
+                </a>
+            </li>
+            <li>
+                <a href="#facebook">
+                    <img src="icons/facebook-circle.svg" alt="facebook icon" id="icon__fb">
+                </a>
+            </li>
+            <li>
+                <a href="#paypal">
+                    <img src="icons/paypal.svg" alt="paypal icon" id="icon__paypal">
+                </a>
+            </li>
+        </ul>
+
+        <ul class="footer__nav">
+            <li>About Us</li>
+            <li>How It Works</li>
+            <li>Imprint</li>
+        </ul>
+    </footer>
+    <!-- =====================Footer end====================== -->
+
+</body>
+
+</html>
