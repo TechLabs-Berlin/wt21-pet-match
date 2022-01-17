@@ -75,9 +75,8 @@ button {
     padding-bottom: 10px;
     width: 100%;
     height: 8vh;
-    font-size: 14px;
+    font-size: 16px;
     font-family: PT Sans Caption, sans-serif;
-    font-weight: bold;
     text-transform: uppercase;
 }
 
@@ -109,24 +108,33 @@ button {
 }
 
 .navbar .logo__img {
-    max-height: 40px;
+    max-height: 50px;
 }
 
 .navbar .logo__img:hover {
-    opacity: 0.8;
-    max-height: 40px;
+    opacity: 50%;
+    max-height: 50px;
 }
 
-.navbar__log_in {
-    border-color: #eb4b38;
-    background-color: #FFFFFF;
-    color: #eb4b38;
+.navbar__login_signup {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.navbar__log_in:hover {
-    border-color: #eb4b38;
-    background-color: #eb4b38;
-    color: #FFFFFF;
+.navbar__login_signup a {
+    color: #50C7F7;
+    font-weight: bold;
+}
+
+.navbar__login_signup a:hover {
+    transition: 0.2s ease;
+    color: #f8da22;
+    font-weight: bold;
+}
+
+.navbar__login_signup p {
+    padding: 0 8px;
+    opacity: 50%;
 }
 
 /* ====================Nav Bar end===================== */
