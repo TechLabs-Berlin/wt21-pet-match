@@ -49,21 +49,22 @@ h1 {
 
 /* NEXT + BACK BUTTON */
 .button__questionnaire_next {
-    border-color: #eb4b38;
-    background-color: #FFFFFF;
-    color: #eb4b38;
-}
-
-.button__questionnaire_next:hover {
-    border-color: #eb4b38;
     background-color: #eb4b38;
     color: #FFFFFF;
 }
 
+.button__questionnaire_next:disabled {
+    background-color: #eb4b38;
+    opacity: 0.6;
+    color: #FFFFFF;
+    cursor: not-allowed;
+}
 
+.button__questionnaire_next:hover {
+    background-color: #CC2714;
+}
 
 /* RADIO BUTTONS */
-
 /* Customize the label (the container) */
 .container__radio_button {
     display: flex;
