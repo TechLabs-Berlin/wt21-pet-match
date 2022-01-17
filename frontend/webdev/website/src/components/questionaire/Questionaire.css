@@ -1,0 +1,11 @@
+.button__questionnaire_next {
+    border-color: #eb4b38;
+    background-color: #FFFFFF;
+    color: #eb4b38;
+}
+
+.button__questionnaire_next:hover {
+    border-color: #eb4b38;
+    background-color: #eb4b38;
+    color: #FFFFFF;
+}
