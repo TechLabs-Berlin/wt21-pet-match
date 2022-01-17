@@ -1,19 +1,49 @@
 
-/* QUESTION BACKGROUND */
-
+/* MAIN */
+h1 {
+    font-size: 50px;
+}
 .container__top_questionnaire {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     justify-content: center;
     background-color: #50c7f7;
+    height: 40vh
 }
 
 .container__bottom_questionnaire {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 30vh;
+}
+
+.container__question {
+    text-align: center;
+    padding: 0 50px;
+}
+
+.questionnaire_question {
+    margin-block-start: 0;
+}
+
+.question_count p {
+    margin: 0;
+    text-align: center;
+    color: #2A353F;
+    opacity: 35%;
+    font-size: 22px;
+    font-family: PT Sans, sans-serif;
+}
+
+.container__back_next {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: end;
+    height: 6vh;
 }
 
 
@@ -36,12 +66,14 @@
 
 /* Customize the label (the container) */
 .container__radio_button {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
+    font-family: PT Sans, sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -49,6 +81,7 @@
   }
   
   /* Hide the browser's default radio button */
+
   .container__radio_button input {
     position: absolute;
     opacity: 0;
