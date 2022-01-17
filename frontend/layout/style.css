@@ -102,6 +102,8 @@ button {
 }
 
 .navbar a {
+    display: flex;
+    align-self: center;
     text-decoration: none;
     color: #463239;
 }
