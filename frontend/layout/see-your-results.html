@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Match | Cat Profile</title>
+
+    <!-- =================Google Fonts start================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Sans+Caption&family=Paytone+One&display=swap"
+        rel="stylesheet">
+    <!-- ==================Google Fonts end=================== -->
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="see-your-results.css">
+</head>
+
+<body>
+
+    <!-- ====================Navbar start===================== -->
+    <nav class="navbar">
+        <a href="index.html"><img src="img/petmatch-dummy-logo.png" alt="petmatch logo" class="logo__img"></a>
+        <ul>
+            <li>
+                <a href="quiz.html">Match Quiz</a>
+            </li>
+            <li>
+                <a href="how-it-works.html">How it Works</a>
+            </li>
+            <li>
+                <a href="about-us.html">About Us</a>
+            </li>
+            <li>
+                <a href="shelter-area.html">Shelter Area</a>
+            </li>
+        </ul>
+
+        <div class="navbar__login_signup">
+            <a href="log-in.html" class="navbar__login">Log In</a>
+            <p>|</p>
+            <a href="sign-uphtml" class="navbar__signup">Sign Up</a>
+        </div>
+    </nav>
+    <!-- =====================Navbar end====================== -->
+
+    <!-- =================Questionnaire start================= -->
+    <main class="questionnaire">
+        <div class="container__top_questionnaire">
+            <div class="container__youre_done">
+                <h1 class="questionnaire_done">You're done!</h1>
+            </div>
+            <div class="container__button_results">
+                <button class="button__results">View Your Matches</button>
+            </div>
+        </div>
+        <div class="container__bottom_questionnaire">
+            <div class="signup_option">
+                <p>or</p>
+                <p>Sign up to save your results</p>
+            </div>
+
+
+            <form action="" method="post" class="form__signup" id="signup_results_page">
+
+                <input type="text" name="USER_name" id="user_name" placeholder="Your first name" required>
+
+                <input type="email" name="user_email" id="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    placeholder="Your email" required>
+
+                <input type="password" name="user_password" id="user_password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
+                    placeholder="Choose a password" required>
+
+                <button formaction="/matching-result" type="submit" form="signup_results_page" class="button__signup_submit">Create Account</button>
+            </form>
+        </div>
+    </main>
+    <!-- ==================Questionnaire end================== -->
+
+    <!-- ====================Footer start===================== -->
+    <footer>
+        <ul class="footer__social">
+            <li>
+                <a href="#insta">
+                    <img src="" alt="">
+                    <img src="icons/instagram.svg" alt="instagram icon" id="icon__insta">
+                </a>
+            </li>
+            <li>
+                <a href="#facebook">
+                    <img src="icons/facebook-circle.svg" alt="facebook icon" id="icon__fb">
+                </a>
+            </li>
+            <li>
+                <a href="#paypal">
+                    <img src="icons/paypal.svg" alt="paypal icon" id="icon__paypal">
+                </a>
+            </li>
+        </ul>
+
+        <ul class="footer__nav">
+            <li>About Us</li>
+            <li>How It Works</li>
+            <li>Imprint</li>
+        </ul>
+    </footer>
+    <!-- =====================Footer end====================== -->
+
+</body>
+
+</html>
