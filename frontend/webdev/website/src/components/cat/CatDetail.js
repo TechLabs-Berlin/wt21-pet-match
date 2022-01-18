@@ -2,27 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import catDetailCSS from './CatDetail.css';
 
-import iconHeart from '../../images/icons/heart.svg';
-import iconArrowRight from '../../images/icons/arrow-right.svg';
-import iconArrowLeft from '../../images/icons/arrow-left.svg';
-import catImage from '../../images/img/catProfile01.jpg'; 
+const CatDetails = (props) => { 
+    const iconHeart = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.ICON_HEART;
+    const iconHeartAlt = props.cfgData.ICON_HEART_ALT;
+    const iconArrowRight = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.ICON_ARROW_RIGHT;
+    const iconArrowRightAlt = props.cfgData.ICON_ARROW_RIGHT_ALT;
+    const iconArrowLeft = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.ICON_ARROW_LEFT;
+    const iconArrowLeftAlt = props.cfgData.ICON_ARROW_LEFT_ALT;
+    /* To be replaced by DB - Data */
+    const catImage = props.cfgData.CAT_IMAGES_PATH + 'catProfile01.jpg';
+    const catImageAlt = 'A brown Birman Mix cat in a blue background.';
 
-const CatDetails = () => { 
     return (
         <main className="cat_profile">
             <div className="container__return">
-                <Link to="/matching/results">&#9166; Return to Matches</Link>
+                <Link to={props.cfgData.FE_ROUTE_MATCHING_RESULT}>&#9166; Return to Matches</Link>
             </div>
             <div className="container__top_cat_profile">
                 <div className="container__cat_profile_picture">
                     <div className="container__img_cat_profile">
-                        <img src={catImage} className="img__cat_profile" alt="A brown Birman Mix cat in a blue background." />
+                        <img src={catImage} className="img__cat_profile" alt={catImageAlt} />
                         <div className="icon__save">
-                            <img src={iconHeart} alt="Heart this cat" />
+                            <img src={iconHeart} alt={iconHeartAlt} />
                         </div>
                         <div className="icon__picture_navigation">
-                            <img src={iconArrowLeft} alt="Previous cat" />
-                            <img src={iconArrowRight} alt="Next cat" />
+                            <img src={iconArrowLeft} alt={iconArrowLeftAlt} />
+                            <img src={iconArrowRight} alt={iconArrowRightAlt} />
                         </div>
                     </div>
                 </div>
@@ -60,7 +65,7 @@ const CatDetails = () => {
                         </div>
                     </div>
                     <div className="container__contact_shelter">
-                        <Link to="/shelter">
+                        <Link to={props.cfgData.FE_ROUTE_SHELTER}>
                             <button id="button__contact_shelter">Contact Shelter</button>
                         </Link>
                     </div>

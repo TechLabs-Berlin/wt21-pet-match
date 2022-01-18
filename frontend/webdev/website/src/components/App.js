@@ -1,5 +1,9 @@
+/* Import react-components */
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+/* Import project-configuration */
+import cfgData from '../config/cfgData.json';
+/* Import project-components */
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import Home from './home/Home';
@@ -12,24 +16,23 @@ import Shelter from './shelter/Shelter';
 import LogIn from './login/LogIn';
 import Imprint from './imprint/Imprint';
 
-import configData from '../config/configData.json';
-const imagesPath = configData.IMAGES_PATH;
-
 const App = () => {
     return (
         <BrowserRouter>
             <div>
-                <Header imagesPath={imagesPath}/>
-                <Route path="/" exact component={Home} />
-                <Route path="/howitworks" component={HowItWorks} />
-                <Route path="/aboutus" component={AboutUs} />
-                <Route path="/shelter" component={Shelter} />
-                <Route path="/login" component={LogIn} />
-                <Route path="/imprint" component={Imprint} />
-                <Route path="/questionaire/start" component={QuestionaireStart} />
-                <Route path="/matching/result" component={MatchingResult} />
-                <Route path="/cat/detail" component={CatDetail} />
-                <Footer />
+                <Header cfgData={cfgData} />
+                <Route path={cfgData.FE_ROUTE_HOME} exact><Home cfgData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_HOWITWORKS} exact><HowItWorks cfgData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_ABOUTUS} exact><AboutUs cfgData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_SHELTER} exact><Shelter cfgData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_LOGIN} exact><LogIn cfgData={cfgData} loginState='I' /></Route>
+                <Route path={cfgData.FE_ROUTE_LOGOUT} exact><LogIn cfgData={cfgData} loginState='O' /></Route>
+                <Route path={cfgData.FE_ROUTE_LOGIN_CREATE} exact><LogIn cfgData={cfgData} loginState='C'/></Route>
+                <Route path={cfgData.FE_ROUTE_IMPRINT} exact><Imprint cfgData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_QUESTIONAIRE_START} exact><QuestionaireStart configcfgDataData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_MATCHING_RESULT} exact><MatchingResult cfgData={cfgData} /></Route>
+                <Route path={cfgData.FE_ROUTE_CAT_DETAIL} exact><CatDetail cfgData={cfgData} /></Route>
+                <Footer cfgData={cfgData} />
             </div>
         </BrowserRouter>
     );
