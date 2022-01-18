@@ -31,6 +31,20 @@ ul {
     list-style-type: none;
 }
 
+a {
+    color:#50C7F7;
+    font-weight: bold;
+    text-decoration: solid underline 2px;
+}
+
+a:hover {
+    color:#f8da22
+}
+
+a:active {
+    color: #EB4B38;
+}
+
 button {
     transition: 0.2s ease;
     border: none;
