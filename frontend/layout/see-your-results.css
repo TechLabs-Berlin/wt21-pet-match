@@ -1,0 +1,71 @@
+
+/* MAIN */
+h1 {
+    font-size: 50px;
+}
+.container__top_questionnaire {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #50c7f7;
+    height: 40vh
+}
+
+.container__bottom_questionnaire {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 30vh;
+}
+
+.container__youre_done {
+    text-align: center;
+    padding: 0 50px;
+}
+
+.questionnaire_done {
+    margin-block-start: 0;
+}
+
+.container__back_next {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: end;
+    height: 6vh;
+}
+
+
+/* BUTTONS */
+.container__button_results {
+    margin: 0;
+    text-align: center;
+}
+
+.button__results {
+    background-color: #eb4b38;
+    color: #FFFFFF;
+    max-width: 200px;
+}
+
+.button__results:hover {
+    background-color: #CC2714;
+}
+
+
+/* SIGN UP FORM */
+input[type=submit] {
+    transition: 0.2s ease;
+    border: 2px solid;
+    border-radius: 1px;
+    max-width: 135px;
+    height: 40px;
+    padding: 0 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}

@@ -45,21 +45,9 @@ button {
     text-align: center;
 }
 
-
-
-/* input[type=submit] {
+button:hover {
     transition: 0.2s ease;
-    border: 2px solid;
-    border-radius: 1px;
-    max-width: 135px;
-    height: 40px;
-    padding: 0 20px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-} */
+}
 
 /* ====================General end===================== */
 
