@@ -38,7 +38,8 @@ a {
 }
 
 a:hover {
-    color:#f8da22
+    color:#f8da22;
+    transition: 0.2s ease;
 }
 
 a:active {
