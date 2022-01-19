@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 
 const answerSchema = new mongoose.Schema({
-    // userAnswerID: mongoose.Schema.Types.ObjectId,
-    userAnswerID: Number,
+    //userAnswerID: mongoose.Schema.Types.ObjectId,
     userID: {
         type: Number,
         // ref: 'user'
