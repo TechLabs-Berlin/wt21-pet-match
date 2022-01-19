@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-const matchQuiz = require('./models/matchquiz')
+const matchQuiz = require('./models/matchquiz');
+const userAnswer = require('./models/answer');
 
 mongoose.connect('mongodb+srv://petmatch-admin:techlab2122@cluster0.9nbuq.mongodb.net/petmatch', {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection;
@@ -19,6 +20,12 @@ app.get('/matchquiz', async(req, res) => {
     const questions = await matchQuiz.find().sort({'questionID': 1});
     res.json(questions);  
 });
+
+// test answer collection
+app.get('/answer', async(req, res) => {
+    const savedAnswer = await userAnswer.find();
+    res.json(savedAnswer);
+})
 
 app.listen(3001, () => {
     console.log('it is working!')
