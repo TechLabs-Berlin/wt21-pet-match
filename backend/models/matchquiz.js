@@ -1,10 +1,20 @@
 const mongoose = require('mongoose');
 
 const quizSchema = new mongoose.Schema({
-    questionID: Number,
-    questionText: String,
-    questionType: Number,
-    answer: [{answerText: String, answerValue: Number}] 
+    questionID: {
+        type: Number,
+        required: true,
+        unique: true
+    },
+    questionText: {
+        type: String,
+        required: true
+    },
+    questionType: Number, // type of answer (1=number input, 2 = radio button)
+    answer: {
+        type: [{answerText: String, answerValue: Number}],
+        required: true
+    } 
 });
 
 const matchQuiz = mongoose.model('Quiz', quizSchema);
