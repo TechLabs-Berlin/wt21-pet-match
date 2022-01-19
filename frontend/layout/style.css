@@ -9,6 +9,7 @@ h1 {
     font-family: Paytone One, sans-serif;
     font-size: 4em;
     color: #FFFFFF;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.065);
 }
 
 h2 {
