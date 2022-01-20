@@ -8,6 +8,7 @@ const userSchema  = new mongoose.Schema({
     },
     password: String,
     memberAccount: Boolean,
+    acceptedConsent: Boolean
 });
 
 const user = mongoose.model('User', userSchema);
