@@ -13,7 +13,8 @@ const quizSchema = new mongoose.Schema({
     questionType: Number, // type of answer (1=number input, 2 = radio button)
     answer: {
         type: [{answerText: String, answerValue: Number}],
-        required: true
+        required: true,
+        _id: false
     } 
 });
 
