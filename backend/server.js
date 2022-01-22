@@ -6,6 +6,8 @@ const axios = require('axios');
 const matchQuiz = require('./models/matchquiz');
 const userAnswer = require('./models/answer');
 const user = require('./models/user');
+const cat = require('./models/cats');
+const cats = require('./models/cats');
 
 mongoose.connect('mongodb+srv://petmatch-admin:techlab2122@cluster0.9nbuq.mongodb.net/petmatch', {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection;
@@ -53,8 +55,7 @@ app.patch('/submitretakequiz', async(req, res) => {
     // pass data to model route
 })
 
-
-// test answer collection
+// connected to model and retrieve cat info from database --> send data to FE
 app.post('/showresult', async (req, res) => {
     // const userID = req.body.userID;
     // const userAnswer = req.body.allChosenAnswer;
@@ -63,19 +64,39 @@ app.post('/showresult', async (req, res) => {
     //     allAnswer.push(choices["a"]);
     // };
         
-    res = await axios.post('http://omaistat.pythonanywhere.com/predict', [{"1": 1, "2": 2, "3": 4, "4": 3, "5": 2, "6": 5, "7": 4, "8": 3, "9": 4, "10": 5, "11": 3, "12": 4, "13": 5, "14": 2, "15": 3, "16": 4, "17": 5, "18": 4, "19": 3}]
+    modelOutput = await axios.post('http://omaistat.pythonanywhere.com/predict', [{"1": 1, "2": 2, "3": 4, "4": 3, "5": 2, "6": 5, "7": 4, "8": 3, "9": 4, "10": 5, "11": 3, "12": 4, "13": 5, "14": 2, "15": 3, "16": 4, "17": 5, "18": 4, "19": 3}]
         // userID: userID,
         // allUserAnswer: allAnswer
     );
+    console.log(modelOutput)  
 
-    //console.log(userID);
-    res.json(res);
+    res.send('ok')
+    // res.json();
 })
 
-// get cat result
-app.get('/result', (req, res) => {
-    //get result from above route to query database to get all cat info
+// find cat from database
+// put in same route as model 
+app.post('/showresult1', async (req, res) => {
+    const userID = req.body.userID;
+    const output = req.body.result;
+    const catResult = [];
+    for (let cat of output){
+        catInfo = {};
+        catInfo['catOrder'] = cat.catOrder;
+        const catData = await cats.findOne({catID: cat.catID}).exec();
+        catInfo['catData'] = catData;
+        catResult.push(catInfo);
+    }
+    res.json(catResult)
 })
+
+
+// {
+//    'userID': 123,
+//    'result': [{'catOrder': 1, 'catID': 234}, {'catOrder': 2, 'catID': 256}]
+// }
+
+    
 
 app.listen(3001, () => {
     console.log('it is working!')
