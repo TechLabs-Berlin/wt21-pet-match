@@ -23,17 +23,41 @@ app.get('/matchquiz', async(req, res) => {
     res.json(questions);  
 });
 
-// show old result for log-in user
-app.get('/showsavedresult', async(req, res) => {
-    const userID = req.body.userID;
-    const savedAnswer = await userAnswer.find({userID: userID});
-    res.json(savedAnswer); 
+// register
+
+// log-in
+
+// log-out
+
+// 'your matches' for log-in user --> show result based on answer saved in database
+// find user & get answers --> send to another route (submit answer to model route)
+app.post('/yourmatchesresult', async(req, res) => {
+    const ID = req.body.userID;
+    const savedAnswer = await userAnswer.find({userID: ID});
+    res.json(savedAnswer);
+    // how to pass to model route
 })
 
+// 'retake quiz' for log-in user ---> user retakes a quiz and we update answer in database
+// update answer ---> send to another route (submit answer to model route)
+app.patch('/submitretakequiz', async(req, res) => {
+    const ID = req.body.userID;
+    const newChosenAnswer = req.body.allChosenAnswer;
+    for (let newAns of newChosenAnswer){
+        updateAnswer = await userAnswer.updateOne(
+            {userID: ID, "allChosenAnswer.questionID": newAns.questionID},
+            {$set: {"allChosenAnswer.$.chosenAnswer": newAns.chosenAnswer}}
+        )
+    }
+    res.json(req);
+    // pass data to model route
+})
+
+
 // test answer collection
-app.post('/submitanswer', async (req, res) => {
+app.post('/showresult', async (req, res) => {
     // const userID = req.body.userID;
-    // const userAnswer = req.body.chosenAnswer;
+    // const userAnswer = req.body.allChosenAnswer;
     // const allAnswer = [];
     // for (let choices of userAnswer){
     //     allAnswer.push(choices["a"]);
@@ -41,7 +65,7 @@ app.post('/submitanswer', async (req, res) => {
         
     res = await axios.post('http://omaistat.pythonanywhere.com/predict', [{"1": 1, "2": 2, "3": 4, "4": 3, "5": 2, "6": 5, "7": 4, "8": 3, "9": 4, "10": 5, "11": 3, "12": 4, "13": 5, "14": 2, "15": 3, "16": 4, "17": 5, "18": 4, "19": 3}]
         // userID: userID,
-        // allChosenAnswer: allAnswer
+        // allUserAnswer: allAnswer
     );
 
     //console.log(userID);
@@ -55,5 +79,4 @@ app.get('/result', (req, res) => {
 
 app.listen(3001, () => {
     console.log('it is working!')
-});
-
+})

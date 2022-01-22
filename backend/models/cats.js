@@ -15,7 +15,6 @@ const catSchema = new mongoose.Schema({
     },
     age: Number,
     breed: String,
-    goodwith: String, // oder [String]
     neutered: Boolean,
     healthIssue: Boolean,
     shelterName: String
