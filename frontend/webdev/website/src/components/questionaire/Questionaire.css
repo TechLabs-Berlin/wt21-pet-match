@@ -1,7 +1,6 @@
-
 /* MAIN */
 h1 {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 input[type="number"] {
@@ -22,38 +21,47 @@ input[type="number"]::placeholder {
 }
 
 .container__top_questionnaire {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #50c7f7;
-    height: 40vh
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #50c7f7;
+  height: 40vh;
 }
 
 .container__bottom_questionnaire {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 20vh;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 20vh;
+}
+
+.container__bottom_questionnaire_yes_no {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
 }
 
 .container__question {
-    text-align: center;
-    padding: 0 50px;
+  text-align: center;
+  padding: 0 50px;
 }
 
 .questionnaire_question {
-    margin-block-start: 0;
+  margin-block-start: 0;
 }
 
 .question_count p {
-    margin: 0;
-    text-align: center;
-    color: #2A353F;
-    opacity: 35%;
-    font-size: 22px;
-    font-family: PT Sans, sans-serif;
+  margin: 0;
+  text-align: center;
+  color: #2a353f;
+  opacity: 35%;
+  font-size: 22px;
+  font-family: PT Sans, sans-serif;
 }
 
 .questionnaire_option {
@@ -61,6 +69,10 @@ input[type="number"]::placeholder {
   text-align: center;
 }
 
+.questionnaire_option_yes_no {
+  padding-right: 20px;
+  padding-left: 20px;
+}
 
 /* NEXT + BACK BUTTON */
 .container__back_next {
@@ -72,20 +84,20 @@ input[type="number"]::placeholder {
 }
 
 .button__questionnaire_next {
-    background-color: #eb4b38;
-    color: #FFFFFF;
-    margin-left: 20px;
+  background-color: #eb4b38;
+  color: #ffffff;
+  margin-left: 20px;
 }
 
 .button__questionnaire_next:disabled {
-    background-color: #eb4b38;
-    opacity: 0.6;
-    color: #FFFFFF;
-    cursor: not-allowed;
+  background-color: #eb4b38;
+  opacity: 0.6;
+  color: #ffffff;
+  cursor: not-allowed;
 }
 
 .button__questionnaire_next:hover {
-    background-color: #CC2714;
+  background-color: #cc2714;
 }
 
 .button__questionnaire_back {
@@ -102,69 +114,69 @@ input[type="number"]::placeholder {
 /* RADIO BUTTONS */
 /* Customize the label (the container) */
 .container__radio_button {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    font-family: PT Sans, sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Hide the browser's default radio button */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: PT Sans, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-  .container__radio_button input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom radio button */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #fef9d8;
-    border-radius: 50%;
-  }
-  
-  /* On mouse-over, add a yellow background color */
-  .container__radio_button:hover input ~ .checkmark {
-    background-color: #F9DF39;
-  }
-  
-  /* When the radio button is checked, add a red background */
-  .container__radio_button input:checked ~ .checkmark {
-    background-color: #eb4b38;
-  }
-  
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the indicator (dot/circle) when checked */
-  .container__radio_button input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the indicator (dot/circle) */
-  .container__radio_button .checkmark:after {
-    top: 9px;
-    left: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-  }
+/* Hide the browser's default radio button */
+
+.container__radio_button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fef9d8;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a yellow background color */
+.container__radio_button:hover input ~ .checkmark {
+  background-color: #f9df39;
+}
+
+/* When the radio button is checked, add a red background */
+.container__radio_button input:checked ~ .checkmark {
+  background-color: #eb4b38;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container__radio_button input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container__radio_button .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
