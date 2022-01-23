@@ -33,8 +33,8 @@ ul {
 
 button {
   transition: 0.2s ease;
-  border: 2px solid;
-  border-radius: 3px;
+  border: none;
+  border-radius: 30px;
   max-width: 135px;
   height: 40px;
   padding: 0 20px;

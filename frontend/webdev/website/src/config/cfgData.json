@@ -42,5 +42,6 @@
     "FE_ROUTE_MATCHING_RESULT": "/matching/result",
     "FE_ROUTE_MATCHING_RESULT_MENUITEM": "Your Matches",
     "FE_ROUTE_CAT_DETAIL": "/cat/detail",
-    "FE_ROUTE_CAT_DETAIL_MENUITEM": "Cat Profile"
+    "FE_ROUTE_CAT_DETAIL_MENUITEM": "Cat Profile",
+    "Q_QUESTION_TXT": "Question"
 }

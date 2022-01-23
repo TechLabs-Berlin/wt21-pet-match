@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-/* Import CSS for Header */
+/* Import CSS used only for Header */
 import headerCSS from './Header.css';
 /* Import project-components */
 import HeaderQuiz from './HeaderQuiz';
 import HeaderMatch from './HeaderMatch';
-/* import HeaderState from './HeaderState'; */
 
 const Header = (props) => {
     const [userId, setUserId] = useState(0);
+    const [answerId, setAnswerId] = useState(0);
     const [loggedIn, setLoggedIn] = useState(false);
     const [loginState, setLoginState] = useState('I');
     const [quizTaken, setQuizTaken] = useState(false);
@@ -21,15 +21,12 @@ const Header = (props) => {
     const location = useLocation();
 
     const clickLogout = e => {
-        console.log('onClick: clickLogout');
         setLogOutClicked(true);
     }
 
-    console.log('Header: after const-declaration');
-
-    function setSessionVar(userId, loggedIn, loginState, quizTaken) {
-        console.log('function: setSessionVar');
+    function setSessionVar(userId, answerId, loggedIn, loginState, quizTaken) {
         sessionStorage.setItem("userId", userId);
+        sessionStorage.setItem("answerId", answerId);
         sessionStorage.setItem("loggedIn", loggedIn);
         sessionStorage.setItem("loginState", loginState);
         sessionStorage.setItem("quizTaken", quizTaken);
@@ -45,7 +42,7 @@ const Header = (props) => {
         if (userId > 0 && loggedIn) {
             sessionStorage.setItem("loginState", 'O');
             return (
-                <div>
+                <div className="navbar__login_signup">
                     <Link to={logoutRoute}>
                         <button onClick={clickLogout} className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
                     </Link>
@@ -54,11 +51,10 @@ const Header = (props) => {
         }
         else {
             sessionStorage.setItem("loginState", 'I');
-
             return (
-                <div>
+                <div className="navbar__login_signup">
                     <Link to={props.cfgData.FE_ROUTE_LOGIN_CREATE}>
-                        <button className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM}</button>
+                        <button className="navbar__signup" type="button">{props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM}</button>
                     </Link>&nbsp;|&nbsp;
                     <Link to={props.cfgData.FE_ROUTE_LOGIN}>
                         <button className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGIN_MENUITEM}</button>
@@ -69,35 +65,34 @@ const Header = (props) => {
     }
         
     useEffect(() => {
-        console.log('useEffect: Start');
         if (firstRender === true) {
-            console.log('useEffect: firstRender');
             setFirstRender(false);
             setUserId(1);
+            setAnswerId(1);
             setLoggedIn(true);
             setLoginState('O');
             setQuizTaken(true);
-            setSessionVar(userId, loggedIn, loginState, quizTaken);
+            setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
         }
         if (logOutClicked === true) {
-            console.log('useEffect: logOutClicked');
             setLogOutClicked(false);
             // Logout -> BE
-            axios.post('http://localhost:3001/logout', userId)
-                .then(response => {
+            //axios.post('http://localhost:3001/logout', userId)
+            //    .then(response => {
                     setUserId(0);
+                    setAnswerId(0);
                     setLoggedIn(false);
                     setLoginState('I');
                     setQuizTaken(false);
-                    setSessionVar(userId, loggedIn, loginState, quizTaken);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+                    setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
+        //        })
+        //       .catch(error => {
+        //            console.log(error);
+        //        });
         }
     })
 
-    setSessionVar(userId, loggedIn, loginState, quizTaken);
+    setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
 
     const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
     const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
