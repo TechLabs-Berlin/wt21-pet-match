@@ -3,6 +3,24 @@
 h1 {
     font-size: 50px;
 }
+
+input[type="number"] {
+  margin: 10px;
+  border: 1px solid #ecf9fe;
+  border-radius: 3px;
+  border-color: #50c8f73f;
+  box-sizing: border-box;
+  width: 60px;
+  padding: 10px 10px;
+  background-color: #ecf9fe;
+  font-family: PT Sans Caption, sans-serif;
+  color: #463239;
+}
+
+input[type="number"]::placeholder {
+  color: #b9b9b9;
+}
+
 .container__top_questionnaire {
     display: flex;
     flex-direction: column;
@@ -36,6 +54,11 @@ h1 {
     opacity: 35%;
     font-size: 22px;
     font-family: PT Sans, sans-serif;
+}
+
+.questionnaire_option {
+  display: flex;
+  text-align: center;
 }
 
 
