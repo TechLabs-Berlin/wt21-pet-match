@@ -2,12 +2,17 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const axios = require('axios');
+const passport = require("passport");
+const passportLocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
 
 const matchQuiz = require('./models/matchquiz');
 const userAnswer = require('./models/answer');
 const user = require('./models/user');
-const cat = require('./models/cats');
 const cats = require('./models/cats');
+
 
 mongoose.connect('mongodb+srv://petmatch-admin:techlab2122@cluster0.9nbuq.mongodb.net/petmatch', {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection;
@@ -16,8 +21,20 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(session({
+      secret: "secretcode",
+      resave: true,
+      saveUninitialized: true,
+    })
+  );
+app.use(cookieParser("secretcode"));
+app.use(passport.initialize());
+app.use(passport.session());
+// require("./passportConfig")(passport);
+
 
 // get all questionnaires from database
 app.get('/matchquiz', async(req, res) => {
@@ -25,17 +42,63 @@ app.get('/matchquiz', async(req, res) => {
     res.json(questions);  
 });
 
-// register
+// non-user --> create dummy account and save answer in Answer collection
+app.post("/viewresult", async(req, res) => {
+    // create dummy user
+    const dummyUser = new user({
+        memberAccount: false,
+        acceptedConsent: req.body.acceptedConsent
+    });
+    await dummyUser.save().then(savedDoc => {
+        dummyid = savedDoc._id;
+    });
+    // save answer
+    const dummyAnswer = new userAnswer({
+        userID: dummyid,
+        allChosenAnswer: req.body.allChosenAnswer
+    });
+    await dummyAnswer.save();
+    res.json(dummyAnswer);
+    // pass data to model
+})
+
+// register new user
+app.post("/register", (req, res) => {
+    user.findOne({email: req.body.email}, async(err, doc) => {
+        if (err) throw err;
+        if (doc) res.send('User Already Exists');
+        if (!doc) {
+            // create new user
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const newUser = new user({
+                email: req.body.email,
+                password: hashedPassword,
+                memberAccount: true,
+                acceptedConsent: req.body.acceptedConsent,
+            });
+            await newUser.save().then(savedDoc => {
+                newid = savedDoc._id;
+            });
+            // save answer in answer collection
+            const newAnswer = new userAnswer({
+                userID: newid,
+                allChosenAnswer: req.body.allChosenAnswer
+            });
+            await newAnswer.save();
+            res.json(newAnswer);
+        }
+    })
+    // pass data to model
+})
 
 // log-in
 
-// log-out
 
 // 'your matches' for log-in user --> show result based on answer saved in database
 // find user & get answers --> send to another route (submit answer to model route)
 app.post('/yourmatchesresult', async(req, res) => {
     const ID = req.body.userID;
-    const savedAnswer = await userAnswer.find({userID: ID});
+    const savedAnswer = await userAnswer.findOne({userID: ID}).exec();
     res.json(savedAnswer);
     // how to pass to model route
 })
@@ -77,26 +140,26 @@ app.post('/showresult', async (req, res) => {
 // find cat from database
 // put in same route as model 
 app.post('/showresult1', async (req, res) => {
-    const userID = req.body.userID;
-    const output = req.body.result;
     const catResult = [];
-    for (let cat of output){
+    for (let cat of req.body.result){
         catInfo = {};
         catInfo['catOrder'] = cat.catOrder;
         const catData = await cats.findOne({catID: cat.catID}).exec();
         catInfo['catData'] = catData;
         catResult.push(catInfo);
-    }
-    res.json(catResult)
+    };
+    const userResult = {
+        userID: req.body.userID,
+        Result: catResult
+    };
+    res.json(userResult);
 })
 
-
-// {
-//    'userID': 123,
-//    'result': [{'catOrder': 1, 'catID': 234}, {'catOrder': 2, 'catID': 256}]
-// }
-
-    
+// log-out
+app.get('/logout', (req, res) => {
+    req.logOut();
+})
+   
 
 app.listen(3001, () => {
     console.log('it is working!')
