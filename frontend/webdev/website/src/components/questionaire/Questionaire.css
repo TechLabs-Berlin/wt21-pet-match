@@ -17,7 +17,7 @@ h1 {
     flex-grow: 1;
     align-items: center;
     justify-content: space-evenly;
-    height: 30vh;
+    height: 20vh;
 }
 
 .container__question {
@@ -38,19 +38,20 @@ h1 {
     font-family: PT Sans, sans-serif;
 }
 
-.container__back_next {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    justify-content: end;
-    height: 6vh;
-}
-
 
 /* NEXT + BACK BUTTON */
+.container__back_next {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: end;
+  margin: 30px 100px;
+}
+
 .button__questionnaire_next {
     background-color: #eb4b38;
     color: #FFFFFF;
+    margin-left: 20px;
 }
 
 .button__questionnaire_next:disabled {
@@ -62,6 +63,17 @@ h1 {
 
 .button__questionnaire_next:hover {
     background-color: #CC2714;
+}
+
+.button__questionnaire_back {
+  color: #9da7a5;
+  border: 0px;
+  background: none;
+  box-shadow: 0 0 0 0;
+}
+
+.button__questionnaire_back:hover {
+  color: #9da7a57a;
 }
 
 /* RADIO BUTTONS */
