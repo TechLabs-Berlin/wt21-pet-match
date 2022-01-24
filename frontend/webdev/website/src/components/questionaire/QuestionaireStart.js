@@ -165,7 +165,7 @@ const QuestionaireStart = (props) => {
         maxPage = questionaireArr.length;
         actualPage = questionaireArr[qIndex];
         initializeAnswerArr();
-        //console.log(choosenAnswer);
+        console.log(questionaireArr);
         //console.log(sessionStorage.choosenAnswer);
         questionActValue = parseInt(choosenAnswer[0].allchoosenAnswer[qIndex].choosenAnswer);
         questionText = actualPage.questionText;
@@ -175,9 +175,9 @@ const QuestionaireStart = (props) => {
     //console.log("... end: QuestionaireStart ...");
 
     /* last question answered -> show up seeYourResults - page */
-    if (questionairePage === maxPage && seeYourResultsPage && 'abd'==='ccc') {
+    if (questionairePage === maxPage && seeYourResultsPage) {
         return (
-            <SeeYourResults cfgData={props.cfgData} answerArr={answerArr} />
+            <SeeYourResults cfgData={props.cfgData} quizTaken={true} logInState='' />
         );
     }
     else {
