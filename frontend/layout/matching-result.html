@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Match | How It Works</title>
+    <title>Pet Match | Matching Results</title>
 
     <!-- =================Google Fonts start================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,103 +47,202 @@
     <!-- =====================Navbar end====================== -->
 
     <!-- ======================Main start===================== -->
-    <main class ="matching_results">
+    <main class="matching_results">
         <div class="container__filters">
+            <div class="filter">
+                <p>Sterilized</p>
+                <label for="sterilized_yes">
+                    <input type="checkbox" name="sterilized" id="sterilized_yes" value="yes">
+                    Yes
+                </label>
+                <label for="sterilized_no">
+                    <input type="checkbox" name="sterilized" id="sterilized_no" value="no">
+                    No
+                </label>
+            </div>
+            <div class="filter">
+                <p>Gender</p>
+                <label for="gender_female">
+                    <input type="checkbox" name="gender" id="gender_female" value="female">
+                    Female
+                </label>
+                <label for="gender_male">
+                    <input type="checkbox" name="gender" id="gender_male" value="male">
+                    Male
+                </label>
+            </div>
+
+            <div class="filter">
+                <p>Good with</p>
+                <label for="good_with_kids">
+                    <input type="checkbox" name="good_with" id="good_with_kids" value="kids">
+                    Kids
+                </label>
+                <label for="good_with_experience_tutor">
+                    <input type="checkbox" name="good_with" id="good_with_experience_tutor" value="experienced_tutor">
+                    Experienced Tutor
+                </label>
+            </div>
 
         </div>
-        <div class="container__cat_cards">
+
+        <div class="container__results">
             <div class="container__title">
                 <h1>Your Matches</h1>
             </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/cookie.jpg" alt="Cat Picture">
+
+            <div class="container__cat_cards">
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/cookie.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Cookie</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Female, 3 y.o.</h3>
+                        <h4 class="cat_shelter">Tierheim Berlin</h4>
+                    </div>
+                    <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
                 </div>
-                <div class="description__card">
-                    <p class="cat_name">Cookie</p>
-                    <p class="cat_gender_age">Female, 3 y.o.</p>
-                    <p class="cat_shelter">Tierheim Berlin</p>
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/mochi.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Mochi</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Female, 2 y.o.</h3>
+                        <h4 class="cat_shelter">Samtpfoten Neukölln e.V.</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/mochi.jpg" alt="Cat Picture">
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/misty.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Misty</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Female, 8 y.o.</h3>
+                        <h4 class="cat_shelter">Berlin Pro-kat e.V.</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-                <div class="description__card">
-                    <p class="cat_name">Mochi</p>
-                    <p class="cat_gender_age">Female, 2 y.o.</p>
-                    <p class="cat_shelter">Samtpfoten Neukölln e.V.</p>
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/olivia.png" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Olivia</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Female, 4 y.o.</h3>
+                        <h4 class="cat_shelter">Berlin Pro-kat e.V.</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
+
                 </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/misty.jpg" alt="Cat Picture">
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/maki.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Maki</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Male, 1 y.o.</h3>
+                        <h4 class="cat_shelter">Samtpfoten Neukölln e.V.</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-                <div class="description__card">
-                    <p class="cat_name">Misty</p>
-                    <p class="cat_gender_age">Female, 8 y.o.</p>
-                    <p class="cat_shelter">Berlin Pro-kat e.V.</p>
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/anthony.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Anthony</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Male, 2 y.o.</h3>
+                        <h4 class="cat_shelter">Katze Not In Berlin</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/olivia.png" alt="Cat Picture">
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/ebi.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Ebi</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Male, 3 y.o.</h3>
+                        <h4 class="cat_shelter">Samtpfoten Neukölln e.V.</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-                <div class="description__card">
-                    <p class="cat_name">Olivia</p>
-                    <p class="cat_gender_age">Female, 4 y.o.</p>
-                    <p class="cat_shelter">Berlin Pro-kat e.V.</p>
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/pumpkin.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Pumpkin</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Male, 3 y.o.</h3>
+                        <h4 class="cat_shelter">Tierheim Berlin</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/maki.jpg" alt="Cat Picture">
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/mila.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Mila</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Female, 4 y.o.</h3>
+                        <h4 class="cat_shelter">Tierheim Berlin</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-                <div class="description__card">
-                    <p class="cat_name">Maki</p>
-                    <p class="cat_gender_age">Male, 1 y.o.</p>
-                    <p class="cat_shelter">Samtpfoten Neukölln e.V.</p>
+
+                <div class="cat_card">
+                    <div class="img__card">
+                        <img src="img/jade.jpg" alt="Cat Picture">
+                    </div>
+                    <div class="description__card">
+                        <div class="container__card_title">
+                            <h2 class="cat_name">Jade</h2>
+                            <a href="cat-profile.html" class="a__more_details">More Details &#10132;</a>
+                        </div>
+                        <h3 class="cat_gender_age">Female, 1 y.o.</h3>
+                        <h4 class="cat_shelter">Berlin Pro-kat e.V.</h4>
+                        <a class="a__cat_profile" href="cat-profile.html"><span></span></a>
+                    </div>
                 </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/anthony.jpg" alt="Cat Picture">
-                </div>
-                <div class="description__card">
-                    <p class="cat_name">Anthony</p>
-                    <p class="cat_gender_age">Male, 2 y.o.</p>
-                    <p class="cat_shelter">Katze Not In Berlin</p>
-                </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/ebi.jpg" alt="Cat Picture">
-                </div>
-                <div class="description__card">
-                    <p class="cat_name">Ebi</p>
-                    <p class="cat_gender_age">Male, 3 y.o.</p>
-                    <p class="cat_shelter">Samtpfoten Neukölln e.V.</p>
-                </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/pumpkin.jpg" alt="Cat Picture">
-                </div>
-                <div class="description__card">
-                    <p class="cat_name">Pumpkin</p>
-                    <p class="cat_gender_age">Male, 3 y.o.</p>
-                    <p class="cat_shelter">Tierheim Berlin</p>
-                </div>
-            </div>
-            <div class="cat_card">
-                <div class="img__card">
-                    <img src="img/mila.jpg" alt="Cat Picture">
-                </div>
-                <div class="description__card">
-                    <p class="cat_name">Mila</p>
-                    <p class="cat_gender_age">Female, 4 y.o.</p>
-                    <p class="cat_shelter">Tierheim Berlin</p>
-                </div>
+
             </div>
         </div>
     </main>
