@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require("cors");
 const axios = require('axios');
 const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
@@ -24,6 +25,12 @@ db.once("open", () => {
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors({
+      origin: "http://localhost:3000", 
+      credentials: true,
+      optionsSuccessStatus: 200
+    })
+);
 app.use(session({
       secret: "secretcode",
       resave: true,
