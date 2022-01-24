@@ -15,6 +15,7 @@ import AboutUs from './aboutus/AboutUs';
 import Shelter from './shelter/Shelter';
 import LogIn from './login/LogIn';
 import Imprint from './imprint/Imprint';
+import Privacy from './privacy/Privacy';              
 
 const App = () => {
     return (
@@ -27,7 +28,8 @@ const App = () => {
                 <Route path={cfgData.FE_ROUTE_SHELTER} exact><Shelter cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_LOGIN} exact><LogIn cfgData={cfgData} loginState='I' /></Route>
                 <Route path={cfgData.FE_ROUTE_LOGOUT} exact><LogIn cfgData={cfgData} loginState='O' /></Route>
-                <Route path={cfgData.FE_ROUTE_LOGIN_CREATE} exact><LogIn cfgData={cfgData} loginState='C'/></Route>
+                <Route path={cfgData.FE_ROUTE_LOGIN_CREATE} exact><LogIn cfgData={cfgData} loginState='C' /></Route>
+                <Route path={cfgData.FE_ROUTE_PRIVACY} exact><Privacy cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_IMPRINT} exact><Imprint cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_QUESTIONAIRE_START} exact><QuestionaireStart cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_MATCHING_RESULT} exact><MatchingResult cfgData={cfgData} /></Route>
@@ -35,7 +37,7 @@ const App = () => {
                 <Footer cfgData={cfgData} />
             </div>
         </BrowserRouter>
-    );
+    )
 };
 
 export default App;

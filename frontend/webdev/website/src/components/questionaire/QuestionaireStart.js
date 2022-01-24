@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import RenderFormField from './RenderFormField';
+import SeeYourResults from '../seeyourresults/SeeYourResults';
 import axios from 'axios';
 import questionaireCSS from './Questionaire.css';
 
@@ -9,6 +10,7 @@ const QuestionaireStart = (props) => {
     const [answerArr, setAnswerArr] = useState([]);
     const [firstRendered, setFirstRenderd] = useState(false);
     const [reRender, setReRender] = useState(false);
+    const [seeYourResultsPage, setSeeYourResultsPage] = useState(false);
 
     let choosenAnswer = [{ "answerID": 0, "userID": 0, "allchoosenAnswer": [] }];
     let qIndex = 0, maxPage = 0, actualPage = {}, actualAnswers = [];
@@ -21,7 +23,7 @@ const QuestionaireStart = (props) => {
 
     useEffect(() => {
         setFirstRenderd(true);
-        sessionStorage.setItem("choosenAnswer",answerArr);
+        sessionStorage.setItem("choosenAnswer", answerArr);
         fetch("/matchquiz")
             .then(res => {
                 if (res.ok) {
@@ -50,7 +52,12 @@ const QuestionaireStart = (props) => {
         //console.log("... onClickNextPage ...");
         //console.log(questionairePage);
         //console.log(newQPage);
-        setQuestionairePage(newQPage);
+        if (questionairePage === questionaireArr.length) {
+            setSeeYourResultsPage(true);
+        }
+        else {
+            setQuestionairePage(newQPage);
+        }
         setReRender(true);
         //console.log(questionairePage);
     };
@@ -83,32 +90,37 @@ const QuestionaireStart = (props) => {
     };
 
 
-    function renderPreviousButton(actualPage,maxPage,actualValue,questionType) {
+    function renderPreviousButton(actualPage, maxPage, actualValue, questionType) {
+        let pageTxt = props.cfgData.Q_QUESTIONAIRE_BTN_PTXT;
         if ((actualPage === 1)) {
-            return (<button disabled className="button__questionnaire_back">&#60; Back</button>)
+            return (<button disabled className="button__questionnaire_back">&#60; {pageTxt}</button>)
         }
         else {
-            return (<button onClick={onClickPrevPage} className="button__questionnaire_back">&#60; Back</button>)
-        }       
-    }
-
-    function renderNextButton(actualPage,maxPage,actualValue,questionType) {
-        if ((actualPage === maxPage) || (actualValue === 0 && questionType !== 1)) {
-            return (<button disabled className="button__questionnaire_next">Next</button>)            
-        }
-        else {
-            return (<button onClick={onClickNextPage} className="button__questionnaire_next">Next</button>)            
+            return (<button onClick={onClickPrevPage} className="button__questionnaire_back">&#60; {pageTxt}</button>)
         }
     }
 
-    function renderQuestion(pAnswers,pMaxPage,pActValue,pType) {
+    function renderNextButton(actualPage, maxPage, actualValue, questionType) {
+        let pageTxt = props.cfgData.Q_QUESTIONAIRE_BTN_NTXT;
+        if (actualPage === maxPage) {
+            pageTxt = props.cfgData.Q_QUESTIONAIRE_BTN_FTXT;
+        }
+        if ((actualValue === 0 && questionType !== 1)) {
+            return (<button disabled className="button__questionnaire_next">{pageTxt}</button>)
+        }
+        else {
+            return (<button onClick={onClickNextPage} className="button__questionnaire_next">{pageTxt}</button>)
+        }
+    }
+
+    function renderQuestion(pAnswers, pMaxPage, pActValue, pType) {
         if (pMaxPage < 1) {
             return ('');
         }
 
         return (
             <div className="container__bottom_questionnaire">
-                {pAnswers.map((answer,index) => (
+                {pAnswers.map((answer, index) => (
                     <RenderFormField
                         key={index} f
                         fieldChanged={fieldChanged}
@@ -117,7 +129,7 @@ const QuestionaireStart = (props) => {
                         index={index}
                         qType={pType}
                     />
-                ))}                
+                ))}
             </div>
         )
     }
@@ -134,14 +146,14 @@ const QuestionaireStart = (props) => {
             choosenAnswer = answerArr;
         }
         else {
-            choosenAnswer[0].answerID = sessionStorage.getItem("answerId"); 
+            choosenAnswer[0].answerID = sessionStorage.getItem("answerId");
             choosenAnswer[0].userID = sessionStorage.getItem("userId");
 
             if (questionaireArr.length > 0) {
                 questionaireArr.map((question, index) => {
                     choosenAnswer[0].allchoosenAnswer.push({ questionID: question.questionID, choosenAnswer: 0 });
                 });
-                setAnswerArr(choosenAnswer);                
+                setAnswerArr(choosenAnswer);
             }
         }
     }
@@ -162,25 +174,33 @@ const QuestionaireStart = (props) => {
     }
     //console.log("... end: QuestionaireStart ...");
 
-    return (
-        <main className="questionnaire">
-            <form>
-                <div className="container__top_questionnaire">
-                    <div className="question_count">
-                        <p>{props.cfgData.Q_QUESTION_TXT} {questionairePage}/{maxPage}</p>
+    /* last question answered -> show up seeYourResults - page */
+    if (questionairePage === maxPage && seeYourResultsPage && 'abd'==='ccc') {
+        return (
+            <SeeYourResults cfgData={props.cfgData} answerArr={answerArr} />
+        );
+    }
+    else {
+        return (
+            <main className="questionnaire">
+                <form>
+                    <div className="container__top_questionnaire">
+                        <div className="question_count">
+                            <p>{props.cfgData.Q_QUESTION_TXT} {questionairePage}/{maxPage}</p>
+                        </div>
+                        <div className="container__question">
+                            <h1 className="questionnaire_question">{questionText}</h1>
+                        </div>
                     </div>
-                    <div className="container__question">
-                        <h1 className="questionnaire_question">{questionText}</h1>
-                    </div>
+                    {renderQuestion(actualAnswers,maxPage,questionActValue,questionType)}
+                </form>
+                <div className="container__back_next">
+                    {renderPreviousButton(questionairePage,maxPage,questionActValue,questionType)}
+                    {renderNextButton(questionairePage,maxPage,questionActValue,questionType)}                
                 </div>
-                {renderQuestion(actualAnswers,maxPage,questionActValue,questionType)}
-            </form>
-            <div className="container__back_next">
-                {renderPreviousButton(questionairePage,maxPage,questionActValue,questionType)}
-                {renderNextButton(questionairePage,maxPage,questionActValue,questionType)}                
-            </div>
-        </main>
-    );
+            </main>
+        );
+    }
 };
 
 export default QuestionaireStart;

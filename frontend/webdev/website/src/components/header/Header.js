@@ -117,7 +117,7 @@ const Header = (props) => {
             </ul>
             {renderHeaderState()}
         </nav>
-    );
+    )
 };
 
 export default Header; 
