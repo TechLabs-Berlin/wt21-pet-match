@@ -67,11 +67,11 @@ const Header = (props) => {
     useEffect(() => {
         if (firstRender === true) {
             setFirstRender(false);
-            setUserId(1);
-            setAnswerId(1);
-            setLoggedIn(true);
-            setLoginState('O');
-            setQuizTaken(true);
+            setUserId(0);
+            setAnswerId(0);
+            setLoggedIn(false);
+            setLoginState('I');
+            setQuizTaken(false);
             setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
         }
         if (logOutClicked === true) {

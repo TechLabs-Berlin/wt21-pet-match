@@ -8,24 +8,35 @@ const SeeYourResults = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [acceptedConsent, setAcceptedConsent] = useState('');
-    const [answerArr, setAnswerArr] = useState([]);
+    const [answerArr, setAnswerArr] = useState({});
     const [resultArr, setResultArr] = useState({});
     const [firstRendered, setFirstRenderd] = useState(false);
 
     let loggedIn = window.sessionStorage.getItem("loggedIn");
     let quizTakenNow = props.quizTaken;
+    let chosenAnswer = JSON.parse(sessionStorage.getItem("chosenAnswer"));
+    //chosenAnswer[0].answerID = 0;
+    //chosenAnswer[0].userID = 0;
+
+    console.log("... begin: SeeYourResults ...");
 
     useEffect(() => {
-        setAnswerArr(sessionStorage.getItem("choosenAnswer"));
+        setAnswerArr(chosenAnswer[0]);
         setFirstRenderd(true);
-        axios.post('http://localhost:3001/viewresult',answerArr)
-        //fetch("/matchquiz")
+        console.log("... begin: useEffect ... ");
+        console.log(chosenAnswer[0]);
+        console.log(answerArr);
+        axios.post('http://localhost:3001/viewresult',chosenAnswer[0])
             .then (res => {
-                if (res.ok) {
-                    console.log("/viewresult: result ok");
-                    return res.json();
-                }                
-            }).then (jsonRes => {
+                if (parseInt(res.status) === 200) {
+                    console.log(res.data);
+                    return res.data;
+                } 
+                else {
+                    console.log("res ist NICHT ok");
+                }
+            }).then(jsonRes => {
+                console.log(jsonRes);
                 setFirstname('Max');
                 setLastname('Mustermann');
                 setEmail('max.mustermann@somwhere.com');
@@ -33,8 +44,12 @@ const SeeYourResults = (props) => {
                 setAcceptedConsent(false);
                 setResultArr(jsonRes);
             })
-            .catch (error => console.log(error)); 
+            .catch(error => console.log(error)); 
+        console.log(resultArr);
+        console.log("... end: useEffect ... ");
     }, []);
+
+    console.log("... end: SeeYourResults ...");
 
     return (
         <main className="questionnaire">

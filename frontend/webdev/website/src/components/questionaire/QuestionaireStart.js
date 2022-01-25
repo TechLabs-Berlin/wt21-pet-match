@@ -12,7 +12,7 @@ const QuestionaireStart = (props) => {
     const [reRender, setReRender] = useState(false);
     const [seeYourResultsPage, setSeeYourResultsPage] = useState(false);
 
-    let choosenAnswer = [{ "answerID": 0, "userID": 0, "allchoosenAnswer": [] }];
+    let chosenAnswer = [{ "answerID": 0, "userID": 0, "allChosenAnswer": [] }];
     let qIndex = 0, maxPage = 0, actualPage = {}, actualAnswers = [];
     let questionText = '', questionType = 0, questionActValue = 0;
     let sessionArr = [];
@@ -23,10 +23,12 @@ const QuestionaireStart = (props) => {
 
     useEffect(() => {
         setFirstRenderd(true);
-        sessionStorage.setItem("choosenAnswer", answerArr);
+        sessionStorage.setItem("chosenAnswer", answerArr);
         fetch("/matchquiz")
             .then(res => {
+                //console.log(res);
                 if (res.ok) {
+                    //console.log("res ist ok");
                     return res.json();
                 }
             }).then(jsonRes => setQuestionaireArr(jsonRes))
@@ -37,10 +39,10 @@ const QuestionaireStart = (props) => {
         //console.log("... start: useEffect: qP + aA ...");
         if (firstRendered) {
             //console.log("... fristRendered TRUE ...");
-            //console.log(choosenAnswer);
-            //sessionArr = window.sessionStorage.getItem("choosenAnswer");
+            //console.log(chosenAnswer);
+            //sessionArr = window.sessionStorage.getItem("chosenAnswer");
             //console.log(sessionArr);
-            setAnswerArr(choosenAnswer);
+            setAnswerArr(chosenAnswer);
             setReRender(false);
         }
         //console.log("... end: useEffect: qP + aA ...");
@@ -77,12 +79,12 @@ const QuestionaireStart = (props) => {
         let pageToChangeValue = questionairePage - 1;
         //console.log("... start: fieldChanged ...");
         //console.log(fieldValue);
-        choosenAnswer = answerArr;
-        choosenAnswer[0].allchoosenAnswer[pageToChangeValue].choosenAnswer = parseInt(fieldValue);
-        //console.log(choosenAnswer);
-        window.sessionStorage.setItem("choosenAnswer", JSON.stringify(choosenAnswer));
-        //sessionArr = JSON.parse(window.sessionStorage.getItem("choosenAnswer"));
-        setAnswerArr(choosenAnswer);
+        chosenAnswer = answerArr;
+        chosenAnswer[0].allChosenAnswer[pageToChangeValue].chosenAnswer = parseInt(fieldValue);
+        //console.log(chosenAnswer);
+        window.sessionStorage.setItem("chosenAnswer", JSON.stringify(chosenAnswer));
+        //sessionArr = JSON.parse(window.sessionStorage.getItem("chosenAnswer"));
+        setAnswerArr(chosenAnswer);
         setReRender(true);
         //console.log(answerArr);
         //console.log(sessionArr);
@@ -143,17 +145,17 @@ const QuestionaireStart = (props) => {
             if (answerArr[0].answerID === 0) {
                 answerArr[0].answerID = sessionStorage.getItem("answerId");
             }
-            choosenAnswer = answerArr;
+            chosenAnswer = answerArr;
         }
         else {
-            choosenAnswer[0].answerID = sessionStorage.getItem("answerId");
-            choosenAnswer[0].userID = sessionStorage.getItem("userId");
+            chosenAnswer[0].answerID = sessionStorage.getItem("answerId");
+            chosenAnswer[0].userID = sessionStorage.getItem("userId");
 
             if (questionaireArr.length > 0) {
                 questionaireArr.map((question, index) => {
-                    choosenAnswer[0].allchoosenAnswer.push({ questionID: question.questionID, choosenAnswer: 0 });
+                    chosenAnswer[0].allChosenAnswer.push({ questionID: question.questionID, chosenAnswer: 0 });
                 });
-                setAnswerArr(choosenAnswer);
+                setAnswerArr(chosenAnswer);
             }
         }
     }
@@ -165,9 +167,9 @@ const QuestionaireStart = (props) => {
         maxPage = questionaireArr.length;
         actualPage = questionaireArr[qIndex];
         initializeAnswerArr();
-        console.log(questionaireArr);
-        //console.log(sessionStorage.choosenAnswer);
-        questionActValue = parseInt(choosenAnswer[0].allchoosenAnswer[qIndex].choosenAnswer);
+        //console.log(questionaireArr);
+        //console.log(sessionStorage.chosenAnswer);
+        questionActValue = parseInt(chosenAnswer[0].allChosenAnswer[qIndex].chosenAnswer);
         questionText = actualPage.questionText;
         questionType = actualPage.questionType;
         actualAnswers = actualPage.answer;
