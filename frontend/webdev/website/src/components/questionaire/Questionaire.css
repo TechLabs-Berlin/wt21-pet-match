@@ -79,7 +79,7 @@ input[type="number"]::placeholder {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 30px 100px;
 }
 
