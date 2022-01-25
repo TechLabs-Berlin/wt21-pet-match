@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const catSchema = new mongoose.Schema({
     catID: {
         type: Number,
-        unique: true
+        unique: true,
     },
     catName: String,
     img: String,
@@ -17,6 +17,8 @@ const catSchema = new mongoose.Schema({
     breed: String,
     neutered: Boolean,
     healthIssue: Boolean,
+    goodwith: String,
+    likesCats: Boolean,
     shelterName: String
 
 });
