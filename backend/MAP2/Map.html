@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Match | How It Works</title>
+
+    <!-- =================Google Fonts start================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Sans+Caption&family=Paytone+One&display=swap"
+        rel="stylesheet">
+    <!-- ==================Google Fonts end=================== -->
+    <link rel="stylesheet" type="text/css" href="leaflet.css" />
+    <script type='text/javascript' src='jquery.min.js'></script>
+    <script type='text/javascript' src='leaflet.js'></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map.css">
+</head>
+
+<body>
+
+    <!-- ====================Navbar start===================== -->
+    <nav class="navbar">
+        <a href="index.html"><img src="img/petmatch-dummy-logo.png" alt="petmatch logo" class="logo__img"></a>
+        <ul>
+            <li>
+                <a href="quiz.html">Match Quiz</a>
+            </li>
+            <li>
+                <a href="how-it-works.html">How it Works</a>
+            </li>
+            <li>
+                <a href="about-us.html">About Us</a>
+            </li>
+            <li>
+                <a href="shelter-area.html">Shelter Area</a>
+            </li>
+        </ul>
+
+        <div class="navbar__login_signup">
+            <a href="log-in.html" class="navbar__login">Log In</a>
+            <p>|</p>
+            <a href="sign-uphtml" class="navbar__signup">Sign Up</a>
+        </div>
+    </nav>
+    <!-- =====================Navbar end====================== -->
+
+    <!-- ======================Main start===================== -->
+    <main class="main__how_it_works">
+        <div class="container__top_howitworks">
+            
+            <div class="container__howitworks_text">
+                
+                <body>
+                    <h1>Shelter overview</h1>
+                    <div id="map" style="width: 800px; height: 440px; border: 1px solid #AAA;"></div>
+                    <script src="basic-leaflet-map.js"></script>
+                </body>
+            </div>
+        </div>
+        <div class="container__bottom_howitworks">
+            <div class="bulletpts__howitworks">
+                
+                <div class="text_bulletpts">
+                    <h3>Tierschutzverein für Berlin <br>Hausvaterweg 39<br>
+                        13057 Berlin<br>
+                        Tel. 030 / 76 888 0 <br>
+                    <a href="https://tierschutz-berlin.de/" target="_blank">Website</a></h3>
+                </div>
+            </div>
+            <div class="bulletpts__howitworks">
+                <div class="text_bulletpts">
+                    <h3>Tierschutzverein Tierheim Falkensee <br>Dallgower Straße 104<br>
+                        14624 Dallgow-Döberitz<br>
+                        Tel. 0176 560 306 70 <br>
+                    <a href="https://tierheim-falkensee.de/" target="_blank">Website</a></h3>
+                </div>
+            </div>
+            <div class="bulletpts__howitworks">
+                <div class="text_bulletpts">
+                    <h3>Tierheim Verlorenwasser <br>Verlorenwasser 17<br>
+                        14806 Bad Belzig<br>
+                        Tel. 033 847 - 41 890 <br>
+                    <a href="https://www.tierheim-verlorenwasser.de/" target="_blank">Website</a></h3>
+                </div>
+            
+        
+    
+        </div>
+    </main>
+    <!-- ======================Main end======================= -->
+
+    <!-- ====================Footer start===================== -->
+    <footer>
+        <ul class="footer__social">
+            <li>
+                <a href="#insta">
+                    <img src="" alt="">
+                    <img src="icons/instagram.svg" alt="instagram icon" id="icon__insta">
+                </a>
+            </li>
+            <li>
+                <a href="#facebook">
+                    <img src="icons/facebook-circle.svg" alt="facebook icon" id="icon__fb">
+                </a>
+            </li>
+            <li>
+                <a href="#paypal">
+                    <img src="icons/paypal.svg" alt="paypal icon" id="icon__paypal">
+                </a>
+            </li>
+        </ul>
+
+        <ul class="footer__nav">
+            <li>About Us</li>
+            <li>How It Works</li>
+            <li>Imprint</li>
+        </ul>
+    </footer>
+    <!-- =====================Footer end====================== -->
+
+</body>
+
+</html>
