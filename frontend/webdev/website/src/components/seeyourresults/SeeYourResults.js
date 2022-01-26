@@ -1,93 +1,194 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from "react-router";
 import axios from 'axios';
 import seeYourResultsCSS from './SeeYourResults.css';
 
 const SeeYourResults = (props) => {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [acceptedConsent, setAcceptedConsent] = useState('');
+    const [userRecord, setUserRecord] = useState({
+        userID: 0,
+        quizTaken: false,
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        memberAccount: false,
+        acceptedConsent: false
+    });
+    const [quizTakenNow, setQuizTakenNow] = useState(props.quizTaken);
+    const [loginState, setLoginState] = useState(props.loginState);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [answerArr, setAnswerArr] = useState({});
     const [resultArr, setResultArr] = useState({});
-    const [firstRendered, setFirstRenderd] = useState(false);
-
-    let loggedIn = window.sessionStorage.getItem("loggedIn");
-    let quizTakenNow = props.quizTaken;
-    let chosenAnswer = JSON.parse(sessionStorage.getItem("chosenAnswer"));
-    //chosenAnswer[0].answerID = 0;
-    //chosenAnswer[0].userID = 0;
+    const [yourResultsState, setYourResultsState] = useState('');
+    const [seeMachtingResultPage, setSeeMachtingResultPage] = useState(false);
+    const [reRender, setReRender] = useState(false);
+    const [backendDone, setBackendDone] = useState(false);    
+    const [backendError, setBackendError] = useState(false);
+    const [backendErrorMsg, setBackendErrorMsg] = useState('');
+    
+    let chosenAnswer = [], errorMsgToShow = '';
+    let userFromDB = { userID: 0, quizTaken: false, firstname: '', lastname: '', email: '', password: '', memberAccount: false, acceptedConsent: false };
 
     console.log("... begin: SeeYourResults ...");
+    
+    useEffect(() => {
+        console.log("... begin: SeeYourResults, useEffect, [] ... ");
+        if (sessionStorage.getItem("loggedIn") === true) {
+            setLoggedIn(sessionStorage.getItem("loggedIn"));
+        }
+        if (sessionStorage.getItem("chosenAnswer") !== null) {
+            console.log("... SeeYourResults, sessionStorage, before json parse ...");
+            chosenAnswer = JSON.parse(sessionStorage.getItem("chosenAnswer"));
+            console.log(chosenAnswer);
+            setAnswerArr(chosenAnswer[0]);
+        }
+        console.log("... end: SeeYourResults useEffect, [] ... ");
+    }, []);
 
     useEffect(() => {
-        setAnswerArr(chosenAnswer[0]);
-        setFirstRenderd(true);
-        console.log("... begin: useEffect ... ");
-        console.log(chosenAnswer[0]);
-        console.log(answerArr);
-        axios.post('http://localhost:3001/viewresult',chosenAnswer[0])
-            .then (res => {
-                if (parseInt(res.status) === 200) {
-                    console.log(res.data);
-                    return res.data;
-                } 
-                else {
-                    console.log("res ist NICHT ok");
-                }
-            }).then(jsonRes => {
-                console.log(jsonRes);
-                setFirstname('Max');
-                setLastname('Mustermann');
-                setEmail('max.mustermann@somwhere.com');
-                setPassword('IchBinEinAusgdachtesPWD');
-                setAcceptedConsent(false);
-                setResultArr(jsonRes);
-            })
-            .catch(error => console.log(error)); 
-        console.log(resultArr);
-        console.log("... end: useEffect ... ");
-    }, []);
+        console.log("... begin: SeeYourResults, useEffect, [reRender] ... ");
+        if ((yourResultsState !== '') && !(backendDone) && (reRender)) {
+            console.log("... SeeYourResults, useEffect, yourResultsState set and backend not done and should be re-rendered ... ");
+            //console.log(chosenAnswer[0]);
+            console.log(answerArr);
+            if (yourResultsState === 'VR') {
+                console.log("... SeeYourResults, useEffect, yourResultsState = /viewresult ... ");
+                axios.post('http://localhost:3001/viewresult',answerArr)
+                    .then (res => {
+                        if (parseInt(res.status) === 200) {
+                            console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
+                            console.log(res.data);
+                            return res.data;
+                        } 
+                        else {
+                            console.log(" ... SeeYourResult, useEffect, axios.post, then, if status !== 200 ...");
+                        }
+                    }).then(jsonRes => {
+                        console.log(" ... SeeYourResult, useEffect, axios.post, then, then, jsonRes ...");
+                        console.log(jsonRes);
+                        setResultArr(jsonRes);
+                        userFromDB.userID = jsonRes.userID;
+                        userFromDB.quizTaken = jsonRes.quizTaken;
+                        setUserRecord(userFromDB);
+                        setBackendDone(true);
+                    })
+                    .catch(error => {
+                        console.log(" ... SeeYourResult, useEffect, axios.post, catch ...");
+                        console.log(error);
+                        setBackendError(true);
+                        setBackendErrorMsg(error);
+                        setBackendDone(false);
+                    }); 
+                console.log(" ... SeeYourResult, useEffect, after axios.post /viewresult ...");
+                console.log(resultArr);
+            }            
+        }
+        console.log("... end: SeeYourResults useEffect, [reRender] ... ");
+        setReRender(false);
+    }, [reRender]);
+
+    useEffect(() => {
+        console.log("... begin: SeeYourResults, useEffect, [userRecord] ... ");
+        console.log("... end: SeeYourResults useEffect, [userRecord] ... ");
+    }, [userRecord]);    
+
+    const onClickViewResult = e => {
+        e.preventDefault();
+        /* ... user finished questionaire right now and clicked on button view results ... */
+        console.log("... begin: onClickViewResult ...");
+        console.log(quizTakenNow);
+        console.log(loggedIn);
+        if (quizTakenNow && !(loggedIn)) {
+            console.log('... onClickViewResult, if condition OK ...');
+            setYourResultsState('VR');
+            setSeeMachtingResultPage(true);
+            setReRender(true);
+        }
+        console.log("... end: onClickViewResult ...");
+    };
+
+    const onClickCreate = e => {
+        e.preventDefault();
+        /* ... user finished questionaire right now and clicked on button view results ... */
+        console.log("... begin: onClickCreate ...");
+        console.log(quizTakenNow);
+        console.log(loggedIn);
+
+        if (quizTakenNow && !loggedIn) {
+            console.log('... onClickCreate, if condition OK ...');
+            setYourResultsState('CR');
+            setSeeMachtingResultPage(true);
+            setReRender(true);
+        }
+        console.log("... end: onClickCreate ...");        
+    };
+
+    const fieldChanged = e => {
+        const { name, value } = e.target;
+        /* if input-field changed, save new value in state variable userRecord */
+        setUserRecord(prevRecord => {
+            return {
+                ...prevRecord,
+                [name]: value
+            }
+        });
+    };
 
     console.log("... end: SeeYourResults ...");
 
-    return (
-        <main className="questionnaire">
-            <div className="container__top_questionnaire">
-                <div className="container__youre_done">
-                    <h1 className="questionnaire_done">You're done!</h1>
+    /* user actions & getting matching results done successfully -> show up matching results - page */
+    if (seeMachtingResultPage && backendDone) {
+        console.log("... SeeYourResults, before Redirect (1) ...");
+        console.log(resultArr);
+        console.log("... SeeYourResults, before Redirect (2) ...");
+        return (
+            <Redirect
+                to={{
+                    pathname: props.cfgData.FE_ROUTE_MATCHING_RESULT,
+                    state: { resultArr: {resultArr} }
+                }}
+            />
+        );
+    }
+    else {
+        return ( 
+            <main className="questionnaire">
+                <div className="container__top_questionnaire">
+                    <div className="container__youre_done">
+                        <h1 className="questionnaire_done">You're done!</h1>
+                    </div>
+                    <div className="container__button_results">
+                        <button onClick={onClickViewResult} className="button__results">{props.cfgData.FE_ROUTE_SEEYOURRESULTS_MENUITEM}</button>
+                    </div>                    
                 </div>
-                <div className="container__button_results">
-                    <button className="button__results">{props.cfgData.FE_ROUTE_SEEYOURRESULTS_MENUITEM}</button>
+                <div><h2>&nbsp;</h2></div>
+                <div className="container__bottom_questionnaire">
+                    <div><h2>&nbsp;</h2></div>
+                    <div className="container__signup_option">
+                        <p>or</p>
+                        <h2>Sign up to save your results</h2>
+                    </div>
+                    <form className="form__signup" id="signup_results_page">
+                        <input onChange={fieldChanged} type="text" name="firstname" id="firstname" value={userRecord.firstname} placeholder="Your first name" required />
+                        <input onChange={fieldChanged} type="text" name="lastname" id="lastname" value={userRecord.lastname} placeholder="Your last name" required />
+                        <input onChange={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
+                        <input onChange={fieldChanged} type="password" name="password" id="password" value={userRecord.password} 
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
+                            placeholder="Choose a password" required />
+                        <label htmlFor="acceptedConsent">
+                            <input onChange={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value={userRecord.acceptedConsent} />&nbsp;
+                            I inderstand that my personal data will be processed in accordance with Pet Match's <a href="/privacy">Privacy Policy</a>
+                        </label>
+                    </form>
+                    <div className="container__button_signup_submit">
+                        <button type="submit" onClick={onClickCreate} form="signup_results_page" className="button__signup_submit">Create Account</button>
+                    </div>
                 </div>
-            </div>
-            <div className="container__bottom_questionnaire">
-                <div className="container__signup_option">
-                    <p>or</p>
-                    <h2>Sign up to save your results</h2>
-                </div>
-                <form action="" method="post" className="form__signup" id="signup_results_page">
-                    <input type="text" name="USER_firstname" id="user_firstname" placeholder="Your first name" required />
-                    <input type="text" name="USER_lastname" id="user_lastname" placeholder="Your last name" required />
-                    <input type="email" name="user_email" id="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Your email" required />
-                    <input type="password" name="user_password" id="user_password"
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
-                        placeholder="Choose a password" required />
-                    <label htmlFor="user_acceptedConsent">
-                        <input required type="checkbox" id="user_acceptedConsent" name="user_acceptedConsent" />&nbsp;
-                        I inderstand that my personal data will be processed in accordance with Pet Match's <a href="/privacy">Privacy Policy</a>
-                    </label>
-                </form>
-                <div className="container__button_signup_submit">
-                    <button type="submit" form="signup_results_page" className="button__signup_submit">Create Account</button>
-                </div>
-                <div className="container__login">
-                    <p>Already have an account? <a href="/login">Log in</a></p>
-                </div>
-            </div>
-        </main>
-    )
+                <div className="errormsg">{errorMsgToShow}&nbsp;</div>
+            </main>
+        );    
+    }
 };
 
 export default SeeYourResults;

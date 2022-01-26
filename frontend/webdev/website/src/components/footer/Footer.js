@@ -25,9 +25,6 @@ const Footer = (props) => {
             </ul>
             <ul className="footer__nav">
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_CAT_DETAIL}>{props.cfgData.FE_ROUTE_CAT_DETAIL_MENUITEM}</Link>
-                </li>
-                <li>
                     <Link to={props.cfgData.FE_ROUTE_ABOUTUS}>{props.cfgData.FE_ROUTE_ABOUTUS_MENUITEM}</Link>
                 </li>
                 <li>

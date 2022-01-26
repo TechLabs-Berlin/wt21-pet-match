@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from "react-router";
 import RenderFormField from './RenderFormField';
-import SeeYourResults from '../seeyourresults/SeeYourResults';
-import axios from 'axios';
+//import SeeYourResults from '../seeyourresults/SeeYourResults';
 import questionaireCSS from './Questionaire.css';
 
 const QuestionaireStart = (props) => {
@@ -15,10 +15,8 @@ const QuestionaireStart = (props) => {
     let chosenAnswer = [{ "answerID": 0, "userID": 0, "allChosenAnswer": [] }];
     let qIndex = 0, maxPage = 0, actualPage = {}, actualAnswers = [];
     let questionText = '', questionType = 0, questionActValue = 0;
-    let sessionArr = [];
 
     //console.log("... begin: QuestionaireStart ...");
-    //console.log(localStorage);
     //console.log(sessionStorage);
 
     useEffect(() => {
@@ -31,7 +29,11 @@ const QuestionaireStart = (props) => {
                     //console.log("res ist ok");
                     return res.json();
                 }
-            }).then(jsonRes => setQuestionaireArr(jsonRes))
+            }).then(jsonRes => {
+                console.log(" ... QuestionaireStart, useEffect, fetch matchquiz, then, then, jsonRes ...");
+                console.log(jsonRes);
+                setQuestionaireArr(jsonRes);
+            })
             .catch(error => console.log(error));
     }, []);
 
@@ -174,12 +176,13 @@ const QuestionaireStart = (props) => {
         questionType = actualPage.questionType;
         actualAnswers = actualPage.answer;
     }
+    
     //console.log("... end: QuestionaireStart ...");
 
     /* last question answered -> show up seeYourResults - page */
     if (questionairePage === maxPage && seeYourResultsPage) {
         return (
-            <SeeYourResults cfgData={props.cfgData} quizTaken={true} logInState='' />
+            <Redirect to={props.cfgData.FE_ROUTE_SEEYOURRESULTS} />
         );
     }
     else {
