@@ -11,7 +11,7 @@ const catSchema = new mongoose.Schema({
     tags: [String],
     gender: {
         type: String,
-        enum: ['male', 'female']
+        enum: ['Male', 'Female']
     },
     age: Number,
     breed: String,
