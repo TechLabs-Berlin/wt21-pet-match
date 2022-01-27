@@ -96,8 +96,8 @@ app.post("/viewresult", async(req, res) => {
     }
 })
 
-// register new user
-app.post("/register", async (req, res) => {
+// register new user without quiz
+app.post("/registerbeforequiz", async (req, res) => {
     user.findOne({email: req.body.email}, async(err, doc) => {
         if (err) throw err;
         if (doc) res.send('User Already Exists');
@@ -115,6 +115,44 @@ app.post("/register", async (req, res) => {
             await newUser.save().then(savedDoc => {
                 newid = savedDoc._id;
             });
+            
+            // save answer in answer collection
+            dummyAllAnswer = [];
+            for (let i = 1; i <=15; i++){
+                const ans = {questionID: i, chosenAnswer: null};
+                dummyAllAnswer.push(ans);
+            }
+            const newAnswer = new answer({
+                userID: newid,
+                allChosenAnswer: dummyAllAnswer 
+            });
+            await newAnswer.save();
+            const returnData = {userID: newid, quizTaken: false, firstName: req.body.firstName}; 
+            res.json(returnData)
+        }
+    })
+})
+
+// register new user after quiz
+app.post("/registerafterquiz", async (req, res) => {
+    user.findOne({email: req.body.email}, async(err, doc) => {
+        if (err) throw err;
+        if (doc) res.send('User Already Exists');
+        if (!doc) {
+            // create new user
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const newUser = new user({
+                email: req.body.username,
+                password: hashedPassword,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                memberAccount: true,
+                acceptedConsent: req.body.acceptedConsent,
+            });
+            await newUser.save().then(savedDoc => {
+                newid = savedDoc._id;
+            });
+            
             // save answer in answer collection
             const newAnswer = new answer({
                 userID: newid,
@@ -158,7 +196,10 @@ app.post("/register", async (req, res) => {
     })
 })
 
-// log-in
+// log-in normally
+
+
+// log-in after quiz
 
 
 // 'your matches' for log-in user --> show result based on answer saved in database
