@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import RenderCatCard from './RenderCatCard';
-//import matchingResultCSS from './MatchingResult.css';
+import matchingResultCSS from './MatchingResult.css';
 
 const MatchingResult = (props) => {
     const [resultArr, setResultArr] = useState();

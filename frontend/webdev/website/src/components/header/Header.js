@@ -1,7 +1,6 @@
 /* Import react-components */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import axios from 'axios';
 /* Import CSS used only for Header */
 import headerCSS from './Header.css';
@@ -43,9 +42,9 @@ const Header = (props) => {
             sessionStorage.setItem("loginState", 'O');
             return (
                 <div className="navbar__login_signup">
-                    <Link to={logoutRoute}>
+                    <NavLink to={logoutRoute}>
                         <button onClick={clickLogout} className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
-                    </Link>
+                    </NavLink>
                 </div>
             );
         }
@@ -53,12 +52,12 @@ const Header = (props) => {
             sessionStorage.setItem("loginState", 'I');
             return (
                 <div className="navbar__login_signup">
-                    <Link to={props.cfgData.FE_ROUTE_LOGIN_CREATE}>
+                    <NavLink to={props.cfgData.FE_ROUTE_LOGIN_CREATE}>
                         <button className="navbar__signup" type="button">{props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM}</button>
-                    </Link>&nbsp;|&nbsp;
-                    <Link to={props.cfgData.FE_ROUTE_LOGIN}>
+                    </NavLink>&nbsp;|&nbsp;
+                    <NavLink to={props.cfgData.FE_ROUTE_LOGIN}>
                         <button className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGIN_MENUITEM}</button>
-                    </Link>
+                    </NavLink>
                 </div>
             );
         }
@@ -106,13 +105,15 @@ const Header = (props) => {
                 </li>
                 <HeaderMatch cfgData={props.cfgData} quizTaken={quizTaken} />
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_HOWITWORKS}>{props.cfgData.FE_ROUTE_HOWITWORKS_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_HOWITWORKS} >
+                        {props.cfgData.FE_ROUTE_HOWITWORKS_MENUITEM}
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_ABOUTUS}>{props.cfgData.FE_ROUTE_ABOUTUS_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_ABOUTUS}>{props.cfgData.FE_ROUTE_ABOUTUS_MENUITEM}</NavLink>
                 </li>
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_SHELTER}>{props.cfgData.FE_ROUTE_SHELTER_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_SHELTER}>{props.cfgData.FE_ROUTE_SHELTER_MENUITEM}</NavLink>
                 </li>
             </ul>
             {renderHeaderState()}

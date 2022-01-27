@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import footerCSS from './Footer.css';
 
 const Footer = (props) => {
@@ -25,16 +25,16 @@ const Footer = (props) => {
             </ul>
             <ul className="footer__nav">
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_ABOUTUS}>{props.cfgData.FE_ROUTE_ABOUTUS_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_ABOUTUS}>{props.cfgData.FE_ROUTE_ABOUTUS_MENUITEM}</NavLink>
                 </li>
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_HOWITWORKS}>{props.cfgData.FE_ROUTE_HOWITWORKS_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_HOWITWORKS}>{props.cfgData.FE_ROUTE_HOWITWORKS_MENUITEM}</NavLink>
                 </li>
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>
                 </li>
                 <li>
-                    <Link to={props.cfgData.FE_ROUTE_IMPRINT}>{props.cfgData.FE_ROUTE_IMPRINT_MENUITEM}</Link>
+                    <NavLink to={props.cfgData.FE_ROUTE_IMPRINT}>{props.cfgData.FE_ROUTE_IMPRINT_MENUITEM}</NavLink>
                 </li>
             </ul>
         </footer>

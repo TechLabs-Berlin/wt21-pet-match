@@ -33,7 +33,7 @@ const RenderCatCard = (props) => {
                 <h4 className="cat_shelter">{catToShow.catData.shelterName}</h4>
             </div>
             <div className="a__cat_profile">
-                <Link to={{ pathname: catProfilePage, state: { resultArr: {resultArr} } }} >
+                <Link to={{ pathname: catProfilePage, state: { resultArr: {resultArr}, catIndex: props.index } }} >
                     <span></span>
                 </Link>
             </div>

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const HeaderMatch = (props) => {
     if (props.quizTaken) {
         return (
             <li>
-                <Link to={props.cfgData.FE_ROUTE_MATCHING_RESULT}>{props.cfgData.FE_ROUTE_MATCHING_RESULT_MENUITEM}</Link>
+                <NavLink to={props.cfgData.FE_ROUTE_MATCHING_RESULT}>{props.cfgData.FE_ROUTE_MATCHING_RESULT_MENUITEM}</NavLink>
             </li>
         );
     }
