@@ -1,37 +1,42 @@
-var mylat = '52.52000659999999';
-var mylong = '13.404954';
-var myzoom = '10';
-var map = L.map('map').setView([mylat, mylong], myzoom);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 17,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+
+
+var map = L.map('map').setView([52.575433, 13.5426443], 8);
+
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'examples.map-i86knfo3'
 }).addTo(map);
- 
-L.marker([mylat, mylong]).addTo(map).bindPopup("<b>Berlin</b>").openPopup();
-L.circle([mylat, mylong], 500, {
+
+
+
+var circle = L.circle([52.575433, 13.5426443], 80, {
     color: 'red',
-    fillColor: '#f2d5df',
-    fillOpacity: 0.2
-}).addTo(map).bindPopup("");
- 
-markers = [{
-    "name": "Tierschutzverein für Berlin",
-    "url": "https://tierschutz-berlin.de/",
-    "lat": 52.575433,
-    "lng": 13.5426443
-}, {
-    "name": "Tierheim Falkensee und Umgebung e.V.",
-    "url": "https://tierheim-falkensee.de/",
-    "lat": 52.5471139,
-    "lng": 13.0978984
-}];
-for (var i = 0; i < markers.length; ++i) {
-    L.marker([markers[i].lat, markers[i].lng], {
-        icon: new L.DivIcon({
-            className: 'my-div-icon',
-            html: '<span class="my-map-label">' + markers[i].name + '</span>'
-        })
-    }).addTo(map);
- 
-    L.marker([markers[i].lat, markers[i].lng]).addTo(map).bindPopup(markers[i].name);
-}
+        fillColor: '#f03',
+        fillOpacity: 0.3
+}).addTo(map)
+    .bindPopup("Popup").openPopup();
+
+L.marker([52.575433, 13.5426443]).addTo(map)
+    .bindPopup("<b>Popup</b><br />Text");
+L.marker([52.575433, 13.5426443]).addTo(map)
+    .bindPopup("<b>Popup</b><br />Text");
+
+document.getElementById('map-navigation').onclick = function(abc) {
+    var pos = abc.target.getAttribute('data-position');
+    var zoom = abc.target.getAttribute('data-zoom');
+    if (pos && zoom) {
+        var locat = pos.split(',');
+        var zoo = parseInt(zoom);
+        map.setView(locat, zoo, {animation: true});
+        return false;
+    }
+}       
+
+var popup = L.popup();
+
+
+
+
