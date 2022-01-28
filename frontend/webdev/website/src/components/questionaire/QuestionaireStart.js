@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router";
 import RenderFormField from './RenderFormField';
-//import SeeYourResults from '../seeyourresults/SeeYourResults';
 import questionaireCSS from './Questionaire.css';
 
 const QuestionaireStart = (props) => {
