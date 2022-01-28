@@ -1,0 +1,26 @@
+.login__h1 {
+  font-family: Paytone One, sans-serif;
+  font-size: 2em;
+  color: #888;
+}
+
+.login__label {
+  display: inline-block;
+  width: 180px;
+  height: 50px;
+  text-align: left;
+}
+
+​.login__button {
+  transition: 0.2s ease;
+  border: 2px solid;
+  border-radius: 3px;
+  max-width: 150px;
+  height: 40px;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
