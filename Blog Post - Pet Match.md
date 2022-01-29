@@ -1,40 +1,17 @@
-***Project "Pet Match"*** - ***GitHub Repo: https://github.com/TechLabs-Berlin/wt21-pet-match.git***
+***Blog Post "Pet Match"*** - ***GitHub Repo: https://github.com/TechLabs-Berlin/wt21-pet-match.git***
 
 
 
 ***Tabel of content***
 
-1. Project Summary
-
-    1.1 Team Members
-
-    1.2 Tools and Communication
-
-2. Blog Post
-   2.1 Front-end 
-   2.2 Back-end
-   2.3 Datac Science
+1. Team Members
+2. Blog Post WD-FE
+3. Blog Post WD-BE
+4. Blog Post DS
 
 
 
-***1. Project Summary***
-
-"Pet Match - get matched with the right pet". This is not just our motto, instead, it is our deep belief that we as Pet Match can help to reduce the amount of returned pets to the shelters. For that, we analyzed the present situation which is taking place in many pet shelters nowadays and figured out the following problems:
-
-● Failed adoptions mean pets were adopted and returned.
-● People frequently return a pet because the pet was not what they expected.
-● This is a huge problem for independent shelters that have to allocate resources for that returning pet.
-● Pets are usually brought from other countries in Europe, so it’s even harder to return to the original shelter.
-● Failed adoptions can traumatize pets even more.
-● During a lock-down situation, people tend to adopt pets and harm them by returning them after such a lock-down. 
-
-We at Pet Match are convinced that by analyzing the traits of a potential adopter and the behavior/characteristics of a pet, we can ensure a better matching by giving the potential adopter a recommendation based on a machine learning model which we deployed on a website. 
-
-
-
-
-
-***1.1 Team Members***
+***1. Team Members***
 
 * Andrea Martins (WD-FE)
 * Oksana Maistat (DS)
@@ -47,11 +24,7 @@ We at Pet Match are convinced that by analyzing the traits of a potential adopte
 
 
 
-
-
-***2. Blog Post***
-
-***2.1 Front-end***
+***2. Blog Post WD-FE***
 
 Tech Stack: 
 Figma, Visual Code Studio
@@ -63,14 +36,24 @@ As we lost UX team early in the project, the WD-FE team decided to go on and des
 
 For this reason we divided up our tasks as follows:
 
+
+
 Andrea:
-	- Figma Layouts
-	- static HTML-pages + CSS
+ - Figma Layouts
+
+ - Static HTML-pages + CSS
+
+  
 
 Brigitta: 
-	- React project
-	- Javascript coding
-	- Coordination with WD-BE
+
+ - React project
+
+ - Javascript coding
+
+ - Coordination with WD-BE
+
+  
 
 As we as a team faced a time problem, we decided not to use any additional UI library or other tools we were not familiar with.
 
@@ -135,13 +118,13 @@ Cat images are stored on file system in public folder of the website.
 
 
 
-***2.2 Back-end***
+***3. Blog Post WD-BE***
 
 
 
 
 
-***2.3 Data Science***
+***4. Blog Post DS***
 
 
 
