@@ -45,13 +45,13 @@
 }
 
 .container__homepage_bottom h2 {
-    font-size: 1.8em;
-    margin-block-start: 15px;
+    font-size: 1.2em;
+    margin-block-start: 5px;
     margin-block-end: 5px;
 }
 
 .container__homepage_bottom h3 {
-    font-size: 1.8em;
+    font-size: 1.2em;
     font-family: PT Sans, sans-serif;
     margin-block-start: 5px;
     margin-block-end: 5px;
@@ -65,8 +65,9 @@
 .container__user_options {
     display: flex;
     flex-direction: row;
-    width: 520px;
-    height: 120px;
+    position: relative;
+    width: 350px;
+    height: 100px;
     background-color: #F0F8FA;
     border-radius: 30px;
     justify-content: space-evenly;
@@ -79,17 +80,16 @@
     height: 100%;
     top: 0;
     left: 0;
-  
     z-index: 1;
-  }
+}
 
 .container__icon_user {
     align-self: center;
 }
 
 .container__icon_user img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 
 .container__text_user {
