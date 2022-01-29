@@ -165,44 +165,7 @@ button:hover {
 
 /* ===================Homepage start=================== */
 
-.banner__homepage {
-    display: flex;
-    justify-content: left;
-    align-items: flex-start;
-    position: relative;
-    width: 100vw;
-    height: 500px;
-}
 
-.banner__homepage::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(img/kitten-hero_01.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom center;
-}
-
-.cta__homepage a {
-    text-decoration: none;
-    color: #FFFFFF;
-}
-
-.cta__homepage a:hover {
-    text-decoration: none;
-    color: #50C7F7;
-}
-
-.h1__homepage {
-    padding-left: 50px;
-    position: relative;
-    max-width: 450px;
-    text-shadow: 1px 1px 2px #c48d89;
-}
 
 /* ====================Homepage end==================== */
 
