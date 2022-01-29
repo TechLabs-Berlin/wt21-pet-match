@@ -1,81 +1,47 @@
+/* MAIN */
+.cat_profile {
+  padding: 0 180px;
+  margin-block-start: 60px;
+}
+
+.cat_profile h1 {
+  font-size: 3em;
+  margin-top: -15px;
+}
+
+.cat_profile h2 {
+  font-size: 2.5em;
+  color: #50c7f7;
+  margin-block-end: 5px
+}
+
 /* RETURN */
 .container__return {
   display: flex;
   margin: 20px;
 }
 
+.container__return a {
+  color: #9da7a5;
+  text-decoration: none;
+}
+
+.container__return a:hover {
+  color: #9da7a57a;
+}
 
 /* TOP CONTAINER */
 .container__top_cat_profile {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 50px;
 }
 
-/* CONTAINER CAT PROFILE PICTURE */
 
+/* CONTAINER CAT PROFILE PICTURE */
 .container__cat_profile_picture {
   width: 385px;
 }
-
-.container__cat_profile_description hr {
-  border: 1px solid #4632393f;
-}
-.container__cat_profile_heading {
-  display: flex;
-  flex-direction: column;
-}
-
-.title__cat_profile {
-  color: #50c7f7;
-  margin: 5px 0;
-}
-
-.cat_profile {
-  width: 100vw;
-  padding: 40px 60px;
-  box-sizing: border-box;
-}
-
-.container__cat_details {
-  display: flex;
-  width: 400px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px 40px
-}
-
-
-/* TAGS */
-.tags__cat_profile {
-  display: flex;
-  flex-direction: row;
-}
-
-.container__cat_profile_heading ul {
-  padding-inline-start: 0px;
-  margin-block-start: 0px;
-}
-
-.container__cat_profile_heading li {
-  margin-right: 20px;
-  border-radius: 15px;
-  padding: 2px 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.068);
-  font-size: 0.8em;
-  font-weight: bolder;
-  color: #463239cb;
-}
-
-.tag_affectionate {
-  background-color: #D5D6EA;
-}
-
-.tag_friendly {
-  background-color: #F5D5CB;
-}
-
-
- /* dd */
 
 .container__img_cat_profile img {
   max-width: 485px;
@@ -108,10 +74,151 @@
   top: 50%;
 }
 
-#button__contact_shelter {
+
+/* CONTAINER CAT DESCRIPTION */
+.container__cat_profile_description {
+  width: 500px;
+  margin-left: 40px;
+}
+
+.container__cat_profile_heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.container__cat_profile_heading ul {
+  padding-inline-start: 0px;
+  margin-block-start: 0px;
+}
+
+.container__cat_profile_heading li {
+  margin-right: 20px;
+  border-radius: 15px;
+  padding: 2px 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.068);
+  font-size: 0.8em;
+  font-weight: bolder;
+  color: #463239cb;
+}
+
+.container__cat_profile_description hr {
+  border: 1px solid #4632393f;
+}
+
+.title__cat_profile {
+  color: #50c7f7;
+  margin: 5px 0;
+}
+
+.container__cat_details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container__cat_details h3 {
+  margin-block-end: 0;
+  font-family: PT Sans, sans-serif;
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.container__cat_details p {
+  margin-block-start: 0.5em;
+  font-family: PT Sans, sans-serif;
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.cat_gender, .cat_age, .cat_breed, .cat_good_with, .cat_sterilized, .cat_health_issues {
+  flex: 0 0 40%;
+}
+
+.cat_good_with p {
+  display: inline-flex;
+}
+
+
+/* CONTAINER CONTACT SHELTER */
+.container__contact_shelter {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.cat_available_at {
+  align-self: flex-start;
+}
+
+.container__button_contact_shelter {
+  align-self: flex-end;
+}
+
+.button__contact_shelter {
   background: #eb4b38;
   color: #ffffff;
-  border: none;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 30px;
+  margin: 20px 60px;
+  max-width: 200px;
+}
+
+.button__contact_shelter:hover {
+  background-color: #9e1f11;
+}
+
+
+/* TAGS */
+.tags__cat_profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.tag_adaptable {
+  background-color: #D5D6EA;
+}
+
+.tag_affectionate {
+  background-color: #E2F0CB;
+}
+
+.tag_curious {
+  background-color: #e7c8e0;
+}
+
+.tag_fearful {
+  background-color: #f4ebc4;
+}
+
+.tag_friendly {
+  background-color: #f9d5c6;
+}
+
+.tag_grumpy {
+  background-color: #badad5;
+}
+
+.tag_likes_routine {
+  background-color: #fbe3e8;
+}
+
+.tag_playful {
+  background-color: #c7e8fd;
+}
+
+.tag_timid {
+  background-color: #fff8ba;
+}
+
+.tag_vocal {
+  background-color: #ffb0af;
+}
+
+
+/* CONTAINER BOTTOM CAT PROFILE */
+.container__bottom_cat_profile hr {
+  border: 1px solid #4632393f;
+}
+
+.container__bottom_cat_profile {
+  margin-block-end: 80px;
 }

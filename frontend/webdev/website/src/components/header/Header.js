@@ -38,12 +38,12 @@ const Header = (props) => {
             logoutRoute = props.cfgData.FE_ROUTE_HOME;
         }
 
-        if (userId > 0 && loggedIn) {
+        if (userId !== 0 && loggedIn) {
             sessionStorage.setItem("loginState", 'O');
             return (
                 <div className="navbar__login_signup">
                     <NavLink to={logoutRoute}>
-                        <button onClick={clickLogout} className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
+                        <button onClick={clickLogout} className="button__navbar_login" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
                     </NavLink>
                 </div>
             );
@@ -52,11 +52,11 @@ const Header = (props) => {
             sessionStorage.setItem("loginState", 'I');
             return (
                 <div className="navbar__login_signup">
-                    <NavLink to={props.cfgData.FE_ROUTE_LOGIN_CREATE}>
-                        <button className="navbar__signup" type="button">{props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM}</button>
-                    </NavLink>&nbsp;|&nbsp;
                     <NavLink to={props.cfgData.FE_ROUTE_LOGIN}>
-                        <button className="navbar__log_in" type="button">{props.cfgData.FE_ROUTE_LOGIN_MENUITEM}</button>
+                        <button className="button__navbar_login" type="button">{props.cfgData.FE_ROUTE_LOGIN_MENUITEM}</button>
+                    </NavLink>                    
+                    <NavLink to={props.cfgData.FE_ROUTE_LOGIN_CREATE}>
+                        <button className="button__navbar_signup" type="button">{props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM}</button>
                     </NavLink>
                 </div>
             );
@@ -66,28 +66,28 @@ const Header = (props) => {
     useEffect(() => {
         if (firstRender === true) {
             setFirstRender(false);
-            setUserId(0);
-            setAnswerId(0);
-            setLoggedIn(false);
-            setLoginState('I');
-            setQuizTaken(false);
+            setUserId('61ef3e4501dc836946e25a2d');
+            setAnswerId(1);
+            setLoggedIn(true);
+            setLoginState('O');
+            setQuizTaken(true);
             setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
         }
         if (logOutClicked === true) {
             setLogOutClicked(false);
             // Logout -> BE
-            //axios.post('http://localhost:3001/logout', userId)
-            //    .then(response => {
+            axios.get('http://localhost:3001/logout', userId)
+                .then(response => {
                     setUserId(0);
                     setAnswerId(0);
                     setLoggedIn(false);
                     setLoginState('I');
                     setQuizTaken(false);
                     setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
-        //        })
-        //       .catch(error => {
-        //            console.log(error);
-        //        });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     })
 
@@ -95,7 +95,8 @@ const Header = (props) => {
 
     const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
     const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
-    
+    console.log(quizTaken);
+
     return ( 
         <nav className="navbar">
             <Link to={props.cfgData.FE_ROUTE_HOME}><img src={petMatchLogo} alt={petMatchLogoAlt} className="logo__img" /></Link>
@@ -103,17 +104,8 @@ const Header = (props) => {
                 <li>
                     <HeaderQuiz cfgData={props.cfgData} quizTaken={quizTaken} />
                 </li>
-                <HeaderMatch cfgData={props.cfgData} quizTaken={quizTaken} />
                 <li>
-                    <NavLink to={props.cfgData.FE_ROUTE_HOWITWORKS} >
-                        {props.cfgData.FE_ROUTE_HOWITWORKS_MENUITEM}
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={props.cfgData.FE_ROUTE_ABOUTUS}>{props.cfgData.FE_ROUTE_ABOUTUS_MENUITEM}</NavLink>
-                </li>
-                <li>
-                    <NavLink to={props.cfgData.FE_ROUTE_SHELTER}>{props.cfgData.FE_ROUTE_SHELTER_MENUITEM}</NavLink>
+                    <NavLink to={props.cfgData.FE_ROUTE_HOWITWORKS} >{props.cfgData.FE_ROUTE_HOWITWORKS_MENUITEM}</NavLink>
                 </li>
             </ul>
             {renderHeaderState()}
