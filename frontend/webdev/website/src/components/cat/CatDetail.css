@@ -11,44 +11,21 @@
   justify-content: space-evenly;
 }
 
-/* CONTAINER CAT PROFILE PICTURE */
 
+/* CONTAINER CAT PROFILE PICTURE */
 .container__cat_profile_picture {
   width: 385px;
 }
 
-.container__cat_profile_description hr {
-  border: 1px solid #4632393f;
+
+/* CONTAINER CAT DESCRIPTION */
+.container__cat_profile_description {
+  width: 600px
 }
+
 .container__cat_profile_heading {
   display: flex;
   flex-direction: column;
-}
-
-.title__cat_profile {
-  color: #50c7f7;
-  margin: 5px 0;
-}
-
-.cat_profile {
-  width: 100vw;
-  padding: 40px 60px;
-  box-sizing: border-box;
-}
-
-.container__cat_details {
-  display: flex;
-  width: 400px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px 40px
-}
-
-
-/* TAGS */
-.tags__cat_profile {
-  display: flex;
-  flex-direction: row;
 }
 
 .container__cat_profile_heading ul {
@@ -66,13 +43,78 @@
   color: #463239cb;
 }
 
-.tag_affectionate {
+.container__cat_profile_description hr {
+  border: 1px solid #4632393f;
+}
+
+.title__cat_profile {
+  color: #50c7f7;
+  margin: 5px 0;
+}
+
+.cat_profile {
+  padding: 40px 60px;
+  box-sizing: border-box;
+}
+
+.container__cat_details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cat_gender, .cat_age, .cat_breed, .cat_good_with, .cat_sterilized, .cat_health_issues {
+  flex: 0 0 40%;
+}
+
+
+/* TAGS */
+.tags__cat_profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.tag_adaptable {
   background-color: #D5D6EA;
 }
 
-.tag_friendly {
-  background-color: #F5D5CB;
+.tag_affectionate {
+  background-color: #E2F0CB;
 }
+
+.tag_curious {
+  background-color: #e7c8e0;
+}
+
+.tag_fearful {
+  background-color: #f4ebc4;
+}
+
+.tag_friendly {
+  background-color: #f9d5c6;
+}
+
+.tag_grumpy {
+  background-color: #badad5;
+}
+
+.tag_likes_routine {
+  background-color: #fbe3e8;
+}
+
+.tag_playful {
+  background-color: #c7e8fd;
+}
+
+.tag_timid {
+  background-color: #fff8ba;
+}
+
+.tag_vocal {
+  background-color: #ffb0af;
+}
+
 
 
  /* dd */
