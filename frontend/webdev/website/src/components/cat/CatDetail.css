@@ -1,14 +1,40 @@
+/* MAIN */
+.cat_profile {
+  padding: 0 180px;
+  margin-block-start: 60px;
+}
+
+.cat_profile h1 {
+  font-size: 3em;
+  margin-top: -15px;
+}
+
+.cat_profile h2 {
+  font-size: 2.5em;
+  color: #50c7f7;
+  margin-block-end: 5px
+}
+
 /* RETURN */
 .container__return {
   display: flex;
-  margin: 20px 60px;
+  margin: 20px;
 }
 
+.container__return a {
+  color: #9da7a5;
+  text-decoration: none;
+}
+
+.container__return a:hover {
+  color: #9da7a57a;
+}
 
 /* TOP CONTAINER */
 .container__top_cat_profile {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 50px;
 }
 
 
@@ -17,10 +43,42 @@
   width: 385px;
 }
 
+.container__img_cat_profile img {
+  max-width: 485px;
+}
+
+.img__cat_profile {
+  width: 385px;
+  height: 555px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.container__img_cat_profile {
+  position: relative;
+}
+
+.icon__save {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.icon__picture_navigation {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 20px;
+  position: absolute;
+  top: 50%;
+}
+
 
 /* CONTAINER CAT DESCRIPTION */
 .container__cat_profile_description {
-  width: 600px
+  width: 500px;
+  margin-left: 40px;
 }
 
 .container__cat_profile_heading {
@@ -82,6 +140,33 @@
 }
 
 
+/* CONTAINER CONTACT SHELTER */
+.container__contact_shelter {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.cat_available_at {
+  align-self: flex-start;
+}
+
+.container__button_contact_shelter {
+  align-self: flex-end;
+}
+
+.button__contact_shelter {
+  background: #eb4b38;
+  color: #ffffff;
+  margin: 20px 60px;
+  max-width: 200px;
+}
+
+.button__contact_shelter:hover {
+  background-color: #9e1f11;
+}
+
+
 /* TAGS */
 .tags__cat_profile {
   display: flex;
@@ -129,51 +214,11 @@
 }
 
 
-
- /* dd */
-
-.container__img_cat_profile img {
-  max-width: 485px;
-}
-
-.img__cat_profile {
-  width: 385px;
-  height: 555px;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-.container__img_cat_profile {
-  position: relative;
-}
-
-.icon__save {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.icon__picture_navigation {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 0 20px;
-  position: absolute;
-  top: 50%;
-}
-
-#button__contact_shelter {
-  background: #eb4b38;
-  color: #ffffff;
-  border: none;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 30px;
-}
-
-
 /* CONTAINER BOTTOM CAT PROFILE */
-
 .container__bottom_cat_profile hr {
   border: 1px solid #4632393f;
+}
+
+.container__bottom_cat_profile {
+  margin-block-end: 80px;
 }
