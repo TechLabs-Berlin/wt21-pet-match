@@ -118,6 +118,7 @@ Cat images are stored on file system in public folder of the website.
 
 
 
+<<<<<<< HEAD
 
 
 ***3. Blog Post WD-BE***
@@ -167,11 +168,17 @@ Beside a lot of trials and errors and moments of enlightenments we had also mome
 We faced a lot of time pressure as the backend track could not really start in the beginning as the whole setup of the website was not clear.
 
 All in all, it was fun to find a solution for all the obstacles we were facing and to get rewarded with a code which is functioning. Also, the meetings with the other tracks were interesting as we got an insight of their work when we needed to create routes or connect endpoints. Most of our problems we were able to solve with the help of our TechLabs mentors, video tutorials, code snippets we found on the internet, tutorials on websites, meetings with the other track members and by just trying.
+=======
+***3. Blog Post WD-BE***
+
+
+>>>>>>> parent of eaf73e9... MergeX
 
 
 
 ***4. Blog Post DS***
 
+<<<<<<< HEAD
 In our Pet-Match project the data science team is responsible for sourcing and providing of a suitable data-set, the cleaning of the entire data which will be needed as information basement for further decision making/support as well as applying a proper machine learning methodology. To realize a good data science support it is mandatory to exchange with all other disciplines from the very beginning in order to achieve a common goal and to deliver the final MVP. 
 
 Thus the DS-Team spend much time to find a sufficient data set which has served as a solid data base in order to extract information and rules from it throughout the entire project phase. We had a couple of attempts to find the "perfect" data set which in the end does not exist. Finally we as the whole team committed to take the "cats data set" for the entire duration of the project phase. Furthermore we discussed to extend the data base with new data sets (other pets). The data set we used has approximately 3300 rows (data sets) and 105  columns (attributes). The very initial task was to clean and structure the data so that we could apply the very first rules to gain important information. For that we cleaned the data in the columns which we saw es required to predict a satisfaction for the potential adopter in order to find any useful pattern. First of all we changed nominal data into numerical data, as seen below.
@@ -213,3 +220,11 @@ result_of_recommendation2.png
 
 
 All in all we achieved our goal to set up a reliable recommendation system which systematic we connect through an API for our backend team mates. In conclusion we need to say that we faced many roadblocks on our way to deliver a good product. But nevertheless it was a great time, we have learned a lot and our mentors supported us wherever they could. Finally we need to highlight that our teamwork was great and we have used many tools to exchange or create files and information. Although "GitHub" was not easy to handle and as a tool to exchange information a little bit to complex for beginners it worked out well in the end. 
+=======
+
+
+
+
+
+
+>>>>>>> parent of eaf73e9... MergeX
