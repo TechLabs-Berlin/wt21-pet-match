@@ -1,7 +1,14 @@
+/* MAIN */
+.cat_profile {
+  /* padding: 40px 60px; */
+  /* box-sizing: border-box; */
+}
+
+
 /* RETURN */
 .container__return {
   display: flex;
-  margin: 20px;
+  margin: 20px 60px;
 }
 
 
@@ -50,11 +57,6 @@
 .title__cat_profile {
   color: #50c7f7;
   margin: 5px 0;
-}
-
-.cat_profile {
-  padding: 40px 60px;
-  box-sizing: border-box;
 }
 
 .container__cat_details {
