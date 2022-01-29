@@ -28,7 +28,7 @@ const SeeYourResults = (props) => {
     
     let chosenAnswer = [], errorMsgToShow = '';
     let userFromDB = { userID: 0, quizTaken: false, firstname: '', lastname: '', email: '', password: '', memberAccount: false, acceptedConsent: false };
-
+    let tmpArr2, tmpArr2Txt, tmpArr;
     console.log("... begin: SeeYourResults ...");
     
     useEffect(() => {
@@ -36,7 +36,20 @@ const SeeYourResults = (props) => {
         if (sessionStorage.getItem("loggedIn") === true) {
             setLoggedIn(sessionStorage.getItem("loggedIn"));
         }
-        if (sessionStorage.getItem("chosenAnswer") !== null) {
+        console.log("xxxxxxx");
+        tmpArr2 = sessionStorage.getItem("chosenAnswer");
+        tmpArr2Txt = typeof (tmpArr2);
+        console.log(tmpArr2Txt);
+        console.log(tmpArr2.length);
+        if (typeof(tmpArr2) === undefined) {
+            console.log("NULL");
+        }
+        else {
+            console.log("NOT NULL");
+        }
+        console.log("aaa"+tmpArr2+"bbb");
+        console.log("yyyyyyy");
+        if (sessionStorage.getItem("chosenAnswer") !== null && sessionStorage.getItem("chosenAnswer").length !== 0) {
             console.log("... SeeYourResults, sessionStorage, before json parse ...");
             chosenAnswer = JSON.parse(sessionStorage.getItem("chosenAnswer"));
             console.log(chosenAnswer);
@@ -53,7 +66,12 @@ const SeeYourResults = (props) => {
             console.log(answerArr);
             if (yourResultsState === 'VR') {
                 console.log("... SeeYourResults, useEffect, yourResultsState = /viewresult ... ");
-                axios.post('http://localhost:3001/viewresult',answerArr)
+                axios.post('http://localhost:3001/viewresult', answerArr)
+//            if (yourResultsState === 'YM') {
+//                console.log("... SeeYourResults, useEffect, yourResultsState = /yourmatchesresult ... ");
+//                tmpArr = answerArr;
+//               tmpArr.userID = "61ef3e4501dc836946e25a2d";
+//                axios.post('http://localhost:3001/yourmatchesrsult',tmpArr)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
                             console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");

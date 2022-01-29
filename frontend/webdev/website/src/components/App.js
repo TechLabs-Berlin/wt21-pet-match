@@ -31,7 +31,7 @@ const App = () => {
                 <Route path={cfgData.FE_ROUTE_LOGIN} exact><LogIn cfgData={cfgData} loginState='I' /></Route>
                 <Route path={cfgData.FE_ROUTE_LOGOUT} exact><LogIn cfgData={cfgData} loginState='O' /></Route>
                 <Route path={cfgData.FE_ROUTE_LOGIN_CREATE} exact><LogIn cfgData={cfgData} loginState='C' /></Route>
-                <Route path={cfgData.FE_ROUTE_SEEYOURRESULTS} exact><SeeYourResults cfgData={cfgData} quizTaken={true} loginState='' /></Route>
+                <Route path={cfgData.FE_ROUTE_SEEYOURRESULTS} exact><SeeYourResults cfgData={cfgData} quizTaken={true} yourResultsState='YM' loginState='' /></Route>
                 <Route path={cfgData.FE_ROUTE_PRIVACY} exact><Privacy cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_IMPRINT} exact><Imprint cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_QUESTIONAIRE_START} exact><QuestionaireStart cfgData={cfgData} /></Route>
