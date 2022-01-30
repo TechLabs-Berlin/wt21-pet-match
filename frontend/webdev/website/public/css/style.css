@@ -77,6 +77,17 @@ button:hover {
 .img_hero_cover::before {
   background: url(./img/hero-user.png);
 }
+
+.button__take_quiz {
+  background: #50c7f7;
+  color: #FFFFFF;
+  margin: 20px 200px;
+  max-width: 200px;
+}
+
+.button__take_quiz:hover {
+  background-color: #3695bb;
+}
 /* ====================Homepage end==================== */
 
 

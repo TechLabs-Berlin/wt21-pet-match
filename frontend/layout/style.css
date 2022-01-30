@@ -1,3 +1,4 @@
+/* ====================General start===================== */
 body {
     font-family: PT Sans, sans-serif;
     font-size: 100%;
@@ -64,6 +65,9 @@ button {
 button:hover {
     transition: 0.2s ease;
 }
+/* ====================General end===================== */
+
+
 /* ===================Homepage start=================== */
 /* Images can only be resolved / loaded if reference to them resides in public-folder */
 .banner__homepage::before {
@@ -73,6 +77,18 @@ button:hover {
 .img_hero_cover::before {
     background: url(./img/hero-user.png);
 }
+
+.button__take_quiz {
+    background: #50c7f7;
+    color: #FFFFFF;
+    margin: 20px 200px;
+    max-width: 200px;
+}
+
+.button__take_quiz:hover {
+    background-color: #3695bb;
+}
+/* ===================Homepage end=================== */
 
 
 /* ================Media Queries start================= */
