@@ -11,15 +11,11 @@ import QuestionaireStart from './questionaire/QuestionaireStart';
 import MatchingResult from './matching/MatchingResult';
 import CatDetail from './cat/CatDetail';
 import HowItWorks from './howitworks/HowItWorks';
-import AboutUs from './aboutus/AboutUs';
-import Shelter from './shelter/Shelter';
 import LogIn from './login/LogIn';
 import UserSettings from './user/UserSettings';
-import Imprint from './imprint/Imprint';
 import Privacy from './privacy/Privacy'; 
-import ScrollToTop from './ScrollToTop';
-/* ONLY FOR TESTING: Import project-component SeeYourResults */
-import SeeYourResults from './seeyourresults/SeeYourResults';           
+import SeeYourResults from './seeyourresults/SeeYourResults';   
+import ScrollToTop from './ScrollToTop';        
 
 const App = () => {
     return (
