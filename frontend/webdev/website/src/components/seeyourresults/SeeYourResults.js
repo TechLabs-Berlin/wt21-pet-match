@@ -184,7 +184,7 @@ const SeeYourResults = (props) => {
                     </div>                    
                 </div>
                 <div><h2>&nbsp;</h2></div>
-                <div className="container__bottom_questionnaire">
+                <div className="container__bottom_see_your_results">
                     <div><h2>&nbsp;</h2></div>
                     <div className="container__signup_option">
                         <p>or</p>

@@ -10,7 +10,7 @@ h1 {
   height: 40vh;
 }
 
-.container__bottom_questionnaire {
+.container__bottom_see_your_results {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
