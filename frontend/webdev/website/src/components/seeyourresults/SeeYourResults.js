@@ -64,14 +64,17 @@ const SeeYourResults = (props) => {
             console.log("... SeeYourResults, useEffect, yourResultsState set and backend not done and should be re-rendered ... ");
             //console.log(chosenAnswer[0]);
             console.log(answerArr);
-            if (yourResultsState === 'VR') {
-                console.log("... SeeYourResults, useEffect, yourResultsState = /viewresult ... ");
-                axios.post('http://localhost:3001/viewresult', answerArr)
-//            if (yourResultsState === 'YM') {
-//                console.log("... SeeYourResults, useEffect, yourResultsState = /yourmatchesresult ... ");
-//                tmpArr = answerArr;
-//               tmpArr.userID = "61ef3e4501dc836946e25a2d";
-//                axios.post('http://localhost:3001/yourmatchesrsult',tmpArr)
+//            if (yourResultsState === 'VR') {
+//                console.log("... SeeYourResults, useEffect, yourResultsState = /viewresult ... ");
+//                axios.post('http://localhost:3001/viewresult', answerArr)
+            let tmpState = 'YM';
+            if (tmpState === 'YM') {
+ //           if (yourResultsState === 'YM') {
+                console.log("... SeeYourResults, useEffect, yourResultsState = /yourmatchesresult ... ");
+                tmpArr = { "userID": "61ef45acd9dc72a2678fbb46" };
+                console.log("==== BEFORE AXIOS =====");
+                console.log(tmpArr);
+                axios.post('http://localhost:3001/yourmatchesresult', tmpArr)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
                             console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
@@ -97,6 +100,7 @@ const SeeYourResults = (props) => {
                         setBackendErrorMsg(error);
                         setBackendDone(false);
                     }); 
+                console.log("==== AFTER AXIOS =====");
                 console.log(" ... SeeYourResult, useEffect, after axios.post /viewresult ...");
                 console.log(resultArr);
             }            

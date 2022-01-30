@@ -34,10 +34,13 @@ const Header = (props) => {
     function renderHeaderState() {
         let logoutRoute = location.pathname;
 
-        if ((logoutRoute === props.cfgData.FE_ROUTE_QUESTIONAIRE_START)||(logoutRoute === props.cfgData.FE_ROUTE_MATCHING_RESULT)) {
+        if ((logoutRoute === props.cfgData.FE_ROUTE_QUESTIONAIRE_START) ||
+            (logoutRoute === props.cfgData.FE_ROUTE_MATCHING_RESULT) ||
+            (logoutRoute === props.cfgData.FE_ROUTE_CAT_DETAIL) ||
+            (logoutRoute === props.cfgData.FE_ROUTE_SEEYOURRESULTS)) {
             logoutRoute = props.cfgData.FE_ROUTE_HOME;
         }
-
+        
         if (userId !== 0 && loggedIn) {
             sessionStorage.setItem("loginState", 'O');
             return (
@@ -95,7 +98,6 @@ const Header = (props) => {
 
     const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
     const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
-    console.log(quizTaken);
 
     return ( 
         <nav className="navbar">

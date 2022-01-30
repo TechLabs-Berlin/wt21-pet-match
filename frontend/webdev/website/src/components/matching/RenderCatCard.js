@@ -6,6 +6,9 @@ const RenderCatCard = (props) => {
     console.log("... begin: RenderCatCard ...");
     console.log(props);
     let catToShow = props.catToShow;
+    if (catToShow.catData === null) {
+        return ('');
+    }
     let resultArr = props.resultArr;
     let catImage = props.imgPath + catToShow.catData.img;
     let catProfilePage = props.catProfilePage;  

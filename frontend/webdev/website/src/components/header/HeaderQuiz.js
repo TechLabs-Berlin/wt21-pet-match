@@ -2,8 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const HeaderQuiz = (props) => {
-    console.log("... HeaderQuiz: ...");
-    console.log(props.quizTaken);
     if (props.quizTaken) {
         return (
             <NavLink to={props.cfgData.FE_ROUTE_QUESTIONAIRE_START}>{props.cfgData.FE_ROUTE_QUESTIONAIRE_START_MENUITEM}</NavLink>
