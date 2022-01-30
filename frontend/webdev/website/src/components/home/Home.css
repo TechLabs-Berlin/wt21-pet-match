@@ -28,6 +28,19 @@
   text-shadow: 1px 1px 2px #c48d89;
 }
 
+
+/* BUTTON */
+.button__take_quiz {
+  background: #f8da22;
+  color: #463239;
+  margin: 20px 200px;
+  max-width: 200px;
+}
+
+.button__take_quiz:hover {
+  background-color: #c0aa1c;
+}
+
 .cta__homepage a {
   text-decoration: none;
   color: #ffffff;
@@ -37,10 +50,3 @@
   text-decoration: none;
   color: #50c7f7;
 }
-
-/* .h1__homepage {
-  padding-left: 50px;
-  position: relative;
-  max-width: 450px;
-  text-shadow: 1px 1px 2px #c48d89;
-} */
