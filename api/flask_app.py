@@ -34,9 +34,8 @@ file_path_4 = os.path.join(module_dir, "cat_list_in_database.csv")
 cats_website=pd.read_csv(file_path_4)
 
 #cleaning cats data and preparing for model fitting
-cats_website_1 = cats_website.drop(columns = ['breed', 'catID'])
-cats_website_1.columns = ['cat_age','cat_gender','needs_outdoor','medical_conditions','behavioural_problems','cat_weight','likes_to_explore','playful','vocal','picked_up','timid','aggressive','adapts_quickly','prefers_alone','likes_stroke','tolerant_handled','friendly','fearful'
-]
+cats_website_1 = cats_website.drop(columns = ['breed']).set_index('catID')
+#print(cats_website_1)
 # fitting nearest neighbor model on currently available cats from the website
 website_cats_model = NearestNeighbors(n_neighbors=10, metric = 'correlation')
 website_cats_model.fit(cats_website_1)
@@ -77,8 +76,9 @@ def predict():
             # finding nearest person in the database, that gives us info on his cat
             nearest_user = int(neigh_users.kneighbors(query_data, return_distance=False))
             
-            # finding the most similar available cats to the one from the database
-            result = pd.DataFrame(website_cats_model.kneighbors(pd.DataFrame(df_cats.iloc[nearest_user]).transpose(), return_distance=False)).transpose()
+            # query the cats model to find the most similar available cats to the one from the database
+            recommended_cats = website_cats_model.kneighbors(pd.DataFrame(df_cats.iloc[nearest_user]).transpose(), return_distance=False)
+            result = pd.DataFrame(list(cats_website_1.index[recommended_cats])).transpose()
             result.columns = ['catID']
             
             # puts together a json-like string for output 
