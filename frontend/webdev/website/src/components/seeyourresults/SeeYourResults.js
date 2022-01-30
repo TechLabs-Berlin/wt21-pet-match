@@ -193,8 +193,8 @@ const SeeYourResults = (props) => {
                     <form className="form__signup" id="signup_results_page">
                         <input onChange={fieldChanged} type="text" name="firstname" id="firstname" value={userRecord.firstname} placeholder="Your first name" required />
                         <input onChange={fieldChanged} type="text" name="lastname" id="lastname" value={userRecord.lastname} placeholder="Your last name" required />
-                        <input onChange={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
-                        <input onChange={fieldChanged} type="password" name="password" id="password" value={userRecord.password} 
+                        <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
+                        <input onInput={fieldChanged} type="password" name="password" id="password" value={userRecord.password} 
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
                             placeholder="Choose a password" required />

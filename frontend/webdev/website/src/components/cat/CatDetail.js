@@ -144,7 +144,7 @@ const CatDetails = (props) => {
     return (
         <main className="cat_profile">
             <div className="container__return">
-                <Link to={{ pathname: matchResultPage, state: { resultArr: {resultArr} } }} >
+                <Link to={{ pathname: matchResultPage, state: { resultArr: {resultArr}, filterRecord: location.state.filterRecord } }} >
                     &#9166; {linkTxt}
                 </Link>
             </div>
