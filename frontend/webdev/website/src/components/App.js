@@ -14,6 +14,7 @@ import HowItWorks from './howitworks/HowItWorks';
 import AboutUs from './aboutus/AboutUs';
 import Shelter from './shelter/Shelter';
 import LogIn from './login/LogIn';
+import UserSettings from './user/UserSettings';
 import Imprint from './imprint/Imprint';
 import Privacy from './privacy/Privacy'; 
 /* ONLY FOR TESTING: Import project-component SeeYourResults */
@@ -31,6 +32,7 @@ const App = () => {
                 <Route path={cfgData.FE_ROUTE_LOGIN} exact><LogIn cfgData={cfgData} loginState='I' /></Route>
                 <Route path={cfgData.FE_ROUTE_LOGOUT} exact><LogIn cfgData={cfgData} loginState='O' /></Route>
                 <Route path={cfgData.FE_ROUTE_LOGIN_CREATE} exact><LogIn cfgData={cfgData} loginState='C' /></Route>
+                <Route path={cfgData.FE_ROUTE_USER_SETTINGS} exact><UserSettings cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_SEEYOURRESULTS} exact><SeeYourResults cfgData={cfgData} quizTaken={true} yourResultsState='YM' loginState='' /></Route>
                 <Route path={cfgData.FE_ROUTE_PRIVACY} exact><Privacy cfgData={cfgData} /></Route>
                 <Route path={cfgData.FE_ROUTE_IMPRINT} exact><Imprint cfgData={cfgData} /></Route>
