@@ -274,9 +274,9 @@ app.delete('/logout', (req, res) => {
 })
 
 
-app.use((err, req, res, next) => {
+app.use((error, req, res, next) => {
     console.error(error.stack);
-    res.status(500).send(err);
+    res.status(500).send('Something went wrong!');
 }) 
 
 
