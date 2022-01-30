@@ -74,7 +74,7 @@ app.post("/viewresult", async(req, res, next) => {
 })
 
 // register new user without quiz
-app.post("/registerbeforequiz", async (req, res, next) => {
+app.post("/registerbeforequiz", (req, res, next) => {
     user.findOne({email: req.body.username}, async(err, doc) => {
         if (err) throw err;
         if (doc) res.send('User Already Exists');
@@ -117,7 +117,7 @@ app.post("/registerbeforequiz", async (req, res, next) => {
 })
 
 // register new user after quiz
-app.post("/registerafterquiz", async (req, res, next) => {
+app.post("/registerafterquiz", (req, res, next) => {
     user.findOne({email: req.body.username}, async(err, doc) => {
         if (err) throw err;
         if (doc) res.send('User Already Exists');
@@ -274,9 +274,9 @@ app.delete('/logout', (req, res) => {
 })
 
 
-app.use((err, req, res, next) => {
+app.use((error, req, res, next) => {
     console.error(error.stack);
-    res.status(500).send(err);
+    res.status(500).send('Something went wrong!');
 }) 
 
 
