@@ -22,6 +22,7 @@ const CatDetails = (props) => {
     const hLineHealth = 'Health issues?';
     const shelterTxtAva = 'Available at: ';
     const shelterTxtBTN = 'Contact Shelter';
+    const breedAlternativeTxt = 'Domestic short/longhair';
 
     /* to go back to machting results ... use history */
     const history = useHistory();
@@ -50,11 +51,15 @@ const CatDetails = (props) => {
     const catAge = catData.Result[actIndex].catData.age + " y.o.";
 
     function renderBreed(pBreed, pHL) {
-        if (pBreed !== null) {
+        let breedTxt = pBreed;
+        if (breedTxt === null) {
+            breedTxt = breedAlternativeTxt;
+        }
+        if (breedTxt !== null) {
             return (
                 <div className="cat_breed">
                     <h3>{pHL}</h3>
-                    <p>{pBreed}</p>
+                    <p>{breedTxt}</p>
                 </div>                
             );
         } 
