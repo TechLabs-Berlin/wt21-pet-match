@@ -183,9 +183,9 @@ const SeeYourResults = (props) => {
                         <button onClick={onClickViewResult} className="button__results">{props.cfgData.FE_ROUTE_SEEYOURRESULTS_MENUITEM}</button>
                     </div>                    
                 </div>
-                <div><h2>&nbsp;</h2></div>
+                {/* <div><h2>&nbsp;</h2></div> */}
                 <div className="container__bottom_see_your_results">
-                    <div><h2>&nbsp;</h2></div>
+                    {/* <div><h2>&nbsp;</h2></div> */}
                     <div className="container__signup_option">
                         <p>or</p>
                         <h2>Sign up to save your results</h2>
@@ -205,6 +205,10 @@ const SeeYourResults = (props) => {
                     </form>
                     <div className="container__button_signup_submit">
                         <button type="submit" onClick={onClickCreate} form="signup_results_page" className="button__signup_submit">Create Account</button>
+                    </div>
+
+                    <div className="container__login">
+                        <p>Already have an account? <a href="/login">Log in</a></p>
                     </div>
                 </div>
                 <div className="errormsg">{errorMsgToShow}&nbsp;</div>
