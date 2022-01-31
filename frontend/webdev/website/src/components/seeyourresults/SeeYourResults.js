@@ -64,14 +64,17 @@ const SeeYourResults = (props) => {
             console.log("... SeeYourResults, useEffect, yourResultsState set and backend not done and should be re-rendered ... ");
             //console.log(chosenAnswer[0]);
             console.log(answerArr);
-            if (yourResultsState === 'VR') {
-                console.log("... SeeYourResults, useEffect, yourResultsState = /viewresult ... ");
-                axios.post('http://localhost:3001/viewresult', answerArr)
-//            if (yourResultsState === 'YM') {
-//                console.log("... SeeYourResults, useEffect, yourResultsState = /yourmatchesresult ... ");
-//                tmpArr = answerArr;
-//               tmpArr.userID = "61ef3e4501dc836946e25a2d";
-//                axios.post('http://localhost:3001/yourmatchesrsult',tmpArr)
+//            if (yourResultsState === 'VR') {
+//                console.log("... SeeYourResults, useEffect, yourResultsState = /viewresult ... ");
+//                axios.post('http://localhost:3001/viewresult', answerArr)
+            let tmpState = 'YM';
+            if (tmpState === 'YM') {
+ //           if (yourResultsState === 'YM') {
+                console.log("... SeeYourResults, useEffect, yourResultsState = /yourmatchesresult ... ");
+                tmpArr = { "userID": "61ef45acd9dc72a2678fbb46" };
+                console.log("==== BEFORE AXIOS =====");
+                console.log(tmpArr);
+                axios.post('http://localhost:3001/yourmatchesresult', tmpArr)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
                             console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
@@ -97,6 +100,7 @@ const SeeYourResults = (props) => {
                         setBackendErrorMsg(error);
                         setBackendDone(false);
                     }); 
+                console.log("==== AFTER AXIOS =====");
                 console.log(" ... SeeYourResult, useEffect, after axios.post /viewresult ...");
                 console.log(resultArr);
             }            
@@ -179,9 +183,9 @@ const SeeYourResults = (props) => {
                         <button onClick={onClickViewResult} className="button__results">{props.cfgData.FE_ROUTE_SEEYOURRESULTS_MENUITEM}</button>
                     </div>                    
                 </div>
-                <div><h2>&nbsp;</h2></div>
-                <div className="container__bottom_questionnaire">
-                    <div><h2>&nbsp;</h2></div>
+                {/* <div><h2>&nbsp;</h2></div> */}
+                <div className="container__bottom_see_your_results">
+                    {/* <div><h2>&nbsp;</h2></div> */}
                     <div className="container__signup_option">
                         <p>or</p>
                         <h2>Sign up to save your results</h2>
@@ -189,8 +193,8 @@ const SeeYourResults = (props) => {
                     <form className="form__signup" id="signup_results_page">
                         <input onChange={fieldChanged} type="text" name="firstname" id="firstname" value={userRecord.firstname} placeholder="Your first name" required />
                         <input onChange={fieldChanged} type="text" name="lastname" id="lastname" value={userRecord.lastname} placeholder="Your last name" required />
-                        <input onChange={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
-                        <input onChange={fieldChanged} type="password" name="password" id="password" value={userRecord.password} 
+                        <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
+                        <input onInput={fieldChanged} type="password" name="password" id="password" value={userRecord.password} 
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
                             placeholder="Choose a password" required />
@@ -201,6 +205,10 @@ const SeeYourResults = (props) => {
                     </form>
                     <div className="container__button_signup_submit">
                         <button type="submit" onClick={onClickCreate} form="signup_results_page" className="button__signup_submit">Create Account</button>
+                    </div>
+
+                    <div className="container__login">
+                        <p>Already have an account? <a href="/login">Log in</a></p>
                     </div>
                 </div>
                 <div className="errormsg">{errorMsgToShow}&nbsp;</div>

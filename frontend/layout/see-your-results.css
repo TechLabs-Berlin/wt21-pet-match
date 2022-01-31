@@ -1,4 +1,3 @@
-
 /* MAIN */
 h1 {
     font-size: 50px;
@@ -9,10 +8,10 @@ h1 {
     flex-direction: column;
     justify-content: center;
     background-color: #50c7f7;
-    height: 40vh
+    height: 40vh;
 }
 
-.container__bottom_questionnaire {
+.container__bottom_see_your_results {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -72,6 +71,14 @@ h1 {
 
 /* SIGN UP FORM */
 
+.form__signup {
+    width: 45%;
+}
+
+.form__signup label {
+    font-size: 10px;
+}
+
 .container__signup_option {
     display: flex;
     flex-direction: column;
@@ -90,7 +97,7 @@ h1 {
     margin-bottom: 0;
 }
 
-.form__signup input[type=text], [type=email], [type=password] {
+.form__signup input[type="text"], .form__signup input[type="email"], .form__signup input[type="password"] {
     margin-bottom: 16px;
     border: 1px solid #ecf9fe;
     border-radius: 3px;

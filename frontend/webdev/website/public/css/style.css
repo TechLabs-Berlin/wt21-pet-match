@@ -9,7 +9,7 @@ body {
 h1 {
   font-family: Paytone One, sans-serif;
   font-size: 4em;
-  color: #FFFFFF;
+  color: #ffffff;
   text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.065);
 }
 
@@ -26,7 +26,6 @@ h3 {
 h4 {
   font-family: PT Sans Caption, sans-serif;
   font-size: 1em;
-
 }
 
 ul {
@@ -34,18 +33,18 @@ ul {
 }
 
 a {
-  color:#50C7F7;
+  color: #50c7f7;
   font-weight: bold;
   text-decoration: solid underline 2px;
 }
 
 a:hover {
-  color:#f8da22;
+  color: #f8da22;
   transition: 0.2s ease;
 }
 
 a:active {
-  color: #EB4B38;
+  color: #eb4b38;
 }
 
 button {
@@ -68,22 +67,29 @@ button:hover {
 }
 /* ====================General end===================== */
 
-/* ====================Nav Bar start=================== */
-/* ====================Nav Bar end===================== */
 
 /* ===================Homepage start=================== */
-/* === images can only be resolved / loaded if      === */
-/* === reference to them resides in public-folder   === */
+/* Images can only be resolved / loaded if reference to them resides in public-folder */
 .banner__homepage::before {
   background: url(./img/kitten-hero_01.png);
 }
+
+.img_hero_cover::before {
+  background: url(./img/hero-user.png);
+}
+
+.button__take_quiz {
+  background: #50c7f7;
+  color: #FFFFFF;
+  margin: 20px 200px;
+  max-width: 200px;
+}
+
+.button__take_quiz:hover {
+  background-color: #3695bb;
+}
 /* ====================Homepage end==================== */
 
-/* =================Cat Profile start================== */
-/* =================Cat Profile end================== */
-
-/* ====================Footer start==================== */
-/* =====================Footer end===================== */
 
 /* ================Media Queries start================= */
 @media (max-width: 768px) {

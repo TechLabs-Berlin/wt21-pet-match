@@ -6,11 +6,11 @@ const RenderFormField = (props) => {
     let optionTxt = 'option_' + actualIndex;
     let fieldChanged = props.fieldChanged;
     let actualValue = props.actValue;
+    let answerTxt = "";
 
     if (props.answer.answerValue) {
         answerValue = props.answer.answerValue;
     }
-
     /* 
     console.log("=========================================");
     console.log("... begin: RenderFormField ...");
@@ -21,23 +21,29 @@ const RenderFormField = (props) => {
     console.log("... end: RenderFormField ...");
     console.log("=========================================");
     */
-
     if (props.qType === 1) {
+        if (props.answer.answerText.indexOf('/') !== -1) {
+            answerTxt = props.answer.answerText.split('/');
+        }
         if (actualValue) {
             answerValue = actualValue;
+        } 
+        else {
+            answerValue = parseInt(answerTxt[2]);
         }
         return (
-            <div key={actualIndex} className="questionnaire_input">
-                <label className="container__input" htmlFor="input_field">
-                    <span>{props.answer.answerText}</span>
+            <div key={actualIndex} className="questionnaire_option">
+                <label htmlFor="input_field">
+                    {answerTxt[0]}
                     <input 
-                        required min="0" max="120"
+                        required min={parseInt(answerTxt[2])} max={parseInt(answerTxt[3])}
                         type="number"
                         id="input_field"
                         name="input_field"
                         value={answerValue}
-                        onChange={e => fieldChanged(e.target.value)}
+                        onInput={e => fieldChanged(e.target.value)}
                     />
+                    {answerTxt[1]}
                 </label>
             </div>
         )
@@ -47,7 +53,7 @@ const RenderFormField = (props) => {
             return (
                 <div key={actualIndex} className="questionnaire_option">
                     <label className="container__radio_button" htmlFor={optionTxt}>
-                        <span>{props.answer.answerText}</span>
+                        {props.answer.answerText}
                         <input
                             required
                             checked
@@ -66,7 +72,7 @@ const RenderFormField = (props) => {
             return (
                 <div key={actualIndex} className="questionnaire_option">
                     <label className="container__radio_button" htmlFor={optionTxt}>
-                        <span>{props.answer.answerText}</span>
+                        {props.answer.answerText}
                         <input
                             required
                             type="radio"

@@ -1,3 +1,4 @@
+/* MAIN */
 h1 {
   font-size: 50px;
 }
@@ -10,7 +11,8 @@ h1 {
   height: 40vh;
 }
 
-.container__bottom_questionnaire {
+
+.container__bottom_see_your_results {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -35,6 +37,7 @@ h1 {
   height: 6vh;
 }
 
+
 /* BUTTONS */
 .container__button_results {
   margin: 0;
@@ -43,31 +46,31 @@ h1 {
 
 .button__results {
   background-color: #eb4b38;
-  color: #ffffff;
+  color: #FFFFFF;
   max-width: 200px;
 }
 
 .button__results:hover {
-  background-color: #cc2714;
+  background-color: #9e1f11;
 }
 
 .button__signup_submit {
   margin-top: 16px;
   margin-bottom: 32px;
   text-align: center;
-  background-color: #50c7f7;
-  color: #ffffff;
+  background-color: #50C7F7;
+  color: #FFFFFF;
   max-width: 200px;
 }
 
 .button__signup_submit:hover {
   background-color: #0babea;
-  color: #ffffff;
+  color: #FFFFFF;
   max-width: 200px;
 }
 
-/* SIGN UP FORM */
 
+/* SIGN UP FORM */
 .container__signup_option {
   display: flex;
   flex-direction: column;
@@ -86,9 +89,11 @@ h1 {
   margin-bottom: 0;
 }
 
-.form__signup input[type="text"],
-[type="email"],
-[type="password"] {
+.form__signup {
+  width: 45%;
+}
+
+.form__signup input[type="text"], .form__signup input[type="email"], .form__signup input[type="password"] {
   margin-bottom: 16px;
   border: 1px solid #ecf9fe;
   border-radius: 3px;
@@ -103,4 +108,12 @@ h1 {
 
 .form__signup ::placeholder {
   color: #b9b9b9;
+}
+
+.form__signup label {
+  font-size: 12px;
+}
+
+.form__signup input[type="checkbox"] {
+  transform: scale(0.8);
 }

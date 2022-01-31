@@ -26,7 +26,9 @@ const LogIn = (props) => {
     }
 
     function renderBottomLink() {
-        if (loginState === 'O') {
+        /* This is not included in MVP */
+//       if (loginState === 'O') {
+        if ('O' === 'O') {
             return '';
         }
         
@@ -38,8 +40,7 @@ const LogIn = (props) => {
         if (loginState === 'C') {
             linkText = props.cfgData.FE_ROUTE_LOGIN_CREATE_TEXT_LOGIN;
             linkRoute = props.cfgData.FE_ROUTE_LOGIN_CREATE;
-            linkItem = props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM;
-            
+            linkItem = props.cfgData.FE_ROUTE_LOGIN_CREATE_MENUITEM; 
         }
 
         return (

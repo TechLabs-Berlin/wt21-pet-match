@@ -13,11 +13,16 @@ const CatDetails = (props) => {
     const matchResultPage = props.cfgData.FE_ROUTE_MATCHING_RESULT;
 
     /* constants -> maybe to move into cfgData-file */
-    const hLineChar = 'Characteristics';
+    const linkTxt = "Return to Matches";
+    const hLineGender = 'Gender';
+    const hLineAge = 'Age';
     const hLineBreed = 'Breed';
     const hLineGoodWith = 'Good With';
-    const hLineHealth = 'Health';
-    const shelterTxt = 'Contact Shelter';
+    const hLineNeutered = 'Sterilized?';
+    const hLineHealth = 'Health issues?';
+    const shelterTxtAva = 'Available at: ';
+    const shelterTxtBTN = 'Contact Shelter';
+    const breedAlternativeTxt = 'Domestic short/longhair';
 
     /* to go back to machting results ... use history */
     const history = useHistory();
@@ -36,27 +41,28 @@ const CatDetails = (props) => {
     const catImage = props.cfgData.CAT_IMAGES_PATH + catData.Result[actIndex].catData.img;
     const catImageAlt = catData.Result[actIndex].catData.alttext;
     const catName = catData.Result[actIndex].catData.catName;
+    const catNameTxt = "Meet " + catName;
     const catTags = catData.Result[actIndex].catData.tags;
     const catBreed = catData.Result[actIndex].catData.breed;
     const catNeutered = catData.Result[actIndex].catData.neutered;
     const catHealth = catData.Result[actIndex].catData.healthIssue;
     const catGood = catData.Result[actIndex].catData.goodwith;
     const catLikesCats = catData.Result[actIndex].catData.likesCats;
-    let catAge = 'Kitten';
-    if (catData.Result[actIndex].catData.age > 1) {
-        catAge = 'Adult';
-    }
+    const catAge = catData.Result[actIndex].catData.age + " y.o.";
 
     function renderBreed(pBreed, pHL) {
-        if (pBreed !== null) {
+        let breedTxt = pBreed;
+        if (breedTxt === null) {
+            breedTxt = breedAlternativeTxt;
+        }
+        if (breedTxt !== null) {
             return (
                 <div className="cat_breed">
                     <h3>{pHL}</h3>
-                    <p>{pBreed}</p>
+                    <p>{breedTxt}</p>
                 </div>                
             );
-
-        }
+        } 
         else {
             return ('');
         }
@@ -65,46 +71,86 @@ const CatDetails = (props) => {
     function renderGoodWith(pGood, pLikesCats, pHL) {
         let goodTxt = '';
         if (pLikesCats) {
-            goodTxt = goodTxt + 'Likes other cats';
-        }
-        else {
-            goodTxt = goodTxt + 'Does not like other cats';         
-        }
+            goodTxt = 'Other cats';
+        }        
         if (pGood) {
-            goodTxt = goodTxt + ', ' + pGood;
+            if (pLikesCats) {
+                goodTxt = pGood + ', ' + goodTxt;
+            }
+            else {
+                goodTxt = pGood;
+            }
+            
         }
         return (
-            <div className="cat_good-with">
+            <div className="cat_good_with">
                 <h3>{pHL}</h3>
                 <p>{goodTxt}</p>
             </div>                
         );        
     }    
 
-    function renderHealth(pNeutered, pHealth, pHL) {
-        let healthIssueTxt = '';
+    function renderNeutered(pNeutered, pNL) {
+        let neuteredTxt = '';
         if (pNeutered) {
-            healthIssueTxt = healthIssueTxt + 'Neutered';
+            neuteredTxt = neuteredTxt + 'Yes';
         }
         else {
-            healthIssueTxt = healthIssueTxt + 'Not neutered';
-        }
-        if (pHealth) {
-            healthIssueTxt = healthIssueTxt + ', Cat has some health issues.';
+            neuteredTxt = neuteredTxt + 'No';
         }
         return (
-            <div className="cat_health-with">
+            <div className="cat_sterilized">
+                <h3>{pNL}</h3>
+                <p>{neuteredTxt}</p>
+            </div>                
+        );
+    }
+
+    function renderHealth(pHealth,pHL) {
+        let healthIssueTxt = '';
+        if (pHealth) {
+            healthIssueTxt = healthIssueTxt + 'Yes';
+        }
+        else {
+            healthIssueTxt = healthIssueTxt + 'No';
+        }
+        return (
+            <div className="cat_health_issues">
                 <h3>{pHL}</h3>
                 <p>{healthIssueTxt}</p>
             </div>                
         );
     }
 
+    function renderShelter(pShelterName, pAvailableTxt, pBTNTxt, pLink) {
+        let actualLink = pLink;
+        /* currently we have no page for the Shelter Area ... */
+        actualLink = "";
+        if (pShelterName !== null && pShelterName.length > 0) {
+            return (
+                <div className="container__contact_shelter">
+                    <div className="cat_available_at">
+                        <h4>{pAvailableTxt}<span className="cat_shelter">{pShelterName}</span></h4>
+
+                    </div>  
+                    <div className="container__button_contact_shelter">    
+                        <Link to={actualLink}>
+                            <button className="button__contact_shelter">{pBTNTxt}</button>
+                        </Link>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return ('');
+        }
+    }
+
     return (
         <main className="cat_profile">
             <div className="container__return">
-                <Link to={{ pathname: matchResultPage, state: { resultArr: {resultArr} } }} >
-                    &#9166; Return to Matches
+                <Link to={{ pathname: matchResultPage, state: { resultArr: {resultArr}, filterRecord: location.state.filterRecord } }} >
+                    &#9166; {linkTxt}
                 </Link>
             </div>
             <div className="container__top_cat_profile">
@@ -120,12 +166,9 @@ const CatDetails = (props) => {
                         </div>
                     </div>
                 </div>
-
                 <div className="container__cat_profile_description">
                     <div className="container__cat_profile_heading">
-                        <div className="heading__cat_profile">
-                            <h1 className="title__cat_profile">{catName}</h1>
-                        </div>
+                        <h1 className="title__cat_profile">{catName}</h1>
                         <ul className="tags__cat_profile">
                             {catTags.map((catTag, index) => (
                                 <RenderCatTag key={index} index={index} catTag={catTag} />
@@ -134,24 +177,25 @@ const CatDetails = (props) => {
                     </div>
                     <hr></hr>
                     <div className="container__cat_details">
-                        <div className="cat_characteristics">
-                            <h3>{hLineChar}</h3>
-                            <p>{catData.Result[actIndex].catData.gender},&nbsp;{catAge}</p>
+                        <div className="cat_gender">
+                            <h3>{hLineGender}</h3>
+                            <p>{catData.Result[actIndex].catData.gender}</p>
+                        </div>
+                        <div className="cat_age">
+                            <h3>{hLineAge}</h3>
+                            <p>{catAge}</p>
                         </div>
                         {renderBreed(catBreed,hLineBreed)}
                         {renderGoodWith(catGood,catLikesCats,hLineGoodWith)}
-                        {renderHealth(catNeutered,catHealth,hLineHealth)}
+                        {renderNeutered(catNeutered, hLineNeutered)}
+                        {renderHealth(catHealth,hLineHealth)}
                     </div>
-                    <div className="container__contact_shelter">
-                        <Link to={props.cfgData.FE_ROUTE_SHELTER}>
-                            <button id="button__contact_shelter">{shelterTxt}</button>
-                        </Link>
-                    </div>
+                    {renderShelter(catData.Result[actIndex].catData.shelterName,shelterTxtAva,shelterTxtBTN,props.cfgData.FE_ROUTE_SHELTER)}
                 </div>
             </div>
             <div className="container__bottom_cat_profile">
                 <hr></hr>
-                <h2>Meet&nbsp;{catName}</h2>
+                <h2>{catNameTxt}</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut massa venenatis, tempor erat et,
                     condimentum metus. Aenean at lectus ut lectus sodales porttitor. Fusce porttitor pulvinar lorem et
