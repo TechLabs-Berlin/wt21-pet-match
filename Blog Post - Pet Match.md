@@ -110,7 +110,7 @@ PetMatch_BlogPost_HTML_Questionnaire.png PetMatch_BlogPost_React_DynamicPage_Que
 PetMatch_BlogPost_React_DaynamicPage_RenderSingleQuestion.png
 PetMatch_BlogPost_React_DynamcPage_RenderFormField.png
 
-
+![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_HTML_Questionnaire.png?raw=true)
 
 ![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DynamicPage_Questionnaire.png?raw=true)
 
@@ -192,9 +192,33 @@ All in all, it was fun to find a solution for all the obstacles we were facing a
 
 ***4. Blog Post DS***
 
-In our Pet-Match project the data science team is responsible for sourcing and providing of a suitable data set, the cleaning of the entire data which will be needed as information basement for further decision making/support as well as applying a proper machine learning methodology. To realize a good data science support it is mandatory to exchange with all other disciplines from the very beginning in order to achieve a common goal and to deliver the final MVP. 
 
-Thus the DS-Team spend much time to find a sufficient data set which has served as a solid data base in order to extract information and rules from it throughout the entire project phase. We had a couple of attempts to find the "perfect" data set which in the end does not exist. Finally we as the whole team committed to take the "cats data set" for the entire duration of the project phase. Furthermore we discussed to extend the data base with new data sets (other pets). The data set we used has approximately 3300 rows (data sets) and 105  columns (attributes). The very initial task was to clean and structure the data so that we could apply the very first rules to gain important information. For that we cleaned the data in the columns which we saw as required to predict a satisfaction for the potential adopter in order to find any useful pattern. First of all we changed nominal data into numerical data, as seen below.
+
+Tech-Stack:
+
+- Python (Sklearn, Numpy, Pandas, Seaborn, Matplotlib, Names)
+
+- Jupiter Notebook
+
+- Flask API
+
+- JSON
+
+- Postman
+
+- Github
+
+- Excel
+
+- Visual Studio Code
+
+  
+
+  
+
+In our Pet-Match project the data science team is responsible for sourcing and providing of a suitable data set, the cleaning of the entire data which will be needed as information basement for further decision-making/support as well as applying a proper machine learning methodology. To produce a good data science support, it is mandatory to exchange with all other disciplines from the very beginning in order to achieve a common goal and to deliver the final MVP. 
+
+Thus, the DS-Team spend much time to find a sufficient data set which has served as a solid database in order to extract information and rules from it throughout the entire project phase. We had a couple of attempts to find the "perfect" data set, which in the end does not exist. Finally, we as the whole team committed to take the "cats data set" for the entire duration of the project phase. Furthermore, we discussed extending the database with new data sets (other pets). The data set we used has approximately 3300 rows (data sets) and 105  columns (attributes). The very initial task was to clean and structure the data so that we could apply the very first rules to gain important information. For that, we cleaned the data in the columns which we saw as required to predict a satisfaction for the potential adopter in order to find any useful pattern. First we changed nominal data into numerical data, as seen below.
 
 
 
@@ -202,7 +226,7 @@ Thus the DS-Team spend much time to find a sufficient data set which has served 
 
 
 
-To find the first pattern we decided on making a correlation analysis. For that we have chosen the columns which might influence the satisfaction of the adopter and tried to find out if there is any correlation. If there would be one or many we must implement the context of the question which is behind of the column in our questionnaire.  We identified a couple of "slight" positive correlations that points out that there are at least small interrelationships. 
+To find the first pattern, we decided on making a correlation analysis. For that we have chosen the columns which might influence the satisfaction of the adopter and tried to find out if there is any correlation. If there would be one or many, we must implement the context of the question of which is behind of the column in our questionnaire.  We identified a couple of "slight" positive correlations that points out that there are at least small interrelationships. 
 
 
 
@@ -210,7 +234,7 @@ To find the first pattern we decided on making a correlation analysis. For that 
 
 
 
-In between were setting up a scoring system which serves our questionnaire to recommend a matching cat, added random cat names since the data set did not have it and did further cleaning. 
+In between we were setting up a scoring system which serves our questionnaire to recommend a matching cat, added random cat names since the data set did not have it and did further clean. 
 
 
 
@@ -218,15 +242,22 @@ In between were setting up a scoring system which serves our questionnaire to re
 
 
 
-The DS-Team decided to go further and build up a reliable recommendation system which we will point out final cat recommendations whenever a potential adopter runs through the defined questionnaire. For that we tried several approaches to find the right one for our project case. We did a regression analysis as well as a k-nearest neighbor attempt to figure out which will fits the best. By doing so we faced a couple of roadblocks and obstacles. It turned out that a recommendation systems based on a correlation analysis fits the best for our data set and returns the best results. 
+The DS-Team decided to go further and build up a reliable recommendation system which we will point out final cat recommendations whenever a potential adopter runs through the defined questionnaire. For that, we tried several approaches to find the right one for our project case. We did a regression analysis as well as a k-nearest neighbor attempt to figure out which will fits the best. By doing so, we faced a couple of roadblocks and obstacles. It turned out that a recommendation systems based on a correlation analysis fits the best for our data set and returns the best results. 
 
-The commendation goes hand in hand with a proper machine learning algorithm. The Idea was that user input (personality test answers) and the system recommends his matching cats. Since our users don't have any prior preferences towards cats ("USER COLD START PROBLEM") we have to start with this:
+
+
+Despite we tried a couple of machine learning methods (e.g. kNN, decision-tree etc.) to build a reliable recommender the DS-Team decided to focus on correlation based method because the initial results were more promising to the teammates. Nevertheless we also tried to use a "Jaccard-Distance Method" as an alternative - which will be shown in detail further in the blog. 
+We started our correlation-based recommender by a with a deep brainstorming and discussion process to define what information is required and how we should conceptualize it.
+
+
+
+The Idea was that user input (personality test answers) and the system recommends his matching cats. Since our users don't have any prior preferences towards cats ("USER COLD START PROBLEM") we have to start with this:
 
 
 
 Version 1
 
-1. Finding **nearset user**: the system takes user input (personality test answers) then finds the nearest user (the most similar one) from our Data Set. For better predictions : we filtered out users with satisfaction level blow 0.8.
+1. Finding **nearest user**: the system takes user input (personality test answers) then finds the nearest user (the most similar one) from our Data Set. For better predictions : we filtered out users with satisfaction level blow 0.8.
 2. We get the nearest user - **Connected Cat** (from the Data Set)
 
 
@@ -248,6 +279,16 @@ Same as vesrion 1 but builds on it
 
 
 
-All in all we achieved our goal to set up a reliable recommendation system which systematic we connect through an API for our backend team mates. In conclusion we need to say that we faced many roadblocks on our way to deliver a good product. We even had a couple of drop outs (UX) who left the team. We did our best to compensate it.
+All in all we achieved our goal to set up a reliable recommendation system which systematic we connect through an API for our backend teammates. In conclusion, we need to say that we faced many roadblocks on our way to deliver a good product. We even had a couple of drop-outs (UX) who left the team. We did our best to compensate it.
 
-But nevertheless it was a great time, we have learned a lot and our mentors supported us wherever they could. Finally we need to highlight that our teamwork was great and we have used many tools to exchange or create files and information. Although "GitHub" was not easy to handle and as a tool to exchange information a little bit to complex for beginners it worked out well in the end. 
+But nevertheless it was a great time, we have learned a lot and our mentors supported us wherever they could. Finally, we need to highlight that our teamwork was great and we have used many tools to exchange or create files and information. Although "GitHub" was not easy to handle and as a tool to exchange information, a little too complex for beginners it worked out well in the end. 
+
+
+
+*** Notes on the screenshot of hany***
+
+- First Version is only one loop of correlation to find the 
+- WE will take only the second version for the blog post
+- Describe the comparison of cosine similarity vs correlation 
+- Take Hany's Screenshot (brain-storming) to introduce our approaches (Version2)
+- API-Discription will be send be Oksana + Screenshot
