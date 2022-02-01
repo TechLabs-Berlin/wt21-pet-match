@@ -122,22 +122,51 @@ const CatDetails = (props) => {
         );
     }
 
+    function renderShelterBTN(pTarget, pLink, pBTNTxt) {
+        if (pLink === '') {
+            return ('');
+        }
+        else {
+            return (
+                <div className="container__button_contact_shelter">    
+                    <a target={pTarget} href={pLink}>
+                        <button className="button__contact_shelter">{pBTNTxt}</button>
+                    </a>
+                </div>
+            );
+        }
+    }
+
+    function renderLinkTarget(pLink,pShelterName) {
+        let actualLink = pLink;
+        props.cfgData.SHELTER_LINKS.map((shelterLink, index) => {
+            console.log(shelterLink.shelterName);
+            console.log(pShelterName);
+            if (shelterLink.shelterName === pShelterName) {
+                actualLink = shelterLink.shelterLink;
+            }
+        });
+        return (actualLink);
+    }
+
     function renderShelter(pShelterName, pAvailableTxt, pBTNTxt, pLink) {
         let actualLink = pLink;
+        let actualTarget = "_self";
+        let newLink = '';
         /* currently we have no page for the Shelter Area ... */
         actualLink = "";
         if (pShelterName !== null && pShelterName.length > 0) {
+            newLink = renderLinkTarget(actualLink, pShelterName);
+            if (newLink !== actualLink) {
+                actualLink = newLink;
+                actualTarget = '_blank';
+            }
             return (
                 <div className="container__contact_shelter">
                     <div className="cat_available_at">
                         <h4>{pAvailableTxt}<span className="cat_shelter">{pShelterName}</span></h4>
-
                     </div>  
-                    <div className="container__button_contact_shelter">    
-                        <Link to={actualLink}>
-                            <button className="button__contact_shelter">{pBTNTxt}</button>
-                        </Link>
-                    </div>
+                    {renderShelterBTN(actualTarget,actualLink,pBTNTxt)}
                 </div>
             );
         }

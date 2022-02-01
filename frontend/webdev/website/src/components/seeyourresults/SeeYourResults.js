@@ -339,7 +339,7 @@ const SeeYourResults = (props) => {
                             placeholder="Choose a password" required />
                         <label htmlFor="acceptedConsent">
                             <input onChange={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value={userRecord.acceptedConsent} />&nbsp;
-                            I inderstand that my personal data will be processed in accordance with Pet Match's <a href="/privacy">Privacy Policy</a>
+                            I inderstand that my personal data will be processed in accordance with Pet Match's <a href="/privacy">Privacy Policy</a>.
                         </label>
                     </form>
                     <div className="container__button_signup_submit">

@@ -24,3 +24,16 @@
   text-transform: uppercase;
   text-align: center;
 }
+
+.error__signup {
+  color: #842029;
+  background-color: #f8d7da;
+  border-radius: 3px;
+  border: 1px solid #f5c2c7;
+  margin: 0px 0px 20px 0px;
+  text-align: center;
+}
+
+.error__signup p {
+  margin: 5px 10px;
+}

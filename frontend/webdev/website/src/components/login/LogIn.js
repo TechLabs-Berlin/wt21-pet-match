@@ -113,16 +113,19 @@ const LogIn = (props) => {
     const onClickCreate = e => {
         e.preventDefault();
 
-        if (userRecord.email === '') {
-            setErrorMsgToShow ("Please fill in your email!");
+        if (userRecord.firstName === '' && loginState === 'C') {
+            setErrorMsgToShow ("Error! First name field is required*.");
+        }
+        else if (userRecord.email === '') {
+            setErrorMsgToShow ("Error! Email field is required*.");
         }
         else if (userRecord.password === '') {
-            setErrorMsgToShow("Please fill in your password!");
+            setErrorMsgToShow("Error! Password field is required*.");
         } 
         else if (String(userRecord.acceptedConsent) !== 'true') {
             /* do this only if in mode create new account */
             if (loginState === 'C') {
-                setErrorMsgToShow("Please accept our Privacy Terms!");
+                setErrorMsgToShow("Error! Please agree with Privacy Policy before we proceed.");
             }
             else {
                 setErrorMsgToShow("");
@@ -142,7 +145,7 @@ const LogIn = (props) => {
                     <label htmlFor="acceptedConsent">
                         <input checked onInput={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true" />&nbsp;
                         I inderstand that my personal data will be processed in accordance with Pet Match's&nsp;
-                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>
+                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>.
                     </label>
                 );
             }
@@ -151,7 +154,7 @@ const LogIn = (props) => {
                     <label htmlFor="acceptedConsent">
                         <input onInput={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true" />&nbsp;
                         I inderstand that my personal data will be processed in accordance with Pet Match's&nbsp;
-                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>
+                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>.
                     </label>
                 );
             }
@@ -164,7 +167,7 @@ const LogIn = (props) => {
     function renderFirstName(loginState) {
         if (loginState === 'C') {
             return (
-                <input onChange={fieldChanged} type="text" name="firstName" id="firstName" value={userRecord.firstName} placeholder="Your first name" required />
+                <input onChange={fieldChanged} type="text" name="firstName" id="firstName" value={userRecord.firstName} placeholder="Your first name*" required />
             );
         }
         else {
@@ -180,6 +183,14 @@ const LogIn = (props) => {
         }
         else {
             return ('');
+        }
+    }
+
+    function renderErrMsg(pErrorMsgToShow) {
+        if (pErrorMsgToShow !== '') {
+            return (
+                <div className="error__signup"><p>{pErrorMsgToShow}</p></div>
+            );
         }
     }
 
@@ -204,19 +215,18 @@ const LogIn = (props) => {
                     </div>
                     <form className="form__signup" id="signup_results_page">
                         {renderFirstName(loginState)}
-                        {renderLastName(loginState)}
-                        <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
+                        <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email*" required />
                         <input onInput={fieldChanged} type="password" name="password" id="password" value={userRecord.password}
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
-                            placeholder="Choose a password" required />
+                            placeholder="Choose a password*" required />
                         {renderConsent(loginState)}
                     </form>
                     <div className="container__button_signup_submit">
                         <button type="submit" onClick={onClickCreate} form="signup_results_page" className="button__signup_submit">{loginText}</button>
                     </div>
                 </div>
-                <div align="center" className="errormsg"><br />{errorMsgToShow}&nbsp;<br /><br /></div>
+                {renderErrMsg(errorMsgToShow)}
             </main>
         );
     }

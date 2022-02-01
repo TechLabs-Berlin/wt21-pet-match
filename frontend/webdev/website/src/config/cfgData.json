@@ -75,5 +75,11 @@
     "Q_QUESTIONAIRE_BTN_NTXT": "Next",
     "Q_QUESTIONAIRE_BTN_PTXT": "Back",
     "Q_QUESTIONAIRE_BTN_FTXT": "Finish",
-    "Q_QUESTION_TXT": "Question"
+    "Q_QUESTION_TXT": "Question",
+    "SHELTER_LINKS": [ 
+        { "shelterName": "Tierheim Berlin", "shelterLink": "https://www.tierheim.de/" }, 
+        { "shelterName": "Berlin Pro-kat e.V.", "shelterLink": "http://www.berliner-pro-kat.de" }, 
+        { "shelterName": "Samtpfoten Neukölln e.V.", "shelterLink": "https://www.samtpfoten-neukoelln.com/" },
+        { "shelterName": "Katze Not In Berlin", "shelterLink": "https://www.facebook.com/katzeninnotberlin/" }
+    ]
 }
