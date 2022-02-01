@@ -136,7 +136,7 @@ const LogIn = (props) => {
             setErrorMsgToShow("");
             setReRender(true);
         }       
-    };
+    };   
     
     function renderConsent(loginState) {
         if (loginState === 'C') {
@@ -145,7 +145,7 @@ const LogIn = (props) => {
                     <label htmlFor="acceptedConsent">
                         <input checked onInput={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true" />&nbsp;
                         I inderstand that my personal data will be processed in accordance with Pet Match's&nsp;
-                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>.
+                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM2}</NavLink>.
                     </label>
                 );
             }
@@ -154,7 +154,7 @@ const LogIn = (props) => {
                     <label htmlFor="acceptedConsent">
                         <input onInput={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true" />&nbsp;
                         I inderstand that my personal data will be processed in accordance with Pet Match's&nbsp;
-                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>.
+                        <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM2}</NavLink>.
                     </label>
                 );
             }
@@ -186,6 +186,18 @@ const LogIn = (props) => {
         }
     }
 
+    function renderLoginQuestion(pLoginState) {
+        if (pLoginState === 'C') {
+            return(
+                <div className="container__login">
+                    <p>Already have an account?&nbsp;
+                        <NavLink to={props.cfgData.FE_ROUTE_LOGIN}>{props.cfgData.FE_ROUTE_LOGIN_MENUITEM}</NavLink> 
+                    </p>
+                </div>
+            );
+        }
+    }
+
     function renderErrMsg(pErrorMsgToShow) {
         if (pErrorMsgToShow !== '') {
             return (
@@ -202,18 +214,12 @@ const LogIn = (props) => {
     }
     else {
         return (
-            <main className="questionnaire">
-                <div className="container__top_questionnaire">
-                    <div className="container__youre_done">
-                        <h1 className="questionnaire_done">{loginText}</h1>
-                    </div>
-                    <div className="container__button_results">&nbsp;</div>
-                </div>
-                <div className="container__bottom_see_your_results">
+            <main className="main__signup_page">
+                <div className="container__signup_page">
                     <div className="container__signup_option">
-                        <h2>{loginText} to save your results</h2>
+                        <h2>{loginText}</h2>
                     </div>
-                    <form className="form__signup" id="signup_results_page">
+                    <form className="form__signup" id="signup_page">
                         {renderFirstName(loginState)}
                         <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email*" required />
                         <input onInput={fieldChanged} type="password" name="password" id="password" value={userRecord.password}
@@ -225,8 +231,9 @@ const LogIn = (props) => {
                     <div className="container__button_signup_submit">
                         <button type="submit" onClick={onClickCreate} form="signup_results_page" className="button__signup_submit">{loginText}</button>
                     </div>
+                    {renderLoginQuestion(loginState)}
+                    {renderErrMsg(errorMsgToShow)}
                 </div>
-                {renderErrMsg(errorMsgToShow)}
             </main>
         );
     }

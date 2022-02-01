@@ -62,6 +62,7 @@
     "FE_ROUTE_SEEYOURRESULTS_MENUITEM": "View your matches", 
     "FE_ROUTE_PRIVACY": "/privacy",
     "FE_ROUTE_PRIVACY_MENUITEM": "Privacy",  
+    "FE_ROUTE_PRIVACY_MENUITEM2": "Privacy Policy",  
     "FE_ROUTE_IMPRINT": "/imprint",
     "FE_ROUTE_IMPRINT_MENUITEM": "Imprint",
     "FE_ROUTE_QUESTIONAIRE_START": "/questionaire/start",
