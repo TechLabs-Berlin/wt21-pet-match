@@ -16,27 +16,24 @@ const QuestionaireStart = (props) => {
     let questionText = '', questionType = 0, questionActValue = 0;
 
     //console.log("... begin: QuestionaireStart ...");
-    //console.log(localStorage);
+    //console.log(sessionStorage);
 
     useEffect(() => {
         setFirstRenderd(true);
-        localStorage.setItem("chosenAnswer", answerArr);
+        sessionStorage.setItem("chosenAnswer", answerArr);
         fetch("/matchquiz")
             .then(res => {
+                //console.log(res);
                 if (res.ok) {
+                    //console.log("res ist ok");
                     return res.json();
                 }
-                else {
-                    console.log("QuestionaireStart: /matchquiz - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
-                }
-            }).then(jRes => {
-                console.log(" ... QuestionaireStart, useEffect, /matchquiz, then, then, jRes ...");
-                console.log(jRes);
-                setQuestionaireArr(jRes);
+            }).then(jsonRes => {
+                console.log(" ... QuestionaireStart, useEffect, fetch matchquiz, then, then, jsonRes ...");
+                console.log(jsonRes);
+                setQuestionaireArr(jsonRes);
             })
-            .catch(error => {
-                console.log("QuestionaireStart: /matchquiz - catch, "+error);
-            });
+            .catch(error => console.log(error));
     }, []);
 
     useEffect(() => {
@@ -86,7 +83,7 @@ const QuestionaireStart = (props) => {
         chosenAnswer = answerArr;
         chosenAnswer[0].allChosenAnswer[pageToChangeValue].chosenAnswer = parseInt(fieldValue);
         //console.log(chosenAnswer);
-        localStorage.setItem("chosenAnswer", JSON.stringify(chosenAnswer));
+        window.sessionStorage.setItem("chosenAnswer", JSON.stringify(chosenAnswer));
         //sessionArr = JSON.parse(window.sessionStorage.getItem("chosenAnswer"));
         setAnswerArr(chosenAnswer);
         setReRender(true);
@@ -123,6 +120,7 @@ const QuestionaireStart = (props) => {
         if (pMaxPage < 1) {
             return ('');
         }
+
         return (
             <div className="container__bottom_questionnaire">
                 {pAnswers.map((answer, index) => (
@@ -142,17 +140,17 @@ const QuestionaireStart = (props) => {
     function initializeAnswerArr() {
         /* if questions already loaded ... */
         if (answerArr.length > 0) {
-            if (answerArr[0].userID === '') {
-                answerArr[0].userID = localStorage.getItem("userId");
+            if (answerArr[0].userID === 0) {
+                answerArr[0].userID = sessionStorage.getItem("userId");
             }
-            if (answerArr[0].answerID === '') {
-                answerArr[0].answerID = localStorage.getItem("answerId");
+            if (answerArr[0].answerID === 0) {
+                answerArr[0].answerID = sessionStorage.getItem("answerId");
             }
             chosenAnswer = answerArr;
         }
         else {
-            chosenAnswer[0].answerID = localStorage.getItem("answerId");
-            chosenAnswer[0].userID = localStorage.getItem("userId");
+            chosenAnswer[0].answerID = sessionStorage.getItem("answerId");
+            chosenAnswer[0].userID = sessionStorage.getItem("userId");
 
             if (questionaireArr.length > 0) {
                 questionaireArr.map((question, index) => {
@@ -208,4 +206,5 @@ const QuestionaireStart = (props) => {
         );
     }
 };
+
 export default QuestionaireStart;

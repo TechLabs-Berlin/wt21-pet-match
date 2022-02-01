@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink,useLocation } from 'react-router-dom';
 import RenderCatCard from './RenderCatCard';
 import matchingResultCSS from './MatchingResult.css';
 
@@ -42,6 +42,10 @@ const MatchingResult = (props) => {
                 [name]: value
             }
         });
+    };
+
+    const retakeQuizClicked = e => {
+        localStorage.setItem("yourResultsState","RT");      
     };
 
     function renderRadioInput(pName, pId, pRValue, pActValue) {
@@ -102,6 +106,10 @@ const MatchingResult = (props) => {
             <div className="container__results">
                 <div className="container__title">
                     <h1>Your Matches</h1>
+                    <NavLink onClick={retakeQuizClicked} to={props.cfgData.FE_ROUTE_QUESTIONAIRE_START}>
+                        {props.cfgData.USER_SETTINGS_HEADERTXT_02}
+                    </NavLink>
+                    <br /><br />
                 </div>
                 <div className="container__cat_cards">
                     {resultArrToPass.Result.map((catData, index) => (
