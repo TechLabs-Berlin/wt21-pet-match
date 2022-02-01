@@ -70,6 +70,10 @@ button:hover {
 
 /* ===================Homepage start=================== */
 /* Images can only be resolved / loaded if reference to them resides in public-folder */
+.banner__homepage {
+    background: url(./img/kitten-hero_01.png);
+}
+
 .banner__homepage::before {
     background: url(./img/kitten-hero_01.png);
 }
