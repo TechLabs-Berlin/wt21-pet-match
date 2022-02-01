@@ -58,11 +58,13 @@ const LogIn = (props) => {
                         setBackendDone(true);
                     }
                     else {
-                        console.log("Login: /registerbeforequiz - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                        console.log("Login: /registerbeforequiz - nicht OK, Status: " + res.status + ", Msg: " + res.statusText);
+                        setErrorMsgToShow("Account creation failed!");
                     }
                 })
                 .catch(error => {
-                    console.log("Login: /registerbeforequiz - catch, "+error);
+                    console.log("Login: /registerbeforequiz - catch, " + error);
+                    setErrorMsgToShow("Account creation failed!");
                 });
         }
         else if (loginState === 'I' && reRender === true) {
@@ -82,13 +84,16 @@ const LogIn = (props) => {
                         localStorage.setItem("loginState", 'O');
                         setGoToPageUS(true);  
                         setBackendDone(true);
+                        setErrorMsgToShow("");
                     }
                     else {
-                        console.log("Login: /login - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                        console.log("Login: /login - not OK, Status: " + res.status + ", Msg: " + res.statusText);
+                        setErrorMsgToShow("Login failed!");
                     }
                 })
                 .catch(error => {
-                    console.log("Login: /login - catch, "+error);
+                    console.log("Login: /login - catch, " + error);
+                    setErrorMsgToShow("Login failed!");
                 });
         }
         setReRender(false);
