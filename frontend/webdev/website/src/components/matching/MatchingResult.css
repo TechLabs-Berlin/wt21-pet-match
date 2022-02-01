@@ -59,6 +59,24 @@
   margin-left: 40px;
 }
 
+.container__title h1 {
+  margin-block-end: 0px;
+}
+
+.container__retake_quiz {
+  margin-block-end: 42.88px;
+}
+
+.container__retake_quiz a {
+  color: #9da7a5;
+  text-decoration: none;
+}
+
+.container__retake_quiz a:hover {
+  color: #9da7a57a;
+}
+
+
 /* CARDS */
 .container__cat_cards {
   display: flex;
