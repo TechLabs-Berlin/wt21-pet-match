@@ -198,7 +198,7 @@ Tech-Stack:
 
 - Python (Sklearn, Numpy, Pandas, Seaborn, Matplotlib, Names)
 
-- Jupiter Notebook
+- Jupyter Notebook
 
 - Flask API
 
@@ -211,8 +211,6 @@ Tech-Stack:
 - Excel
 
 - Visual Studio Code
-
-  
 
   
 
@@ -244,34 +242,17 @@ In between we were setting up a scoring system which serves our questionnaire to
 
 The DS-Team decided to go further and build up a reliable recommendation system which we will point out final cat recommendations whenever a potential adopter runs through the defined questionnaire. For that, we tried several approaches to find the right one for our project case. We did a regression analysis as well as a k-nearest neighbor attempt to figure out which will fits the best. By doing so, we faced a couple of roadblocks and obstacles. It turned out that a recommendation systems based on a correlation analysis fits the best for our data set and returns the best results. 
 
+Despite we tried a couple of machine learning methods (e.g. kNN, decision-tree etc.) to build a reliable recommender the DS-Team decided to focus on correlation based method because the initial results were more promising to the teammates. Nevertheless we also tried to use a "Jaccard-Similarity Method" as an alternative - which will be shown in detail further in the blog. 
+We started our correlation-based recommender by a with a deep brainstorming and discussion process to define what information is required and how we should conceptualize it, as below illustrated.
 
-
-Despite we tried a couple of machine learning methods (e.g. kNN, decision-tree etc.) to build a reliable recommender the DS-Team decided to focus on correlation based method because the initial results were more promising to the teammates. Nevertheless we also tried to use a "Jaccard-Distance Method" as an alternative - which will be shown in detail further in the blog. 
-We started our correlation-based recommender by a with a deep brainstorming and discussion process to define what information is required and how we should conceptualize it.
-
-
-
-The Idea was that user input (personality test answers) and the system recommends his matching cats. Since our users don't have any prior preferences towards cats ("USER COLD START PROBLEM") we have to start with this:
+![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/ds_documentation/DS_Screenshots_BlogPost/HanyScreenshot.jpg?raw=true)
 
 
 
-Version 1
+The final recommendation system which we used in our matchmaking requires two datasets. The first is the original dataset (offline dataset) which contains the adopters data as well as the cat data (recommender reference). The second dataset is basically a new subset of the original one which includes 40% of the original data (~ 953cats). 
 
-1. Finding **nearest user**: the system takes user input (personality test answers) then finds the nearest user (the most similar one) from our Data Set. For better predictions : we filtered out users with satisfaction level blow 0.8.
-2. We get the nearest user - **Connected Cat** (from the Data Set)
-
-
-
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/ds_documentation/DS_Screenshots_BlogPost/DS4.png?raw=true)
-
-
-
-Version 2
-
-Same as vesrion 1 but builds on it 
-
-- Based on the **Connected Cat** the system recommends the nearest cat from Cat_dataset
-- Cats and adopters datasets are independent. 
+Afterwards the user inputs his data by using the online questionnaire - this is applied by using the Flask API.
+The recommender applies the first cycle of matching to get the best matching user - based on a utility matrix table made from adopter's features only.  The recommender extracts the best user's connected cat data from the offline dataset (first choice). After that the recommender applies the second cycle of matching to to get the best matching cats from the cats online dataset, which is based on a utility matrix table from the cat features only. Finally the recommender sorts the best results and gets the best 10, as shown by the illustration below.
 
 
 
@@ -279,16 +260,28 @@ Same as vesrion 1 but builds on it
 
 
 
-All in all we achieved our goal to set up a reliable recommendation system which systematic we connect through an API for our backend teammates. In conclusion, we need to say that we faced many roadblocks on our way to deliver a good product. We even had a couple of drop-outs (UX) who left the team. We did our best to compensate it.
+As mentioned before, we also tried the "Jaccard-Similarity Method". Jaccard similarity also called the jaccard index  is a metric that measures the overlap between two sets of items, defined as the number of overlapping items found in both sets divided by the total number of unique items in either set. In this evaluation method, 3 different sets of connected cats were generated using correlation of 0.95 and 0.50 comparing with the use case of 0.8. What knowledge we can extract is that the model functions because there's a overlap in recommended cats, which is consistent with the real life situation. 
+
+
+
+![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/ds_documentation/DS_Screenshots_BlogPost/Dayo%20Screenshot.png?raw=true)
+
+
+
+All in all we achieved our goal to set up a reliable recommendation system, for which systematic we implemented a Flask API. That required close work with backend and we had to debug issues raised  by the difference between Jupyter Notebook vs. Flask format, local vs. server implementation and incompatibilities of our output with backend. On the picture below, there is an example of input (users questionnaire) and output (recommended cats) from Postman.
+
+
+
+![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/ds_documentation/DS_Screenshots_BlogPost/Oksana%20Screenshot.png?raw=true)
+
+
+
+In conclusion, we need to say that we faced many roadblocks on our way to deliver a good product. We even had a couple of drop-outs (UX) who left the team. We did our best to compensate it.
+
+
 
 But nevertheless it was a great time, we have learned a lot and our mentors supported us wherever they could. Finally, we need to highlight that our teamwork was great and we have used many tools to exchange or create files and information. Although "GitHub" was not easy to handle and as a tool to exchange information, a little too complex for beginners it worked out well in the end. 
 
 
 
-*** Notes on the screenshot of hany***
 
-- First Version is only one loop of correlation to find the 
-- WE will take only the second version for the blog post
-- Describe the comparison of cosine similarity vs correlation 
-- Take Hany's Screenshot (brain-storming) to introduce our approaches (Version2)
-- API-Discription will be send be Oksana + Screenshot
