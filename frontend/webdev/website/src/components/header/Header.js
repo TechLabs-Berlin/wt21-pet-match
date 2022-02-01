@@ -1,50 +1,57 @@
-/* Import react-components */
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import axios from 'axios';
-/* Import CSS used only for Header */
-import headerCSS from './Header.css';
-/* Import project-components */
 import HeaderQuiz from './HeaderQuiz';
-import HeaderMatch from './HeaderMatch';
+import headerCSS from './Header.css';
 
 const Header = (props) => {
-    const [userId, setUserId] = useState(0);
-    const [answerId, setAnswerId] = useState(0);
+    const [userId, setUserId] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [quizTaken, setQuizTaken] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [loginState, setLoginState] = useState('I');
-    const [quizTaken, setQuizTaken] = useState(false);
-    const [logOutClicked, setLogOutClicked] = useState(false);
-    const [firstRender, setFirstRender] = useState(true);
+    const [logoutClicked, setLogoutClicked] = useState(false);
+    const [firstRendered, setFirstRendered] = useState(false);
 
     const location = useLocation();
+    let logoutRoute = location.pathname;
+
+    console.log("====== Header - begin: ======");
+    console.log(localStorage);
+    console.log("-----------------------------");
+    console.log(userId);
+    console.log(firstName);
+    console.log(loggedIn);
+    console.log(quizTaken);
+    console.log("====== Header - end: ======");
 
     const clickLogout = e => {
-        setLogOutClicked(true);
+        setLogoutClicked(true);
     }
 
-    function setSessionVar(userId, answerId, loggedIn, loginState, quizTaken) {
-        sessionStorage.setItem("userId", userId);
-        sessionStorage.setItem("answerId", answerId);
-        sessionStorage.setItem("loggedIn", loggedIn);
-        sessionStorage.setItem("loginState", loginState);
-        sessionStorage.setItem("quizTaken", quizTaken);
+    function setLocalStorage(userId,firstName,quizTaken,loggedIn,loginState) {
+        localStorage.setItem("userId",userId);
+        localStorage.setItem("firstName",firstName);
+        localStorage.setItem("quizTaken",quizTaken);
+        localStorage.setItem("loggedIn",loggedIn);
+        localStorage.setItem("loginState",loginState);
     }
 
     function renderHeaderState() {
-        let logoutRoute = location.pathname;
-
         if ((logoutRoute === props.cfgData.FE_ROUTE_QUESTIONAIRE_START) ||
             (logoutRoute === props.cfgData.FE_ROUTE_MATCHING_RESULT) ||
             (logoutRoute === props.cfgData.FE_ROUTE_CAT_DETAIL) ||
+            (logoutRoute === props.cfgData.FE_ROUTE_USER_SETTINGS) ||
             (logoutRoute === props.cfgData.FE_ROUTE_SEEYOURRESULTS)) {
             logoutRoute = props.cfgData.FE_ROUTE_HOME;
         }
         
-        if (userId !== 0 && loggedIn) {
-            sessionStorage.setItem("loginState", 'O');
+        if (userId !== '' && String(loggedIn) === 'true') {
             return (
                 <div className="navbar__login_signup">
+                    <NavLink to={props.cfgData.FE_ROUTE_USER_SETTINGS}>
+                        <button className="button__navbar_signup" type="button">{props.cfgData.FE_ROUTE_USER_SETTINGS_MENUITEM2}</button>
+                    </NavLink>
                     <NavLink to={logoutRoute}>
                         <button onClick={clickLogout} className="button__navbar_login" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
                     </NavLink>
@@ -52,7 +59,6 @@ const Header = (props) => {
             );
         }
         else {
-            sessionStorage.setItem("loginState", 'I');
             return (
                 <div className="navbar__login_signup">
                     <NavLink to={props.cfgData.FE_ROUTE_LOGIN}>
@@ -67,34 +73,66 @@ const Header = (props) => {
     }
         
     useEffect(() => {
-        if (firstRender === true) {
-            setFirstRender(false);
-            setUserId('61ef3e4501dc836946e25a2d');
-            setAnswerId(1);
-            setLoggedIn(true);
-            setLoginState('O');
-            setQuizTaken(true);
-            setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
+        if (localStorage.getItem("userId") === null) {
+            localStorage.setItem("userId",userId);
         }
-        if (logOutClicked === true) {
-            setLogOutClicked(false);
+        else {
+            setUserId(localStorage.getItem("userId"));
+        }
+        if (localStorage.getItem("firstName") === null) {
+            localStorage.setItem("firstName",firstName);
+        }
+        else {
+            setFirstName(localStorage.getItem("firstName"));
+        }
+        if (localStorage.getItem("loginState") === null) {
+            localStorage.setItem("loginState", loginState);
+        }
+        else {
+            setLoginState(localStorage.getItem("loginState"));
+        }
+        if (localStorage.getItem("quizTaken") === null) {
+            localStorage.setItem("quizTaken", quizTaken);
+        }
+        else {
+            setQuizTaken(localStorage.getItem("quizTaken"));
+        }
+        if (localStorage.getItem("loggedIn") === null) {
+            localStorage.setItem("loggedIn", loggedIn);
+        }
+        else {
+            setLoggedIn(localStorage.getItem("loggedIn"));
+        }
+        if (firstRendered === false) {
+            localStorage.setItem("yourResultsState","");
+            setLogoutClicked(false);
+            setFirstRendered(true);
+        }
+    });
+
+    useEffect(() => {
+        if (logoutClicked === true) {
+            setLogoutClicked(false);
             // Logout -> BE
-            axios.get('http://localhost:3001/logout', userId)
-                .then(response => {
-                    setUserId(0);
-                    setAnswerId(0);
-                    setLoggedIn(false);
-                    setLoginState('I');
-                    setQuizTaken(false);
-                    setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
+            axios.delete('http://localhost:3001/logout', userId)
+                .then(res => {
+                    if (parseInt(res.status) === 200) {
+                        setUserId('');
+                        setFirstName('');
+                        setQuizTaken(false);
+                        setLoggedIn(false);
+                        setLoginState('I');
+                        setLocalStorage('', '', false, false, 'I');
+                    }
+                    else {
+                        console.log("Header: /logout - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                    }
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.log("Header: /logout - catch, " + error);
                 });
         }
-    })
-
-    setSessionVar(userId, answerId, loggedIn, loginState, quizTaken);
+    }, [logoutClicked]);
 
     const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
     const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
@@ -114,5 +152,4 @@ const Header = (props) => {
         </nav>
     )
 };
-
 export default Header; 

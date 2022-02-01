@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink,useLocation } from 'react-router-dom';
 import RenderCatCard from './RenderCatCard';
 import matchingResultCSS from './MatchingResult.css';
 
@@ -33,6 +33,12 @@ const MatchingResult = (props) => {
         console.log("... end: SeeYourResults useEffect, [userRecord] ... ");
     }, [filterRecord]); 
 
+    useEffect(() => {
+        console.log("... begin: SeeYourResults, useEffect, [reRender] ... ");
+        console.log("... end: SeeYourResults useEffect, [reRender] ... ");
+        setReRender(false);
+    }, [reRender]); 
+
     const fieldChanged = e => {
         const { name, value } = e.target;
         /* if input-field changed, save new value in state variable userRecord */
@@ -42,6 +48,19 @@ const MatchingResult = (props) => {
                 [name]: value
             }
         });
+    };
+
+    const retakeQuizClicked = e => {
+        localStorage.setItem("yourResultsState","RT");      
+    };
+
+    const onClickReset = e => {
+        let tmpFilterRecord = filterRecord;
+        tmpFilterRecord.neutered = null;
+        tmpFilterRecord.goodwith = '';
+        tmpFilterRecord.gender = '';  
+        setFilterRecord(tmpFilterRecord);
+        setReRender(true);
     };
 
     function renderRadioInput(pName, pId, pRValue, pActValue) {
@@ -61,6 +80,10 @@ const MatchingResult = (props) => {
     return (
         <main className="matching_results">
             <div className="container__filters">
+                <div className="container__filter_title">
+                    <h3>Filters</h3>
+                    <button onClick={onClickReset} className="button__reset_filters">&#10006; Reset All Filters</button>
+                </div>
                 <div className="filter">
                     <p>Sterilized</p>
                     <label htmlFor="sterilized_yes">
@@ -102,6 +125,11 @@ const MatchingResult = (props) => {
             <div className="container__results">
                 <div className="container__title">
                     <h1>Your Matches</h1>
+                    <div className="container__retake_quiz">
+                        <NavLink onClick={retakeQuizClicked} to={props.cfgData.FE_ROUTE_QUESTIONAIRE_START}>
+                            &#8634; {props.cfgData.USER_SETTINGS_HEADERTXT_02}
+                        </NavLink>
+                    </div>
                 </div>
                 <div className="container__cat_cards">
                     {resultArrToPass.Result.map((catData, index) => (
@@ -120,5 +148,4 @@ const MatchingResult = (props) => {
         </main>
     );
 };
-
 export default MatchingResult;

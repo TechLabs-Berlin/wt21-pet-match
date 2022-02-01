@@ -22,9 +22,6 @@ const Footer = (props) => {
             </ul>
             <ul className="footer__nav">
                 <li>
-                    Test-Link: <NavLink to={props.cfgData.FE_ROUTE_USER_SETTINGS}>{props.cfgData.FE_ROUTE_USER_SETTINGS_MENUITEM}</NavLink>
-                </li>
-                <li>
                     <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM}</NavLink>
                 </li>
             </ul>

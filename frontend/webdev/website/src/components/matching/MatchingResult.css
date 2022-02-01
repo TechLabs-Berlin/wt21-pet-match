@@ -24,10 +24,36 @@
 }
 
 .container__filters {
-  /* width: 20vw; */
-  margin-top: 175px;
+  margin-top: 180px;
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.container__filter_title {
+  display: flex;
+  flex-direction: column;
+}
+
+.container__filter_title h3 {
+  text-transform: uppercase;
+  font-family: Paytone One, sans-serif;
+  font-size: 14px;
+  margin-block-end: 5px;
+}
+
+.button__reset_filters {
+  color: #eb4b38;
+  font-weight: bolder;
+  font-size: 11px;
+  text-align: start;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  height: 20px;
+}
+
+.button__reset_filters:hover {
+  color: #9e1f11;
 }
 
 .filter {
@@ -58,6 +84,24 @@
 .container__title {
   margin-left: 40px;
 }
+
+.container__title h1 {
+  margin-block-end: 0px;
+}
+
+.container__retake_quiz {
+  margin-block-end: 42.88px;
+}
+
+.container__retake_quiz a {
+  color: #9da7a5;
+  text-decoration: none;
+}
+
+.container__retake_quiz a:hover {
+  color: #9da7a57a;
+}
+
 
 /* CARDS */
 .container__cat_cards {
