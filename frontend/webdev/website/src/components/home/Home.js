@@ -8,13 +8,12 @@ const Home = (props) => {
             <div className="banner__homepage">
                 <div className="h1__homepage">
                     <h1>{props.cfgData.HOME_H1_TXT}</h1>
-                    <h3 className="cta__homepage">
-                        <Link to={props.cfgData.FE_ROUTE_QUESTIONAIRE_START}>{props.cfgData.HOME_TTQ_TXT}&#11106;</Link>
-                    </h3>
+                    <button className="button__take_quiz">
+                        <Link to={props.cfgData.FE_ROUTE_QUESTIONAIRE_START}>{props.cfgData.HOME_TTQ_TXT}</Link>
+                    </button>
                 </div>
             </div>
         </main>
     );
 };
-
 export default Home;
