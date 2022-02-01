@@ -114,7 +114,7 @@ const Header = (props) => {
         if (logoutClicked === true) {
             setLogoutClicked(false);
             // Logout -> BE
-            axios.get('http://localhost:3001/logout', userId)
+            axios.delete('http://localhost:3001/logout', userId)
                 .then(res => {
                     if (parseInt(res.status) === 200) {
                         setUserId('');
@@ -130,13 +130,6 @@ const Header = (props) => {
                 })
                 .catch(error => {
                     console.log("Header: /logout - catch, " + error);
-                    /* simulate logout success, as route /logout does not work at the moment ... */
-                    setUserId('');
-                    setFirstName('');
-                    setQuizTaken(false);
-                    setLoggedIn(false);
-                    setLoginState('I');
-                    setLocalStorage('', '', false, false, 'I');
                 });
         }
     }, [logoutClicked]);

@@ -153,7 +153,7 @@ const SeeYourResults = (props) => {
                 console.log(resultArr);
             }
             else if (yourResultsState === 'RT') {
-                axios.post('http://localhost:3001/retakequiz', answerArr)
+                axios.patch('http://localhost:3001/retakequiz', answerArr)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
                             console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");

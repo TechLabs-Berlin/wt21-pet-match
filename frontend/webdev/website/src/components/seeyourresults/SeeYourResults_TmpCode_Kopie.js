@@ -1,4 +1,10 @@
-
+                   /* simulate logout success, as route /logout does not work at the moment ... */
+                    setUserId('');
+                    setFirstName('');
+                    setQuizTaken(false);
+                    setLoggedIn(false);
+                    setLoginState('I');
+                    setLocalStorage('', '', false, false, 'I');
 
 
         if ((yourResultsState !== '') && !(backendDone) && (reRender)) {
