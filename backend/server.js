@@ -77,7 +77,7 @@ app.post("/viewresult", async(req, res, next) => {
 app.post("/registerbeforequiz", (req, res, next) => {
     user.findOne({email: req.body.username}, async(err, doc) => {
         if (err) throw err;
-        if (doc) res.send('User Already Exists');
+        if (doc) res.status(401).send('User Already Exists');
         if (!doc) {
             try{
                 // create new user
@@ -120,7 +120,7 @@ app.post("/registerbeforequiz", (req, res, next) => {
 app.post("/registerafterquiz", (req, res, next) => {
     user.findOne({email: req.body.username}, async(err, doc) => {
         if (err) throw err;
-        if (doc) res.send('User Already Exists');
+        if (doc) res.status(401).send('User Already Exists');
         if (!doc) {
             try{
                 // create new user
@@ -162,7 +162,7 @@ app.post("/registerafterquiz", (req, res, next) => {
 app.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, founduser, info) => {
         if (err) throw err;
-        if (!founduser) res.send("No User Exists");
+        if (!founduser) res.status(401).send("No User Exists");
         else {
             req.logIn(founduser, (err) => {
                 if (err) throw err;
@@ -188,7 +188,7 @@ app.post("/login", (req, res, next) => {
 app.post("/loginafterquiz", (req, res, next) => {
     passport.authenticate("local", (err, founduser, info) => {
         if (err) throw err;
-        if (!founduser) res.send("No User Exists");
+        if (!founduser) res.status(401).send("No User Exists");
         else {
             try{
                 req.logIn(founduser, (err) => {
@@ -264,16 +264,19 @@ app.patch('/retakequiz', async(req, res, next) => {
             };
             res.json(userResult);
         })
-    } catch (error){next(error)}
+    } catch (error){next(error)};
 })
 
 // log-out
-app.delete('/logout', (req, res) => {
+app.delete('/logout', (req, res, next) => {
+    try{
     req.logOut();
-    res.send('User log-out successfully')
+    res.clearCookie('connect.sid');
+    res.json({userID: 0});
+    } catch (error) {next(error)};
 })
 
-
+// error handler for all routes
 app.use((error, req, res, next) => {
     console.error(error.stack);
     res.status(500).send('Something went wrong!');
