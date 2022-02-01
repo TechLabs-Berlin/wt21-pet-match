@@ -92,13 +92,38 @@
   text-decoration: none;
 }
 
-.navbar__user_logged_in img {
+.user__greeting {
+  display: flex;
+  margin-right: 20px;
+}
+
+.user__greeting img {
   width: 30px;
   margin-right: 5px;
 }
 
-.navbar__user_logged_in p {
+.user__greeting a {
   text-transform: capitalize;
   font-weight: bolder;
   color: #eb4b38;
+}
+
+.user__greeting a:hover {
+  color: #9e1f11;
+}
+
+.button__navbar_logout {
+  border: 2px solid;
+  border-color: #eb4b38;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  color: #eb4b38;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.button__navbar_logout:hover {
+  border-color: #eb4b38;
+  background-color: #eb4b38;
+  color: #FFFFFF;
 }
