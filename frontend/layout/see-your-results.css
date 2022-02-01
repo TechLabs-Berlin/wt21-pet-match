@@ -119,6 +119,7 @@ h1 {
     border-radius: 3px;
     border: 1px solid #f5c2c7;
     margin: 0px 0px 20px 0px;
+    max-width: 100px;
 }
 
 .error__signup p {
