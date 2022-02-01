@@ -59,7 +59,14 @@
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters."
                     placeholder="Choose a password*" required>
+
+                <label for="acceptedConsent">
+                    <input checked required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true">
+                    I inderstand that my personal data will be processed in accordance with Pet Match's <a
+                        href="privacy-policy.html">Privacy Policy</a>.
+                </label>
             </form>
+
 
             <div class="container__button_signup_submit">
                 <button formaction="/matching-result" type="submit" form="signup_results_page"
