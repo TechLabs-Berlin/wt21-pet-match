@@ -261,11 +261,26 @@ const SeeYourResults = (props) => {
         console.log(quizTakenNow);
         console.log(loggedIn);
 
-        if (quizTakenNow && !loggedIn) {
-            console.log('... onClickCreate, if condition OK ...');
-            setYourResultsState('CR');
-            setSeeMachtingResultPage(true);
-            setReRender(true);
+        if (userRecord.firstName === '') {
+            setBackendErrorMsg("Error! First name field is required*.");
+        }
+        else if (userRecord.email === '') {
+            setBackendErrorMsg("Error! Email field is required*.");
+        }
+        else if (userRecord.password === '') {
+            setBackendErrorMsg("Error! Password field is required*.");
+        }
+        else if (String(userRecord.acceptedConsent) !== 'true') {
+            setBackendErrorMsg("Error! Please agree with Privacy Policy before we proceed.");
+        }
+        else {
+            if (quizTakenNow && !loggedIn) {
+                console.log('... onClickCreate, if condition OK ...');
+                setYourResultsState('CR');
+                setSeeMachtingResultPage(true);
+                setBackendErrorMsg('');
+                setReRender(true);
+            }
         }
         console.log("... end: onClickCreate ...");        
     };
@@ -281,14 +296,19 @@ const SeeYourResults = (props) => {
         });
     };
 
+    function renderErrMsg(pErrMsg) {
+        if (pErrMsg !== '') {
+            return (
+                <div align="center" className="errormsg"><br />{pErrMsg}&nbsp;<br /><br /></div>
+            );
+        }
+    }
+
     console.log("... end: SeeYourResults ...");
 
     // if BE route did not well, show why ...
     if (backendError) {
         errorMsgToShow = backendErrorMsg;
-    }
-    else {
-        errorMsgToShow = 'FEHLER: Ich bin eine Fehlermeldung und brauche noch ein wenig CSS-styling :-)';
     }
 
     /* if something went wrong ... and could not be resolved -> go to home - page */
@@ -349,7 +369,7 @@ const SeeYourResults = (props) => {
                         <p>Already have an account? <a href="/login">Log in</a></p>
                     </div>
                 </div>
-                <div align="center" className="errormsg"><br />{errorMsgToShow}&nbsp;<br /><br /></div>
+                {renderErrMsg(errorMsgToShow)}
             </main>
         );    
     }
