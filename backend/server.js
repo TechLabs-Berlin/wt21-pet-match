@@ -1,3 +1,4 @@
+// Import packages
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -6,12 +7,15 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
+// require('dotenv').config();
 
+// Import Schema and function
 const matchQuiz = require('./models/matchquiz');
 const answer = require('./models/answer');
 const user = require('./models/user');
 const processAnswer = require('./processAnswer');
 
+// Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://petmatch-admin:techlab2122@cluster0.9nbuq.mongodb.net/petmatch', {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -48,7 +52,8 @@ app.get('/matchquiz', async(req, res, next) => {
     } catch(error){next(error)}; 
 });
 
-// non-user --> create dummy account and save answer in Answer collection
+// non-user route
+// create dummy account and save answer in Answer collection --> connect to model --> retrieve cat data from db --> send data back to FE
 app.post("/viewresult", async(req, res, next) => {
     try{
         // create dummy user
@@ -60,7 +65,7 @@ app.post("/viewresult", async(req, res, next) => {
             allChosenAnswer: req.body.allChosenAnswer
         });
         await dummyAnswer.save();
-        // reconstruct input for model + model + get cat result
+        // reconstruct input for model + connect to model + get cat result
         processAnswer(dummyid, req.body.allChosenAnswer).then(results => {
             //return value
             const userResult = {
@@ -73,7 +78,8 @@ app.post("/viewresult", async(req, res, next) => {
     } catch (error) {next(error)};
 })
 
-// register new user without quiz
+// register new user without taking quiz
+// create new user and dummy answer in database
 app.post("/registerbeforequiz", (req, res, next) => {
     user.findOne({email: req.body.username}, async(err, doc) => {
         if (err) throw err;
@@ -94,7 +100,7 @@ app.post("/registerbeforequiz", (req, res, next) => {
                     newid = savedDoc._id;
                 });
                 
-                // save answer in answer collection
+                // save dummy answer in answer collection
                 dummyAllAnswer = [];
                 for (let i = 1; i <=15; i++){
                     const ans = {questionID: i, chosenAnswer: null};
@@ -105,6 +111,7 @@ app.post("/registerbeforequiz", (req, res, next) => {
                     allChosenAnswer: dummyAllAnswer 
                 });
                 await newAnswer.save();
+                // return value
                 const returnData = {
                     userID: newid, 
                     quizTaken: false, 
@@ -116,7 +123,8 @@ app.post("/registerbeforequiz", (req, res, next) => {
     })
 })
 
-// register new user after quiz
+// register new user after taking quiz
+// create new user & save answer ---> connect to model --> retrieve cat data --> send data back to FE
 app.post("/registerafterquiz", (req, res, next) => {
     user.findOne({email: req.body.username}, async(err, doc) => {
         if (err) throw err;
@@ -142,7 +150,7 @@ app.post("/registerafterquiz", (req, res, next) => {
                     allChosenAnswer: req.body.allChosenAnswer
                 });
                 await newAnswer.save();
-                // reconstruct input for model + model + get cat result
+                // reconstruct input for model + connect to model + get cat result
                 processAnswer(newid, req.body.allChosenAnswer).then(results => {
                     //return value
                     const userResult = {
@@ -184,7 +192,8 @@ app.post("/login", (req, res, next) => {
     })(req, res, next);
 });
 
-// log-in after quiz
+// log-in after taking quiz
+// log-in ---> update answer in db --> connect to model --> retrieve cat data --> send data back to FE
 app.post("/loginafterquiz", (req, res, next) => {
     passport.authenticate("local", (err, founduser, info) => {
         if (err) throw err;
@@ -224,12 +233,13 @@ app.post("/loginafterquiz", (req, res, next) => {
 });
 
 // 'your matches' for log-in user --> show result based on answer saved in database
-// find user & get answers --> send to another route (submit answer to model route)
+// find user & get answers --> connect to model --> retrieve cat info from database --> send back data to FE
 app.post('/yourmatchesresult', async(req, res, next) => {
     try{
         const userID = req.body.userID;
+        // find saved answer from database
         const savedAnswer = await answer.findOne({userID: userID}).exec();
-        // reconstruct input for model + model + get cat result
+        // reconstruct input for model + connect to model + get cat result
         processAnswer(userID, savedAnswer.allChosenAnswer).then(results => {
             //return value
             const userResult = {
@@ -243,18 +253,19 @@ app.post('/yourmatchesresult', async(req, res, next) => {
 })
 
 // 'retake quiz' for log-in user ---> user retakes a quiz and we update answer in database
-// update answer ---> send to another route (submit answer to model route)
+// update answer ---> connect to model --> retrieve cat data --> send data back to FE
 app.patch('/retakequiz', async(req, res, next) => {
     try{
         const userID = req.body.userID;
         const newChosenAnswer = req.body.allChosenAnswer;
+        // update answers in database
         for (let newAns of newChosenAnswer){
             updateAnswer = await answer.updateOne(
                 {userID: userID, "allChosenAnswer.questionID": newAns.questionID},
                 {$set: {"allChosenAnswer.$.chosenAnswer": newAns.chosenAnswer}}
             )
         }
-        // reconstruct input for model + model + get cat result
+        // reconstruct input for model + connect to model + get cat result
         processAnswer(userID, newChosenAnswer).then(results => {
             //return value
             const userResult = {
@@ -268,6 +279,7 @@ app.patch('/retakequiz', async(req, res, next) => {
 })
 
 // log-out
+// clear cookies and change userID parameter to 0
 app.delete('/logout', (req, res, next) => {
     try{
     req.logOut();
