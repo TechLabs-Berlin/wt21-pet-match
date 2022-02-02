@@ -61,7 +61,7 @@
 .icon__save {
   position: absolute;
   top: 20px;
-  right: 100px;
+  right: 120px;
 }
 
 .icon__picture_navigation {
@@ -69,7 +69,7 @@
   width: 85%;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 0 40px;
   position: absolute;
   top: 50%;
 }
