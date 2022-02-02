@@ -1,0 +1,151 @@
+[
+    {"questionID": 1, 
+        "questionText": "What is your gender?", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Male", "answerValue": 1}, 
+            {"answerText": "Female", "answerValue": 2}, 
+            {"answerText": "Diverse", "answerValue": 3},
+            {"answerText": "Don't want to disclose", "answerValue": 4}
+        ]
+    },
+    {"questionID": 2, 
+        "questionText": "How old are you?", 
+        "questionType": 1, 
+        "answer": [{"answerText": "I am/years old/16/99", "answerValue": null}]
+    },
+    {"questionID": 3, 
+        "questionText": "How many other cats do you currently have?", 
+        "questionType": 1, 
+        "answer": [{"answerText": "I own/cats/0/10", "answerValue": null}]
+    },
+    {"questionID": 4, 
+        "questionText": "Can you provide outdoor access?", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "No", "answerValue": 1}, 
+            {"answerText": "Yes", "answerValue": 2}
+        ]
+    },
+    {"questionID": 5, 
+        "questionText": "I see myself as someone who worries a lot", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 6, 
+        "questionText": "I see myself as someone who remains calm in tense situations", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 7, 
+        "questionText": "I see myself as someone who is outgoing, sociable", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 8, 
+        "questionText": "I see myself as someone who is reserved", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 9, 
+        "questionText": "I see myself as someone who is original, comes up with new ideas", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 10, 
+        "questionText": "I see myself as someone who values artistic, aesthetic experiences", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 11, 
+        "questionText": "I see myself as someone who is sometimes rude to others", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 12, 
+        "questionText": "I see myself as someone who has a forgiving nature", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 13, 
+        "questionText": "I see myself as someone who is considerate and kind to almost everyone", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 14, 
+        "questionText": "I see myself as someone who tends to be lazy", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    },
+    {"questionID": 15, 
+        "questionText": "I see myself as someone who does things efficiently", 
+        "questionType": 2, 
+        "answer": [
+            {"answerText": "Strongly Disagree", "answerValue": 1}, 
+            {"answerText": "Disagree", "answerValue": 2}, 
+            {"answerText": "Neutral", "answerValue": 3},
+            {"answerText": "Agree", "answerValue": 4},
+            {"answerText": "Strongly Agree", "answerValue": 5}
+        ]
+    }
+]
