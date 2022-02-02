@@ -30,7 +30,11 @@ const SeeYourResults = (props) => {
     const [backendErrorMsg, setBackendErrorMsg] = useState('');
     const [frontendErrorMsg, setFrontendErrorMsg] = useState('');    
     
-    let chosenAnswer = [], errorMsgToShow = '', tmpObj; 
+    let chosenAnswer = [], errorMsgToShow = ''; 
+    let tmpUserID = {
+        userID: 0
+    };
+
     let userFromDB = {
         userID: 0,
         quizTaken: false,
@@ -55,12 +59,14 @@ const SeeYourResults = (props) => {
     console.log("============== begin: SeeYourResults ==============");
     
     useEffect(() => {
+        let tmp = String(localStorage.getItem("loggedIn"));
+        console.log(tmp);
         if (String(localStorage.getItem("loggedIn")) === 'true') {
             setLoggedIn(true);
         }
         if (localStorage.getItem("yourResultsState") !== "") {
             setYourResultsState(localStorage.getItem("yourResultsState"));
-        }        
+        }
 
         if (localStorage.getItem("chosenAnswer") !== null && localStorage.getItem("chosenAnswer").length !== 0) {
             chosenAnswer = JSON.parse(localStorage.getItem("chosenAnswer"));
@@ -70,24 +76,29 @@ const SeeYourResults = (props) => {
         }
 
         /* if 'Match History' invoked -> show machtes immediately ... no user-action before needed ... */
-        console.log('Props: ' + quizTakenNow + ', ' + loggedIn + ', ' + yourResultsState);
+        console.log(chosenAnswer);
+        console.log('UseEffect (first) - Props: ' + quizTakenNow + ', ' + loggedIn + ', ' + yourResultsState);
+        console.log(localStorage.getItem("loggedIn"));
+        console.log(localStorage.getItem("userID"));
         if (yourResultsState === 'YM') {
-            if (loggedIn === false) {
-                if (chosenAnswer[0].allChosenAnswer.length > 0 && quizTakenNow === true) {
+            if (String(localStorage.getItem("loggedIn")) === 'false') {
+                if ((chosenAnswer.length !== 0) && quizTakenNow === true) {
                     setYourResultsState('VR');
                     setSeeMachtingResultPage(true);
                     setBackendDone(false);
                     setReRender(true);
                 }
                 else {
+                    /* FALSCHE REAKTION: sollte eigentlich besser zur ersten Seite vom Quiz gehen ... da es nur ein begonnenes Quiz gibt ... */
+                    /* -> daher: wenn quiz begonnen wird und chosenAnswer resettet wird -> Match History auch deaktivieren */
                     localStorage.setItem("quizTaken", false);
                     setSeeHomePage(true);
                 }
             }
             else {
-                console.log("/yourmatchesresult: userID: " + chosenAnswer[0].userID);
-                tmpObj = { userID: chosenAnswer[0].userID}
-                axios.post('http://localhost:3001/yourmatchesresult',tmpObj)
+                tmpUserID.userID = localStorage.getItem("userID");
+                console.log("/yourmatchesresult: userID: " + tmpUserID.userID);
+                axios.post('http://localhost:3001/yourmatchesresult',tmpUserID)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
                             console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
