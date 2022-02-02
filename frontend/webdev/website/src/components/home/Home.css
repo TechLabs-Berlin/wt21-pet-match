@@ -22,6 +22,7 @@
 }
 
 .h1__homepage {
+  font-size: 55px;
   padding: 100px;
   position: relative;
   max-width: 400px;
@@ -33,7 +34,7 @@
 .button__take_quiz {
   background: #50c7f7;
   color: #FFFFFF;
-  margin: 20px 200px;
+  margin: 20px 50px;
   max-width: 200px;
 }
 
