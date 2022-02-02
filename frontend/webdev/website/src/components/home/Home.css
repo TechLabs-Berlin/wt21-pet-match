@@ -41,12 +41,12 @@
   background-color: #3695bb;
 }
 
-.cta__homepage a {
+.button__take_quiz a {
   text-decoration: none;
   color: #ffffff;
 }
 
-.cta__homepage a:hover {
+/* .button__take_quiz a:hover {
   text-decoration: none;
   color: #50c7f7;
-}
+} */
