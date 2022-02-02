@@ -30,14 +30,14 @@
 
 
 /* BUTTON */
-.button__take_quiz {
+.button__retake_quiz {
   background: #f8da22;
   color: #463239;
   margin: 20px 200px;
   max-width: 200px;
 }
 
-.button__take_quiz:hover {
+.button__retake_quiz:hover {
   background-color: #c0aa1c;
 }
 
