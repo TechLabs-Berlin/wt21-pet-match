@@ -22,7 +22,6 @@
 }
 
 .h1__homepage {
-  font-size: 60px;
   padding: 100px;
   position: relative;
   max-width: 400px;
@@ -46,8 +45,3 @@
   text-decoration: none;
   color: #ffffff;
 }
-
-/* .button__take_quiz a:hover {
-  text-decoration: none;
-  color: #50c7f7;
-} */
