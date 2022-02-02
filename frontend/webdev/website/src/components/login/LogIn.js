@@ -49,7 +49,7 @@ const LogIn = (props) => {
                 .then(res => {
                     if (res.status === 200) {
                         console.log(res);
-                        localStorage.setItem("userId", res.data.userID);
+                        localStorage.setItem("userID", res.data.userID);
                         localStorage.setItem("firstName", res.data.firstName);
                         localStorage.setItem("quizTaken", res.data.quizTaken);
                         localStorage.setItem("loggedIn", true);
@@ -77,7 +77,7 @@ const LogIn = (props) => {
                 .then(res => {
                     if (res.status === 200) {
                         console.log(res.data);
-                        localStorage.setItem("userId", res.data.userID);
+                        localStorage.setItem("userID", res.data.userID);
                         localStorage.setItem("firstName", res.data.firstName);
                         localStorage.setItem("quizTaken", res.data.quizTaken);
                         localStorage.setItem("loggedIn", true);

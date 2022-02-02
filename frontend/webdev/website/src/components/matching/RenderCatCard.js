@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 const RenderCatCard = (props) => {
-    console.log("=========================================");
-    console.log("... begin: RenderCatCard ...");
-    console.log(props);
+    //console.log("=========================================");
+    //console.log("... begin: RenderCatCard ...");
+    //console.log(props);
     let catToShow = props.catToShow;
     if (catToShow.catData === null) {
         return ('');

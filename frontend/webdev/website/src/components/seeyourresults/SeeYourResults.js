@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router";
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import seeYourResultsCSS from './SeeYourResults.css';
 
@@ -7,8 +8,8 @@ const SeeYourResults = (props) => {
     const [userRecord, setUserRecord] = useState({
         userID: 0,
         quizTaken: false,
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         memberAccount: false,
@@ -27,23 +28,34 @@ const SeeYourResults = (props) => {
     const [backendDone, setBackendDone] = useState(false);    
     const [backendError, setBackendError] = useState(false);
     const [backendErrorMsg, setBackendErrorMsg] = useState('');
+    const [frontendErrorMsg, setFrontendErrorMsg] = useState('');    
     
     let chosenAnswer = [], errorMsgToShow = '', tmpObj; 
     let userFromDB = {
         userID: 0,
         quizTaken: false,
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         memberAccount: false,
         acceptedConsent: false
     };
-
-    console.log("... begin: SeeYourResults ...");
+    let createAccountRecord = {
+        userID: 0,
+        quizTaken: false,
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        memberAccount: true,
+        acceptedConsent: true,
+        allChosenAnswer: []
+    }
+    console.log("============== begin: SeeYourResults ==============");
     
     useEffect(() => {
-        if (localStorage.getItem("loggedIn") === true) {
+        if (String(localStorage.getItem("loggedIn")) === 'true') {
             setLoggedIn(true);
         }
         if (localStorage.getItem("yourResultsState") !== "") {
@@ -52,7 +64,8 @@ const SeeYourResults = (props) => {
 
         if (localStorage.getItem("chosenAnswer") !== null && localStorage.getItem("chosenAnswer").length !== 0) {
             chosenAnswer = JSON.parse(localStorage.getItem("chosenAnswer"));
-            console.log(chosenAnswer);
+            chosenAnswer[0].userID = localStorage.getItem("userID");
+            //console.log(chosenAnswer);
             setAnswerArr(chosenAnswer[0]);
         }
 
@@ -89,19 +102,12 @@ const SeeYourResults = (props) => {
                         console.log(jRes);
                         setResultArr(jRes);
                         userFromDB.userID = jRes.userID;
-                        userFromDB.firstname = jRes.firstname;
-                        userFromDB.lastname = jRes.lastname;
-                        userFromDB.email = jRes.email;
-                        userFromDB.password = jRes.password;
                         userFromDB.quizTaken = jRes.quizTaken;
-                        userFromDB.memberAccount = jRes.memberAccount;
-                        userFromDB.acceptedConsent = jRes.acceptedConsent;
                         setUserRecord(userFromDB);
                         setSeeMachtingResultPage(true);
                         setBackendDone(true);
                         localStorage.setItem("quizTaken", userFromDB.quizTaken);
-                        localStorage.setItem("userId", userFromDB.userId);
-                        localStorage.setItem("firstName", userFromDB.firstName);
+                        localStorage.setItem("userID", userFromDB.userID);
                     })
                     .catch(error => {
                         console.log(" ... SeeYourResult, useEffect, axios.post, catch ...");
@@ -141,7 +147,7 @@ const SeeYourResults = (props) => {
                         setSeeMachtingResultPage(true);
                         setBackendDone(true);
                         localStorage.setItem("quizTaken", userFromDB.quizTaken);
-                        localStorage.setItem("userId", userFromDB.userId);
+                        localStorage.setItem("userID", userFromDB.userID);
                     })
                     .catch(error => {
                         console.log("SeeYourResults: /viewresult - catch, "+error);
@@ -153,10 +159,15 @@ const SeeYourResults = (props) => {
                 console.log(resultArr);
             }
             else if (yourResultsState === 'RT') {
+                console.log("/retakequiz: userID: " + answerArr.userID);
+                console.log(answerArr);
+                console.log(userRecord.userID);
+                console.log(localStorage.getItem("userID"));
+                
                 axios.patch('http://localhost:3001/retakequiz', answerArr)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
-                            console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
+                            console.log(" ... SeeYourResult, useEffect, axios.patch, then, if status = 200 ...");
                             console.log(res.data);
                             return res.data;
                         } 
@@ -164,26 +175,19 @@ const SeeYourResults = (props) => {
                             console.log("SeeYourResults: /retakequiz - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
                         }
                     }).then(jRes => {
-                        console.log(" ... SeeYourResult, useEffect, axios.post, then, then, jsonRes ...");
+                        console.log(" ... SeeYourResult, useEffect, axios.patch, then, then, jsonRes ...");
                         console.log(jRes);
                         setResultArr(jRes);
                         userFromDB.userID = jRes.userID;
-                        userFromDB.firstname = jRes.firstname;
-                        userFromDB.lastname = jRes.lastname;
-                        userFromDB.email = jRes.email;
-                        userFromDB.password = jRes.password;
                         userFromDB.quizTaken = jRes.quizTaken;
-                        userFromDB.memberAccount = jRes.memberAccount;
-                        userFromDB.acceptedConsent = jRes.acceptedConsent;
                         setUserRecord(userFromDB);
                         setSeeMachtingResultPage(true);
                         setBackendDone(true);
                         localStorage.setItem("quizTaken", userFromDB.quizTaken);
-                        localStorage.setItem("userId", userFromDB.userId);
-                        localStorage.setItem("firstName", userFromDB.firstName);
+                        localStorage.setItem("userID", userFromDB.userID);
                     })
                     .catch(error => {
-                        console.log(" ... SeeYourResult, useEffect, axios.post, catch ...");
+                        console.log(" ... SeeYourResult, useEffect, axios.patch, catch ...");
                         console.log("SeeYourResults: /retakequiz - catch, "+error);
                         setBackendError(true);
                         setBackendErrorMsg(error);
@@ -191,7 +195,16 @@ const SeeYourResults = (props) => {
                     });                 
             }
             else if (yourResultsState === 'CR') {
-                axios.post('http://localhost:3001/register', answerArr)
+                console.log("/registerafterquiz: userID: " + answerArr.userID);
+                console.log(answerArr);
+                createAccountRecord.userID = 0;
+                createAccountRecord.answerID = 0;
+                createAccountRecord.firstName = userRecord.firstName;
+                createAccountRecord.username = userRecord.email;
+                createAccountRecord.password = userRecord.password;
+                createAccountRecord.allChosenAnswer = answerArr.allChosenAnswer;
+                console.log(createAccountRecord);
+                axios.post('http://localhost:3001/registerafterquiz', createAccountRecord)
                     .then (res => {
                         if (parseInt(res.status) === 200) {
                             console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
@@ -199,30 +212,29 @@ const SeeYourResults = (props) => {
                             return res.data;
                         } 
                         else {
-                            console.log("SeeYourResults: /register - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                            console.log("SeeYourResults: /registerafterquiz - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
                         }
                     }).then(jRes => {
                         console.log(" ... SeeYourResult, useEffect, axios.post, then, then, jsonRes ...");
                         console.log(jRes);
                         setResultArr(jRes);
                         userFromDB.userID = jRes.userID;
-                        userFromDB.firstname = jRes.firstname;
-                        userFromDB.lastname = jRes.lastname;
-                        userFromDB.email = jRes.email;
-                        userFromDB.password = jRes.password;
+                        userFromDB.firstName = jRes.firstName;
                         userFromDB.quizTaken = jRes.quizTaken;
-                        userFromDB.memberAccount = jRes.memberAccount;
-                        userFromDB.acceptedConsent = jRes.acceptedConsent;
+                        userFromDB.lastName = '';
+                        userFromDB.password = '';
+                        userFromDB.email = '';
+                        localStorage.setItem("loggedIn", true);
+                        localStorage.setItem("quizTaken", jRes.quizTaken);
+                        localStorage.setItem("userID", jRes.userID);
+                        localStorage.setItem("firstName", jRes.firstName);
                         setUserRecord(userFromDB);
                         setSeeMachtingResultPage(true);
                         setBackendDone(true);
-                        localStorage.setItem("quizTaken", userFromDB.quizTaken);
-                        localStorage.setItem("userId", userFromDB.userId);
-                        localStorage.setItem("firstName", userFromDB.firstName);
                     })
                     .catch(error => {
                         console.log(" ... SeeYourResult, useEffect, axios.post, catch ...");
-                        console.log("SeeYourResults: /register - catch, "+error);
+                        console.log("SeeYourResults: /registerafterquiz - catch, "+error);
                         setBackendError(true);
                         setBackendErrorMsg(error);
                         setBackendDone(false);
@@ -235,9 +247,9 @@ const SeeYourResults = (props) => {
     }, [reRender]);
 
     useEffect(() => {
-        console.log("... begin: SeeYourResults, useEffect, [userRecord] ... ");
-        console.log("... end: SeeYourResults useEffect, [userRecord] ... ");
-    }, [userRecord]);    
+        console.log("... begin: SeeYourResults, useEffect, [userRecord, frontendErrorMsg] ... ");
+        console.log("... end: SeeYourResults useEffect, [userRecord, rontendErrorMsg] ... ");
+    }, [userRecord, frontendErrorMsg]);    
 
     const onClickViewResult = e => {
         e.preventDefault();
@@ -245,10 +257,17 @@ const SeeYourResults = (props) => {
         console.log("... begin: onClickViewResult ...");
         console.log(quizTakenNow);
         console.log(loggedIn);
-        if (quizTakenNow && !(loggedIn)) {
-            console.log('... onClickViewResult, if condition OK ...');
-            setYourResultsState('VR');
+        if (quizTakenNow) {
+            if (!loggedIn) {
+                setYourResultsState('VR');
+                console.log('... onClickViewResult, quiz is taken ... (VR) ...');
+            }
+            else {
+                setYourResultsState('RT');
+                console.log('... onClickViewResult, quiz is taken ... (RT) ...');
+            }
             setSeeMachtingResultPage(true);
+            setFrontendErrorMsg('');
             setReRender(true);
         }
         console.log("... end: onClickViewResult ...");
@@ -261,24 +280,27 @@ const SeeYourResults = (props) => {
         console.log(quizTakenNow);
         console.log(loggedIn);
 
-        if (userRecord.firstName === '') {
-            setBackendErrorMsg("Error! First name field is required*.");
+        if (loggedIn) {
+            setFrontendErrorMsg("Error! You are already logged in.");
+        }
+        else if (userRecord.firstName === '') {
+            setFrontendErrorMsg("Error! First name field is required*.");
         }
         else if (userRecord.email === '') {
-            setBackendErrorMsg("Error! Email field is required*.");
+            setFrontendErrorMsg("Error! Email field is required*.");
         }
         else if (userRecord.password === '') {
-            setBackendErrorMsg("Error! Password field is required*.");
+            setFrontendErrorMsg("Error! Password field is required*.");
         }
         else if (String(userRecord.acceptedConsent) !== 'true') {
-            setBackendErrorMsg("Error! Please agree with Privacy Policy before we proceed.");
+            setFrontendErrorMsg("Error! Please agree with Privacy Policy before we proceed.");
         }
         else {
             if (quizTakenNow && !loggedIn) {
                 console.log('... onClickCreate, if condition OK ...');
                 setYourResultsState('CR');
                 setSeeMachtingResultPage(true);
-                setBackendErrorMsg('');
+                setFrontendErrorMsg('');
                 setReRender(true);
             }
         }
@@ -299,18 +321,41 @@ const SeeYourResults = (props) => {
     function renderErrMsg(pErrMsg) {
         if (pErrMsg !== '') {
             return (
-                <div align="center" className="errormsg"><br />{pErrMsg}&nbsp;<br /><br /></div>
+                <div className="error__signup">{pErrMsg}</div>
             );
         }
     }
 
-    console.log("... end: SeeYourResults ...");
+    function renderConsent() {
+        if (userRecord.acceptedConsent === true) {
+            return (
+                <label htmlFor="acceptedConsent">
+                    <input checked onInput={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true" />&nbsp;
+                    I inderstand that my personal data will be processed in accordance with Pet Match's&nsp;
+                    <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM2}</NavLink>.
+                </label>
+            );
+        }
+        else {
+            return (
+                <label htmlFor="acceptedConsent">
+                    <input onInput={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value="true" />&nbsp;
+                    I inderstand that my personal data will be processed in accordance with Pet Match's&nbsp;
+                    <NavLink to={props.cfgData.FE_ROUTE_PRIVACY}>{props.cfgData.FE_ROUTE_PRIVACY_MENUITEM2}</NavLink>.
+                </label>
+            );
+        }
+    }
+
+    console.log("============== end: SeeYourResults ==============");
 
     // if BE route did not well, show why ...
     if (backendError) {
         errorMsgToShow = backendErrorMsg;
     }
-
+    else {
+        errorMsgToShow = frontendErrorMsg;
+    }
     /* if something went wrong ... and could not be resolved -> go to home - page */
     if (seeHomePage) {
         return (
@@ -319,9 +364,8 @@ const SeeYourResults = (props) => {
     }
     else if (seeMachtingResultPage && backendDone) {
         /* user actions & getting matching results done successfully -> show up matching results - page */        
-        console.log("... SeeYourResults, before Redirect (1) ...");
+        console.log("... SeeYourResults, before Redirect to MatchingResult ...");
         console.log(resultArr);
-        console.log("... SeeYourResults, before Redirect (2) ...");
         /* set localStorage - quizTaken -> true */
         localStorage.setItem("quizTaken",true);
         return (
@@ -350,17 +394,13 @@ const SeeYourResults = (props) => {
                         <h2>Sign up to save your results</h2>
                     </div>
                     <form className="form__signup" id="signup_results_page">
-                        <input onChange={fieldChanged} type="text" name="firstname" id="firstname" value={userRecord.firstname} placeholder="Your first name" required />
-                        <input onChange={fieldChanged} type="text" name="lastname" id="lastname" value={userRecord.lastname} placeholder="Your last name" required />
-                        <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email" required />
+                        <input onChange={fieldChanged} type="text" name="firstName" id="firstName" value={userRecord.firstName} placeholder="Your first name*" required />
+                        <input onInput={fieldChanged} type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={userRecord.email} placeholder="Your email*" required />
                         <input onInput={fieldChanged} type="password" name="password" id="password" value={userRecord.password} 
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters."
-                            placeholder="Choose a password" required />
-                        <label htmlFor="acceptedConsent">
-                            <input onChange={fieldChanged} required type="checkbox" id="acceptedConsent" name="acceptedConsent" value={userRecord.acceptedConsent} />&nbsp;
-                            I inderstand that my personal data will be processed in accordance with Pet Match's <a href="/privacy">Privacy Policy</a>.
-                        </label>
+                            placeholder="Choose a password*" required />
+                        {renderConsent()}
                     </form>
                     <div className="container__button_signup_submit">
                         <button type="submit" onClick={onClickCreate} form="signup_results_page" className="button__signup_submit">Create Account</button>
@@ -368,8 +408,8 @@ const SeeYourResults = (props) => {
                     <div className="container__login">
                         <p>Already have an account? <a href="/login">Log in</a></p>
                     </div>
+                    {renderErrMsg(errorMsgToShow)}
                 </div>
-                {renderErrMsg(errorMsgToShow)}
             </main>
         );    
     }

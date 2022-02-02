@@ -4,6 +4,8 @@
     "LAYOUT_ICONS_PATH": "/images/layout/icons/",
     "HEADER_PET_MATCH_LOGO": "petmatch-dummy-logo.png",
     "HEADER_PET_MATCH_LOGO_ALT": "Pet Match - Logo",
+    "HEADER_ICON_AVATAR": "user-avatar.svg",
+    "HEADER_ICON_AVATAR_ALT": "User Avatar",
     "FOOTER_ICON_INSTAGRAM": "instagram.svg",
     "FOOTER_ICON_INSTAGRAM_ALT": "Instagram",
     "FOOTER_ICON_FACEBOOK": "facebook-circle.svg",

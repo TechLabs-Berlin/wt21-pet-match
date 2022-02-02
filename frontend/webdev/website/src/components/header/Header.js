@@ -5,7 +5,7 @@ import HeaderQuiz from './HeaderQuiz';
 import headerCSS from './Header.css';
 
 const Header = (props) => {
-    const [userId, setUserId] = useState('');
+    const [userID, setUserID] = useState('');
     const [firstName, setFirstName] = useState('');
     const [quizTaken, setQuizTaken] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -19,10 +19,7 @@ const Header = (props) => {
     console.log("====== Header - begin: ======");
     console.log(localStorage);
     console.log("-----------------------------");
-    console.log(userId);
-    console.log(firstName);
-    console.log(loggedIn);
-    console.log(quizTaken);
+    console.log("UserID: "+userID+", FirstName: "+firstName+", loggedIn: "+loggedIn+", quizTaken: "+quizTaken);
     console.log("====== Header - end: ======");
 
     const clickLogout = e => {
@@ -30,7 +27,7 @@ const Header = (props) => {
     }
 
     function setLocalStorage(userId,firstName,quizTaken,loggedIn,loginState) {
-        localStorage.setItem("userId",userId);
+        localStorage.setItem("userID",userID);
         localStorage.setItem("firstName",firstName);
         localStorage.setItem("quizTaken",quizTaken);
         localStorage.setItem("loggedIn",loggedIn);
@@ -38,6 +35,11 @@ const Header = (props) => {
     }
 
     function renderHeaderState() {
+        let greetingTXT = props.cfgData.FE_ROUTE_USER_SETTINGS_MENUITEM2;
+        let usersFirstName = localStorage.getItem("firstName");
+        if (usersFirstName !== null && usersFirstName !== "") {
+            greetingTXT = "Hi, " + usersFirstName;
+        }
         if ((logoutRoute === props.cfgData.FE_ROUTE_QUESTIONAIRE_START) ||
             (logoutRoute === props.cfgData.FE_ROUTE_MATCHING_RESULT) ||
             (logoutRoute === props.cfgData.FE_ROUTE_CAT_DETAIL) ||
@@ -45,16 +47,19 @@ const Header = (props) => {
             (logoutRoute === props.cfgData.FE_ROUTE_SEEYOURRESULTS)) {
             logoutRoute = props.cfgData.FE_ROUTE_HOME;
         }
-        
-        if (userId !== '' && String(loggedIn) === 'true') {
+
+        if (userID !== '' && String(loggedIn) === 'true') {
             return (
-                <div className="navbar__login_signup">
-                    <NavLink to={props.cfgData.FE_ROUTE_USER_SETTINGS}>
-                        <button className="button__navbar_signup" type="button">{props.cfgData.FE_ROUTE_USER_SETTINGS_MENUITEM2}</button>
-                    </NavLink>
-                    <NavLink to={logoutRoute}>
-                        <button onClick={clickLogout} className="button__navbar_login" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
-                    </NavLink>
+                <div className="navbar__user_logged_in">
+                    <div className="user__greeting">
+                        <img src={petMatchAvatar} alt={petMatchAvatarAlt} />
+                        <NavLink to={props.cfgData.FE_ROUTE_USER_SETTINGS}>{greetingTXT}</NavLink>
+                    </div>
+                    <div>
+                        <NavLink to={logoutRoute}>
+                            <button onClick={clickLogout} className="button__navbar_logout" type="button">{props.cfgData.FE_ROUTE_LOGOUT_MENUITEM}</button>
+                        </NavLink>
+                    </div>
                 </div>
             );
         }
@@ -73,11 +78,11 @@ const Header = (props) => {
     }
         
     useEffect(() => {
-        if (localStorage.getItem("userId") === null) {
-            localStorage.setItem("userId",userId);
+        if (localStorage.getItem("userID") === null) {
+            localStorage.setItem("userID",userID);
         }
         else {
-            setUserId(localStorage.getItem("userId"));
+            setUserID(localStorage.getItem("userID"));
         }
         if (localStorage.getItem("firstName") === null) {
             localStorage.setItem("firstName",firstName);
@@ -114,10 +119,10 @@ const Header = (props) => {
         if (logoutClicked === true) {
             setLogoutClicked(false);
             // Logout -> BE
-            axios.delete('http://localhost:3001/logout', userId)
+            axios.delete('http://localhost:3001/logout', userID)
                 .then(res => {
                     if (parseInt(res.status) === 200) {
-                        setUserId('');
+                        setUserID('');
                         setFirstName('');
                         setQuizTaken(false);
                         setLoggedIn(false);
@@ -136,6 +141,8 @@ const Header = (props) => {
 
     const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
     const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
+    const petMatchAvatar = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.HEADER_ICON_AVATAR;
+    const petMatchAvatarAlt = props.cfgData.HEADER_ICON_AVATAR_ALT;
 
     return ( 
         <nav className="navbar">

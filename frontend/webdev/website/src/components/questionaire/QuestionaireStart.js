@@ -143,7 +143,7 @@ const QuestionaireStart = (props) => {
         /* if questions already loaded ... */
         if (answerArr.length > 0) {
             if (answerArr[0].userID === '') {
-                answerArr[0].userID = localStorage.getItem("userId");
+                answerArr[0].userID = localStorage.getItem("userID");
             }
             if (answerArr[0].answerID === '') {
                 answerArr[0].answerID = localStorage.getItem("answerId");
@@ -152,7 +152,7 @@ const QuestionaireStart = (props) => {
         }
         else {
             chosenAnswer[0].answerID = localStorage.getItem("answerId");
-            chosenAnswer[0].userID = localStorage.getItem("userId");
+            chosenAnswer[0].userID = localStorage.getItem("userID");
 
             if (questionaireArr.length > 0) {
                 questionaireArr.map((question, index) => {

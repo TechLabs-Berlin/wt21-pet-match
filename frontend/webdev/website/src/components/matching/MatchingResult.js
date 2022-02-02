@@ -15,13 +15,13 @@ const MatchingResult = (props) => {
     const location = useLocation();
     let resultArrToPass = location.state.resultArr.resultArr;
     let filterRecToPass = { neutered: null, goodwith: '', gender: '' }
-    console.log(location);
+    //console.log(location);
     if (location.state.filterRecord !== undefined) {
         filterRecToPass = location.state.filterRecord;
     }
 
-    console.log("... begin: MatchingResult ...");
-    console.log(resultArrToPass);
+    //console.log("... begin: MatchingResult ...");
+    //console.log(resultArrToPass);
 
     useEffect(() => {
         setResultArr(resultArrToPass);
@@ -29,19 +29,19 @@ const MatchingResult = (props) => {
     }, []);
 
     useEffect(() => {
-        console.log("... begin: SeeYourResults, useEffect, [userRecord] ... ");
-        console.log("... end: SeeYourResults useEffect, [userRecord] ... ");
+        //console.log("... begin: MatchingResults, useEffect, [filterRecord] ... ");
+        //console.log("... end: MatchingResults useEffect, [filterRecord] ... ");
     }, [filterRecord]); 
 
     useEffect(() => {
-        console.log("... begin: SeeYourResults, useEffect, [reRender] ... ");
-        console.log("... end: SeeYourResults useEffect, [reRender] ... ");
+        //console.log("... begin: MatchingResults, useEffect, [reRender] ... ");
+        //console.log("... end: MatchingResults useEffect, [reRender] ... ");
         setReRender(false);
     }, [reRender]); 
 
     const fieldChanged = e => {
         const { name, value } = e.target;
-        /* if input-field changed, save new value in state variable userRecord */
+        /* if input-field changed, save new value in state variable filterRecord */
         setFilterRecord(prevRecord => {
             return {
                 ...prevRecord,
@@ -76,7 +76,7 @@ const MatchingResult = (props) => {
         }
     }
 
-    console.log("... end: MatchingResult ...");
+    //console.log("... end: MatchingResult ...");
     return (
         <main className="matching_results">
             <div className="container__filters">

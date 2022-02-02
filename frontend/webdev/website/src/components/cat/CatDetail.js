@@ -29,13 +29,13 @@ const CatDetails = (props) => {
     /* read out catData passed as state parameter to CatDetails */
 
     const location = useLocation();
-    console.log("======== CAT DETAIL ===========");
-    console.log(location);
+    //console.log("======== CAT DETAIL ===========");
+    //console.log(location);
     const catData = location.state.resultArr.resultArr;
     const resultArr = location.state.resultArr.resultArr;
     const actIndex = location.state.catIndex;
-    console.log(actIndex);
-    console.log(catData);
+    //console.log(actIndex);
+    //console.log(catData);
 
     /* catData from  DB  */
     const catImage = props.cfgData.CAT_IMAGES_PATH + catData.Result[actIndex].catData.img;
@@ -140,8 +140,8 @@ const CatDetails = (props) => {
     function renderLinkTarget(pLink,pShelterName) {
         let actualLink = pLink;
         props.cfgData.SHELTER_LINKS.map((shelterLink, index) => {
-            console.log(shelterLink.shelterName);
-            console.log(pShelterName);
+            //console.log(shelterLink.shelterName);
+            //console.log(pShelterName);
             if (shelterLink.shelterName === pShelterName) {
                 actualLink = shelterLink.shelterLink;
             }
