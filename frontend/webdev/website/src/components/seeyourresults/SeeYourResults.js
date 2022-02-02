@@ -80,54 +80,66 @@ const SeeYourResults = (props) => {
         console.log('UseEffect (first) - Props: ' + quizTakenNow + ', ' + loggedIn + ', ' + yourResultsState);
         console.log(localStorage.getItem("loggedIn"));
         console.log(localStorage.getItem("userID"));
-        if (yourResultsState === 'YM') {
-            if (String(localStorage.getItem("loggedIn")) === 'false') {
-                if ((chosenAnswer.length !== 0) && quizTakenNow === true) {
-                    setYourResultsState('VR');
-                    setSeeMachtingResultPage(true);
-                    setBackendDone(false);
-                    setReRender(true);
+        console.log(localStorage.getItem("quizTaken"));
+        console.log(quizTakenNow);
+        console.log(userRecord.quizTaken);
+
+        if ((yourResultsState === 'YM') &&
+            (String(localStorage.getItem("loggedIn")) === 'true') &&
+            (quizTakenNow === true) &&
+            (localStorage.getItem("chosenAnswer").length !== 0)) {
+            setYourResultsState('RT');
+        }
+        else {
+            if (yourResultsState === 'YM') {
+                if (String(localStorage.getItem("loggedIn")) === 'false') {
+                    if ((chosenAnswer.length !== 0) && quizTakenNow === true) {
+                        setYourResultsState('VR');
+                        setSeeMachtingResultPage(true);
+                        setBackendDone(false);
+                        setReRender(true);
+                    }
+                    else {
+                        /* FALSCHE REAKTION: sollte eigentlich besser zur ersten Seite vom Quiz gehen ... da es nur ein begonnenes Quiz gibt ... */
+                        /* -> daher: wenn quiz begonnen wird und chosenAnswer resettet wird -> Match History auch deaktivieren */
+                        localStorage.setItem("quizTaken", false);
+                        setSeeHomePage(true);
+                    }
                 }
                 else {
-                    /* FALSCHE REAKTION: sollte eigentlich besser zur ersten Seite vom Quiz gehen ... da es nur ein begonnenes Quiz gibt ... */
-                    /* -> daher: wenn quiz begonnen wird und chosenAnswer resettet wird -> Match History auch deaktivieren */
-                    localStorage.setItem("quizTaken", false);
-                    setSeeHomePage(true);
-                }
-            }
-            else {
-                tmpUserID.userID = localStorage.getItem("userID");
-                console.log("/yourmatchesresult: userID: " + tmpUserID.userID);
-                axios.post('http://localhost:3001/yourmatchesresult',tmpUserID)
-                    .then (res => {
-                        if (parseInt(res.status) === 200) {
-                            console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
-                            console.log(res.data);
-                            return res.data;
-                        } 
-                        else {
-                            console.log("SeeYourResults: /yourmatchesresult - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
-                        }
-                    }).then(jRes => {
-                        console.log(" ... SeeYourResult, useEffect, axios.post, then, then, jsonRes ...");
-                        console.log(jRes);
-                        setResultArr(jRes);
-                        userFromDB.userID = jRes.userID;
-                        userFromDB.quizTaken = jRes.quizTaken;
-                        setUserRecord(userFromDB);
-                        setSeeMachtingResultPage(true);
-                        setBackendDone(true);
-                        localStorage.setItem("quizTaken", userFromDB.quizTaken);
-                        localStorage.setItem("userID", userFromDB.userID);
-                    })
-                    .catch(error => {
-                        console.log(" ... SeeYourResult, useEffect, axios.post, catch ...");
-                        console.log("SeeYourResults: /yourmatchesResult - catch, "+error);
-                        setBackendError(true);
-                        setBackendErrorMsg(error);
-                        setBackendDone(false);
-                    }); 
+                    tmpUserID.userID = localStorage.getItem("userID");
+                    console.log("/yourmatchesresult: userID: " + tmpUserID.userID);
+                    axios.post('http://localhost:3001/yourmatchesresult',tmpUserID)
+                        .then (res => {
+                            if (parseInt(res.status) === 200) {
+                                console.log(" ... SeeYourResult, useEffect, axios.post, then, if status = 200 ...");
+                                console.log(res.data);
+                                return res.data;
+                            } 
+                            else {
+                                console.log("SeeYourResults: /yourmatchesresult - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                            }
+                        }).then(jRes => {
+                            console.log(" ... SeeYourResult, useEffect, axios.post, then, then, jsonRes ...");
+                            console.log(jRes);
+                            setResultArr(jRes);
+                            userFromDB.userID = jRes.userID;
+                            userFromDB.quizTaken = jRes.quizTaken;
+                            setUserRecord(userFromDB);
+                            setSeeMachtingResultPage(true);
+                            setBackendDone(true);
+                            localStorage.setItem("quizTaken", userFromDB.quizTaken);
+                            localStorage.setItem("userID", userFromDB.userID);
+                        })
+                        .catch(error => {
+                            console.log(" ... SeeYourResult, useEffect, axios.post, catch ...");
+                            console.log("SeeYourResults: /yourmatchesResult - catch, "+error);
+                            setBackendError(true);
+                            setBackendErrorMsg(error);
+                            setBackendDone(false);
+                        }); 
 
+                }
             }
         }
     }, []);
@@ -284,6 +296,20 @@ const SeeYourResults = (props) => {
         console.log("... end: onClickViewResult ...");
     };
 
+   function validatePWD(pwd) {
+        if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(pwd)) {
+            return (true)
+        }
+        return (false)
+    }
+
+    function validateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        return (false)
+    }    
+
     const onClickCreate = e => {
         e.preventDefault();
         /* ... user finished questionaire right now and clicked on button view results ... */
@@ -293,17 +319,35 @@ const SeeYourResults = (props) => {
 
         if (loggedIn) {
             setFrontendErrorMsg("Error! You are already logged in.");
+            return;
         }
-        else if (userRecord.firstName === '') {
+        if (userRecord.firstName === '') {
             setFrontendErrorMsg("Error! First name field is required*.");
+            return;
         }
-        else if (userRecord.email === '') {
+        if (userRecord.email === '') {
             setFrontendErrorMsg("Error! Email field is required*.");
+            return;
         }
-        else if (userRecord.password === '') {
+        else {
+            if (!validateEmail(userRecord.email)) {
+                setFrontendErrorMsg("Error! Email is not valid.");
+                return;
+            }
+        }
+
+        if (userRecord.password === '') {
             setFrontendErrorMsg("Error! Password field is required*.");
+            return;
         }
-        else if (String(userRecord.acceptedConsent) !== 'true') {
+        else {
+            if (!validatePWD(userRecord.password)) {
+                setFrontendErrorMsg("Error! Password is not valid.");
+                return;
+            }
+        }
+
+        if (String(userRecord.acceptedConsent) !== 'true') {
             setFrontendErrorMsg("Error! Please agree with Privacy Policy before we proceed.");
         }
         else {

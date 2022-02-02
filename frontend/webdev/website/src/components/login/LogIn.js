@@ -99,6 +99,20 @@ const LogIn = (props) => {
         setReRender(false);
     }, [reRender, backendDone]);
 
+    function validatePWD(pwd) {
+        if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(pwd)) {
+            return (true)
+        }
+        return (false)
+    }
+
+    function validateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        return (false)
+    }
+
     const fieldChanged = e => {
         const { name, value } = e.target;
         /* if input-field changed, save new value in state variable userRecord */
@@ -114,15 +128,33 @@ const LogIn = (props) => {
         e.preventDefault();
 
         if (userRecord.firstName === '' && loginState === 'C') {
-            setErrorMsgToShow ("Error! First name field is required*.");
+            setErrorMsgToShow("Error! First name field is required*.");
+            return;
         }
-        else if (userRecord.email === '') {
-            setErrorMsgToShow ("Error! Email field is required*.");
+
+        if (userRecord.email === '') {
+            setErrorMsgToShow("Error! Email field is required*.");
+            return;
         }
-        else if (userRecord.password === '') {
+        else {
+            if (loginState === 'C' && !validateEmail(userRecord.email)) {
+                setErrorMsgToShow("Error! Email is not valid.");
+                return;
+            }
+        }
+
+        if (userRecord.password === '') {
             setErrorMsgToShow("Error! Password field is required*.");
+            return;
         } 
-        else if (String(userRecord.acceptedConsent) !== 'true') {
+        else {
+            if (loginState === 'C' && !validatePWD(userRecord.password)) {
+                setErrorMsgToShow("Error! Password is not valid.");
+                return;
+            }
+        }
+
+        if (String(userRecord.acceptedConsent) !== 'true') {
             /* do this only if in mode create new account */
             if (loginState === 'C') {
                 setErrorMsgToShow("Error! Please agree with Privacy Policy before we proceed.");
