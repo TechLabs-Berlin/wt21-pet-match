@@ -1,0 +1,182 @@
+/* MAIN */
+h1 {
+  font-size: 50px;
+}
+
+input[type="number"] {
+  margin: 10px;
+  border: 1px solid #ecf9fe;
+  border-radius: 3px;
+  border-color: #50c8f73f;
+  box-sizing: border-box;
+  width: 60px;
+  padding: 10px 10px;
+  background-color: #ecf9fe;
+  font-family: PT Sans Caption, sans-serif;
+  color: #463239;
+}
+
+input[type="number"]::placeholder {
+  color: #b9b9b9;
+}
+
+.container__top_questionnaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #50c7f7;
+  height: 40vh;
+}
+
+.container__bottom_questionnaire {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 20vh;
+}
+
+.container__bottom_questionnaire_yes_no {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+}
+
+.container__question {
+  text-align: center;
+  padding: 0 50px;
+}
+
+.questionnaire_question {
+  margin-block-start: 0;
+}
+
+.question_count p {
+  margin: 0;
+  text-align: center;
+  color: #2a353f;
+  opacity: 35%;
+  font-size: 22px;
+  font-family: PT Sans, sans-serif;
+}
+
+.questionnaire_option {
+  display: flex;
+  text-align: center;
+}
+
+.questionnaire_option_yes_no {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/* NEXT + BACK BUTTON */
+.container__back_next {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin: 30px 100px;
+}
+
+.button__questionnaire_next {
+  background-color: #eb4b38;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
+.button__questionnaire_next:disabled {
+  background-color: #eb4b38;
+  opacity: 0.6;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.button__questionnaire_next:hover {
+  background-color: #cc2714;
+}
+
+.button__questionnaire_back {
+  color: #9da7a5;
+  border: 0px;
+  background: none;
+  box-shadow: 0 0 0 0;
+}
+
+.button__questionnaire_back:hover {
+  color: #9da7a57a;
+}
+
+/* RADIO BUTTONS */
+/* Customize the label (the container) */
+.container__radio_button {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: PT Sans, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+
+.container__radio_button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fef9d8;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a yellow background color */
+.container__radio_button:hover input ~ .checkmark {
+  background-color: #f9df39;
+}
+
+/* When the radio button is checked, add a red background */
+.container__radio_button input:checked ~ .checkmark {
+  background-color: #eb4b38;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container__radio_button input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container__radio_button .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
