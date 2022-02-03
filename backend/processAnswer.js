@@ -1,3 +1,4 @@
+// function for connecting to DS model and retrieve cat data from database
 module.exports = async function processAnswer(id, chosenAnswer){
     const cats = require('./models/cats');
     const axios = require('axios');
