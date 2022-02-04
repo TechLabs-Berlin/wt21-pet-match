@@ -7,7 +7,7 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
-// require('dotenv').config();
+require('dotenv').config();
 
 // Import Schema and function
 const matchQuiz = require('./models/matchquiz');
@@ -16,7 +16,7 @@ const user = require('./models/user');
 const processAnswer = require('./processAnswer');
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://petmatch-admin:techlab2122@cluster0.9nbuq.mongodb.net/petmatch', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
