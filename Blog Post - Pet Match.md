@@ -88,15 +88,15 @@ Cat images are stored on file system in public folder of the website.
 
 **Additional functionality of our project:**
 
-- login, sign up
-- user can rewatch his matches, as his answers to the questionnaire are stored in his profile, and re-take the quiz
-- matching results page includes filter functionality
+- User can sign up / login.
+- User can rewatch his matches, as his answers to the questionnaire are stored in his profile, and re-take the quiz.
+- Matching results page includes filter functionality.
 
 **Open Points:**
 
-- CSS integration into React project is incomplete
-- Cleanup functionality for useEffect is missing
-- User friendliness of our forms could be improved
+- CSS integration into React project is incomplete.
+- Cleanup functionality for useEffect is missing.
+- User friendliness of our forms could be improved.
 - There are some warning messages when compiling the project that we could not solve, so far.
 
 - And, last but not least, with the knowledge of today, we would implement the react project differently than we have done it!
