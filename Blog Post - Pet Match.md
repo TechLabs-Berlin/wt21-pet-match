@@ -78,7 +78,7 @@ After last question the array with all answers is passed to backend. Backend rou
 
 ![Pet Match - React - Axios](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_Axios.png?raw=true)
 
-Backend, after asking data science API for applying matching algorithm to user’s answers, sends back the 10 best cat matches to frontend. In frontend, the user is redirected to machting results page showing up previews of the selected cats. For this functionality we use der React component Redirect and pass the list of selected cats as state variable (see screenshot - React - Redirect). On matching result page the state variable is read out with the React component useLocation.
+Backend, after asking data science API for applying matching algorithm to user’s answers, sends back the 10 best cat matches to frontend. In frontend, the user is redirected to machting results page showing up previews of the selected cats. For this functionality we use the React component Redirect and pass the list of selected cats as state variable (see screenshot - React - Redirect). On matching result page the state variable is read out with the React component useLocation.
 
 ![Pet Match - React - Redirect](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_RedirectWithState.png?raw=true)
 
