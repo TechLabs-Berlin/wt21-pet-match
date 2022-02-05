@@ -30,6 +30,7 @@
 }
 
 
+
 /* BUTTON */
 .button__retake_quiz {
   background: #f8da22;
@@ -43,10 +44,12 @@
 }
 
 
+
 /* USER HOME */
 .container__homepage_bottom {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .container__homepage_bottom h2 {
@@ -99,4 +102,11 @@
 
 .container__text_user {
   align-self: center;
+}
+
+.img__map {
+  border-radius: 30px;
+  width: 350px;
+  margin-bottom: 30px;
+
 }
