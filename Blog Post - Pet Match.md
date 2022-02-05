@@ -88,9 +88,9 @@ Cat images are stored on file system in public folder of the website.
 
 **Additional functionality of our project:**
 
-- Login, sign up
-- User can rewatch his matches, as his answers to the questionnaire are stored in his profile, and re-take the quiz.
-- Matching results page includes filter functionality
+- login, sign up
+- user can rewatch his matches, as his answers to the questionnaire are stored in his profile, and re-take the quiz
+- matching results page includes filter functionality
 
 **Open Points:**
 
