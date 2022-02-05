@@ -40,6 +40,7 @@
 }
 
 
+
 /* BOTTOM CONTAINER */
 .main__how_it_works h3 {
     font-family: PT Sans, sans-serif;
@@ -58,6 +59,7 @@
 .bulletpts__howitworks {
     margin: 60px;
 }
+
 .icon__howitworks {
     display: flex;
     justify-content: center;
