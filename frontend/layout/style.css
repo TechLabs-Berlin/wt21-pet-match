@@ -1,4 +1,4 @@
-/* ====================General start===================== */
+/* GENERAL */
 body {
     font-family: PT Sans, sans-serif;
     font-size: 100%;
@@ -65,11 +65,9 @@ button {
 button:hover {
     transition: 0.2s ease;
 }
-/* ====================General end===================== */
 
 
-/* ===================Homepage start=================== */
-/* Images can only be resolved / loaded if reference to them resides in public-folder */
+/* HOMEPAGE */
 .banner__homepage::before {
     background: url(./img/kitten-hero_01.png);
 }
@@ -88,10 +86,10 @@ button:hover {
 .button__take_quiz:hover {
     background-color: #3695bb;
 }
-/* ===================Homepage end=================== */
 
 
-/* ================Media Queries start================= */
+
+/* MEDIA QUERIES */
 @media (max-width: 768px) {
     button {
         max-width: 135px;
@@ -126,4 +124,3 @@ button:hover {
         font-size: 2em;
     }
 }
-/* =================Media Queries end================== */

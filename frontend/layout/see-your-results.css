@@ -1,5 +1,5 @@
 /* MAIN */
-h1 {
+.questionnaire h1 {
     font-size: 50px;
 }
 
@@ -35,6 +35,7 @@ h1 {
     justify-content: end;
     height: 6vh;
 }
+
 
 
 /* BUTTONS */
