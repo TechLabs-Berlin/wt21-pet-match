@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; 
 import axios from 'axios';
+import { renderErrMsg, validatePWD, validateEmail } from '../functions/HelperFunctions';
 import logInCSS from './LogIn.css';
 
 const LogIn = (props) => {
@@ -15,15 +16,25 @@ const LogIn = (props) => {
         memberAccount: true,
         acceptedConsent: false
     });
+
     const [reRender, setReRender] = useState(false);
     const [goToPageUS, setGoToPageUS] = useState(false);
     const [backendDone, setBackendDone] = useState(false);
     const [errorMsgToShow, setErrorMsgToShow] = useState('');
 
     let loginText = props.cfgData.FE_ROUTE_LOGIN_MENUITEM;
-
-    /* { "username": "rb2_test@gmail.com", "password": "123456" } */
     let loginState = '', tmpLogin, tmpRecord;
+
+    function resetPageState(pUserID,pFirstName,pQuizTaken) {
+        localStorage.setItem("userID", pUserID);
+        localStorage.setItem("firstName", pFirstName);
+        localStorage.setItem("quizTaken", pQuizTaken);
+        localStorage.setItem("loggedIn", true);
+        localStorage.setItem("loginState", 'O');
+        setGoToPageUS(true);
+        setBackendDone(true);
+        setErrorMsgToShow("");        
+    }
 
     if ((props.loginState) && (props.loginState !== '')) {
         loginState = props.loginState;
@@ -42,23 +53,14 @@ const LogIn = (props) => {
     
     useEffect(() => {
         if (loginState === 'C' && reRender === true) {
-            console.log(userRecord);
             tmpRecord = { "userID": 0, "answerID": 0, "acceptedConsent": userRecord.acceptedConsent, "firstName": userRecord.firstName, "lastName": userRecord.lastName, "username": userRecord.email, "password": userRecord.password };
-            console.log(tmpRecord);
             axios.post('http://localhost:3001/registerbeforequiz', tmpRecord)
                 .then(res => {
                     if (res.status === 200) {
-                        console.log(res);
-                        localStorage.setItem("userID", res.data.userID);
-                        localStorage.setItem("firstName", res.data.firstName);
-                        localStorage.setItem("quizTaken", res.data.quizTaken);
-                        localStorage.setItem("loggedIn", true);
-                        localStorage.setItem("loginState", 'O');
-                        setGoToPageUS(true);
-                        setBackendDone(true);
+                        resetPageState(res.data.userID,res.data.firstName,res.data.quizTaken);
                     }
                     else {
-                        console.log("Login: /registerbeforequiz - nicht OK, Status: " + res.status + ", Msg: " + res.statusText);
+                        console.log("Login: /registerbeforequiz - not OK, state: " + res.status + ", msg: " + res.statusText);
                         setErrorMsgToShow("Account creation failed!");
                     }
                 })
@@ -68,26 +70,14 @@ const LogIn = (props) => {
                 });
         }
         else if (loginState === 'I' && reRender === true) {
-            tmpLogin = {
-                "username": userRecord.email,
-                "password": userRecord.password
-            };
-            console.log(tmpLogin);
+            tmpLogin = { "username": userRecord.email, "password": userRecord.password };
             axios.post('http://localhost:3001/login', tmpLogin)
                 .then(res => {
                     if (res.status === 200) {
-                        console.log(res.data);
-                        localStorage.setItem("userID", res.data.userID);
-                        localStorage.setItem("firstName", res.data.firstName);
-                        localStorage.setItem("quizTaken", res.data.quizTaken);
-                        localStorage.setItem("loggedIn", true);
-                        localStorage.setItem("loginState", 'O');
-                        setGoToPageUS(true);  
-                        setBackendDone(true);
-                        setErrorMsgToShow("");
+                        resetPageState(res.data.userID,res.data.firstName,res.data.quizTaken);
                     }
                     else {
-                        console.log("Login: /login - not OK, Status: " + res.status + ", Msg: " + res.statusText);
+                        console.log("Login: /login - not OK, state: " + res.status + ", msg: " + res.statusText);
                         setErrorMsgToShow("Login failed!");
                     }
                 })
@@ -99,22 +89,9 @@ const LogIn = (props) => {
         setReRender(false);
     }, [reRender, backendDone]);
 
-    function validatePWD(pwd) {
-        if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(pwd)) {
-            return (true)
-        }
-        return (false)
-    }
-
-    function validateEmail(mail) {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-            return (true)
-        }
-        return (false)
-    }
-
     const fieldChanged = e => {
         const { name, value } = e.target;
+
         /* if input-field changed, save new value in state variable userRecord */
         setUserRecord(prevRecord => {
             return {
@@ -202,20 +179,6 @@ const LogIn = (props) => {
                 <input onChange={fieldChanged} type="text" name="firstName" id="firstName" value={userRecord.firstName} placeholder="Your first name*" required />
             );
         }
-        else {
-            return ('');
-        }
-    }
-
-    function renderLastName(loginState) {
-        if (loginState === 'C') {
-            return (
-                <input onChange={fieldChanged} type="text" name="lastName" id="lastName" value={userRecord.lastName} placeholder="Your last name" required />
-            );
-        }
-        else {
-            return ('');
-        }
     }
 
     function renderLoginQuestion(pLoginState) {
@@ -226,14 +189,6 @@ const LogIn = (props) => {
                         <NavLink to={props.cfgData.FE_ROUTE_LOGIN}>{props.cfgData.FE_ROUTE_LOGIN_MENUITEM}</NavLink> 
                     </p>
                 </div>
-            );
-        }
-    }
-
-    function renderErrMsg(pErrorMsgToShow) {
-        if (pErrorMsgToShow !== '') {
-            return (
-                <div className="error__signup"><p>{pErrorMsgToShow}</p></div>
             );
         }
     }
@@ -270,4 +225,5 @@ const LogIn = (props) => {
         );
     }
 };
+
 export default LogIn;

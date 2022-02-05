@@ -4,8 +4,8 @@ import { Link, NavLink } from 'react-router-dom';
 import userSettingsCSS from './UserSettings.css';
 
 const UserSettings = (props) => {
-    const userId = localStorage.getItem("userId");
-    const firstName = localStorage.getItem("firstName");
+    //const userID = localStorage.getItem("userID");
+    //const firstName = localStorage.getItem("firstName");
     const loggedIn = localStorage.getItem("loggedIn");
     const quizTaken = localStorage.getItem("quizTaken");
 
@@ -19,11 +19,11 @@ const UserSettings = (props) => {
     const uSUS_TXT_02 = props.cfgData.USER_SETTINGS_US_TXT_02;
 
     const retakeQuizClicked = e => {
-        localStorage.setItem("yourResultsState","RT");      
+        localStorage.setItem("yourResultsState","RT"); 
     };
 
     const matchQuizClicked = e => {
-        localStorage.setItem("yourResultsState","RT");      
+        localStorage.setItem("yourResultsState","YM");      
     };
 
     const onUserSettingsClicked = e => {
@@ -70,8 +70,6 @@ const UserSettings = (props) => {
         }
     }
 
-    console.log("userId: "+userId+"firstName: "+firstName);
-    console.log(loggedIn);
     if (String(loggedIn) === 'false') {
         return (
             <Redirect to={{ pathname: props.cfgData.FE_ROUTE_HOME }} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 
 const RenderFormField = (props) => {
     let answerValue = 0;
@@ -11,16 +11,8 @@ const RenderFormField = (props) => {
     if (props.answer.answerValue) {
         answerValue = props.answer.answerValue;
     }
-    /* 
-    console.log("=========================================");
-    console.log("... begin: RenderFormField ...");
-    console.log("actualValue: "+actualValue);
-    console.log(optionTxt);
-    console.log("answerValue: " + answerValue);
-    console.log("props.answer.answerValue: "+props.answer.answerValue);
-    console.log("... end: RenderFormField ...");
-    console.log("=========================================");
-    */
+
+    /* .... render from field: qType = 1 -> numeric field, qType = 2 -> radio-button ... */
     if (props.qType === 1) {
         if (props.answer.answerText.indexOf('/') !== -1) {
             answerTxt = props.answer.answerText.split('/');
@@ -29,7 +21,7 @@ const RenderFormField = (props) => {
             answerValue = actualValue;
         } 
         else {
-            answerValue = parseInt(answerTxt[2]);
+            answerValue = parseInt(answerTxt[2]); 
         }
         return (
             <div key={actualIndex} className="questionnaire_option">
