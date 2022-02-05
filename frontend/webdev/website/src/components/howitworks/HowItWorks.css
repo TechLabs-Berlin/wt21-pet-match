@@ -37,7 +37,6 @@
 
 .container__howitworks_text {
     max-width: 430px;
-    /* line-height: 34px; */
 }
 
 
@@ -46,7 +45,6 @@
     font-family: PT Sans, sans-serif;
     font-size: 1.3em;
     font-weight: lighter;
-    /* line-height: 40px; */
 }
 
 .container__bottom_howitworks {
