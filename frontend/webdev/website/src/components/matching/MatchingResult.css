@@ -143,8 +143,8 @@
   color: #eb4b38;
 }
 
-/* This enables the whole cat card to be a link to the cat profile */
 .a__cat_profile span {
+  /* This enables the whole cat card to be a link to the cat profile */
   position: absolute;
   width: 100%;
   height: 100%;
