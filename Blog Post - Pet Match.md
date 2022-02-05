@@ -30,22 +30,15 @@
 
 **_2. Blog Post WD-FE_**
 
-Tech Stack:
-Figma, Visual Code Studio
-HTML, CSS, Javascript
-React (Router, Hooks), Axios
+**Tech Stack:**
+
+- Figma, Visual Code Studio
+- HTML, CSS, Javascript
+- React (Router, Hooks), Axios
 
 As we lost UX team early in the project, the WD-FE team decided to go on and design the layout on Figma. Since Andrea has a personal interest in layout and design and also some experience with it, she started with the development in Figma.
 
-For this reason we divided up our tasks as follows:
-
-Andrea:
-
-- Figma Layouts, Static HTML-pages + CSS
-
-Brigitta:
-
-- React project, Javascript coding, Coordination with WD-BE
+For this reason we divided up our tasks as follows: Andrea worked on Figma Layouts, Static HTML-pages and CSS, Brigitta on React project, Javascript coding and Coordination with WD-BE.
 
 As we as a team faced a time problem, we decided not to use any additional UI library or other tools we were not familiar with.
 
@@ -61,40 +54,52 @@ Brigitta set up frontend part of our project with React Router (see screenshot R
 
 ![Pet Match - React routes](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_Routes.png?raw=true)
 
-In the following we want to show you our way from a Figma layout (see screenshot Figma - Questionnaire) to a dynamic generated web page with React Router. As an example page we use a page from the questionnaire for potential adopters.
+In the following we want to show you our way from a Figma layout to a dynamic generated web page with React Router. As an example page we use a page from the questionnaire for potential adopters (see screenshot Figma - Questionnaire).
 
 ![Pet Match - Figma - Questionnaire](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_FigmaLayout_Questionnaire.png?raw=true)
 
-The main part of React project was to implement a dynamically generated page showing up the whole questionnaire for adopters. In order to remain as flexible as possible in the number of questions and possible answers, we decided to store them in a database. Together with the team WD-BE we decided to use mongoDB Atlas (see screenshot MongoDB - Question).
+One of the main parts of React project was to implement a dynamically generated page showing up the whole questionnaire for adopters. In order to remain as flexible as possible in the number of questions and possible answers, we decided to store them in a database. Together with the team WD-BE we decided to use mongoDB Atlas (see screenshot MongoDB - Question).
 
 ![Pet Match - MongoDB - Question](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_mongoDB_Questionnaire.png?raw=true)
 
-Here you can see some screenshots of how we created a React Router component from a static HTML page:
-PetMatch_BlogPost_HTML_Questionnaire.png PetMatch_BlogPost_React_DynamicPage_Questionnaire.png
-PetMatch_BlogPost_React_DaynamicPage_RenderSingleQuestion.png
-PetMatch_BlogPost_React_DynamcPage_RenderFormField.png
+The screenshots below show the path from a static HTML page (see screenshot HTML page) to the associated components in React (see screenshots Dynamic Questionnaire, Render Question, Render Form Field).
 
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_HTML_Questionnaire.png?raw=true)
+![Pet Match - HTML page](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_HTML_Questionnaire.png?raw=true)
 
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DynamicPage_Questionnaire.png?raw=true)
+![Pet Match - Dynamic Questionnaire](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DynamicPage_Questionnaire.png?raw=true)
 
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DaynamicPage_RenderSingleQuestion.png?raw=true)
+![Pet Match - Render Question](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DaynamicPage_RenderSingleQuestion.png?raw=true)
 
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DynamcPage_RenderFormField.png?raw=true)
+![Pet Match - Render Form Field](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_DynamcPage_RenderFormField.png?raw=true)
 
 We read out the whole questionnaire from DB and store all questions in a JS array and present them to the user as separate pages each. The user can navigate back and forth between the pages, e.g. to be able to correct his answers. All user’s answers are stored in a JS array as well. For this purpose we use Hooks (useState, useEffect).
 
-After last question the array with all answers is passed to backend. Backend routes are invoked either via Axios HTTP request or mongoose functionality (see PetMatch_BlogPost_React_Axios.png).
+After last question the array with all answers is passed to backend. Backend routes are invoked either via Axios HTTP request or mongoose functionality (see screenshot React - Axios).
 
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_Axios.png?raw=true)
+![Pet Match - React - Axios](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_Axios.png?raw=true)
 
-Backend, after asking data science API for applying matching algorithm to user’s answers, sends back the 10 best cat matches to frontend. In frontend, the user is redirected to machting results page showing up previews of the selected cats. For this functionality we use der React component Redirect and pass the list of selected cats as state variable (see PetMatch_BlogPost_React_RedirectWithState.png). On matching result page the state variable is read out with the React component useLocation.
+Backend, after asking data science API for applying matching algorithm to user’s answers, sends back the 10 best cat matches to frontend. In frontend, the user is redirected to machting results page showing up previews of the selected cats. For this functionality we use der React component Redirect and pass the list of selected cats as state variable (see screenshot - React - Redirect). On matching result page the state variable is read out with the React component useLocation.
 
-![](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_RedirectWithState.png?raw=true)
+![Pet Match - React - Redirect](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/frontend/BlogPost/Screenshots/PetMatch_BlogPost_React_RedirectWithState.png?raw=true)
 
 On machting result page the cats are presented in sorted order, best matches first. For each cat there is a link to cat detail page.
 
 Cat images are stored on file system in public folder of the website.
+
+**Additional functionality of our project:**
+
+- Login, sign up
+- User can rewatch his matches, as his answers to the questionnaire are stored in his profile, and re-take the quiz.
+- Matching results page includes filter functionality
+
+**Open Points:**
+
+- CSS integration into React project is incomplete
+- Cleanup functionality for useEffect is missing
+- User friendliness of our forms could be improved
+- There are some warning messages when compiling the project that we could not solve, so far.
+
+- And, last but not least, with the knowledge of today, we would implement the react project differently than we have done it!
 
 **_3. Blog Post WD-BE_**
 
