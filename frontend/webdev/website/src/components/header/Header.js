@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import HeaderQuiz from './HeaderQuiz';
+import HeaderQuiz from './HeaderQuiz'; 
 import headerCSS from './Header.css';
 
 const Header = (props) => {
@@ -16,22 +16,29 @@ const Header = (props) => {
     const location = useLocation();
     let logoutRoute = location.pathname;
 
-    console.log("====== Header - begin: ======");
-    console.log(localStorage);
-    console.log("-----------------------------");
-    console.log("UserID: "+userID+", FirstName: "+firstName+", loggedIn: "+loggedIn+", quizTaken: "+quizTaken);
-    console.log("====== Header - end: ======");
+    const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
+    const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
+    const petMatchAvatar = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.HEADER_ICON_AVATAR;
+    const petMatchAvatarAlt = props.cfgData.HEADER_ICON_AVATAR_ALT;    
 
     const clickLogout = e => {
         setLogoutClicked(true);
     }
 
-    function setLocalStorage(userId,firstName,quizTaken,loggedIn,loginState) {
+    function setLocalStorage(userID,firstName,quizTaken,loggedIn,loginState) {
         localStorage.setItem("userID",userID);
         localStorage.setItem("firstName",firstName);
         localStorage.setItem("quizTaken",quizTaken);
         localStorage.setItem("loggedIn",loggedIn);
         localStorage.setItem("loginState",loginState);
+    }
+
+    function setUseStateVars() {
+        setUserID(localStorage.getItem("userID"));
+        setFirstName(localStorage.getItem("firstName"));
+        setLoginState(localStorage.getItem("loginState"));
+        setQuizTaken(localStorage.getItem("quizTaken"));
+        setLoggedIn(localStorage.getItem("loggedIn"));  
     }
 
     function renderHeaderState() {
@@ -40,6 +47,8 @@ const Header = (props) => {
         if (usersFirstName !== null && usersFirstName !== "") {
             greetingTXT = "Hi, " + usersFirstName;
         }
+        /* when user clicks on logout, make sure to leave pages whose content       */
+        /* depends on whether the user is logged in or not; show home page instead */
         if ((logoutRoute === props.cfgData.FE_ROUTE_QUESTIONAIRE_START) ||
             (logoutRoute === props.cfgData.FE_ROUTE_MATCHING_RESULT) ||
             (logoutRoute === props.cfgData.FE_ROUTE_CAT_DETAIL) ||
@@ -76,49 +85,29 @@ const Header = (props) => {
             );
         }
     }
-        
+
     useEffect(() => {
-        if (localStorage.getItem("userID") === null) {
-            localStorage.setItem("userID",userID);
-        }
-        else {
-            setUserID(localStorage.getItem("userID"));
-        }
-        if (localStorage.getItem("firstName") === null) {
-            localStorage.setItem("firstName",firstName);
-        }
-        else {
-            setFirstName(localStorage.getItem("firstName"));
-        }
-        if (localStorage.getItem("loginState") === null) {
-            localStorage.setItem("loginState", loginState);
-        }
-        else {
-            setLoginState(localStorage.getItem("loginState"));
-        }
-        if (localStorage.getItem("quizTaken") === null) {
-            localStorage.setItem("quizTaken", quizTaken);
-        }
-        else {
-            setQuizTaken(localStorage.getItem("quizTaken"));
-        }
-        if (localStorage.getItem("loggedIn") === null) {
-            localStorage.setItem("loggedIn", loggedIn);
-        }
-        else {
-            setLoggedIn(localStorage.getItem("loggedIn"));
-        }
         if (firstRendered === false) {
-            localStorage.setItem("yourResultsState","");
-            setLogoutClicked(false);
+            if (!((String(localStorage.getItem("loggedIn")) === 'true') || (String(localStorage.getItem("quizTaken")) === 'true'))) {
+                setLocalStorage(userID, firstName, quizTaken, loggedIn, loginState);
+            }
+            else {
+                setUseStateVars();
+            }
+            localStorage.setItem("yourResultsState", "");
             setFirstRendered(true);
+            setLogoutClicked(false);
+        }
+        else {
+            setUseStateVars();
         }
     });
 
     useEffect(() => {
         if (logoutClicked === true) {
             setLogoutClicked(false);
-            // Logout -> BE
+
+            // invoke logout -> BE
             axios.delete('http://localhost:3001/logout', userID)
                 .then(res => {
                     if (parseInt(res.status) === 200) {
@@ -127,10 +116,12 @@ const Header = (props) => {
                         setQuizTaken(false);
                         setLoggedIn(false);
                         setLoginState('I');
+                        localStorage.clear();
                         setLocalStorage('', '', false, false, 'I');
+                        localStorage.setItem("yourResultsState","");
                     }
                     else {
-                        console.log("Header: /logout - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                        console.log("Header: /logout - not OK, state: "+res.status+", msg: "+res.statusText);
                     }
                 })
                 .catch(error => {
@@ -138,11 +129,6 @@ const Header = (props) => {
                 });
         }
     }, [logoutClicked]);
-
-    const petMatchLogo = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.HEADER_PET_MATCH_LOGO;
-    const petMatchLogoAlt = props.cfgData.HEADER_PET_MATCH_LOGO_ALT;
-    const petMatchAvatar = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.HEADER_ICON_AVATAR;
-    const petMatchAvatarAlt = props.cfgData.HEADER_ICON_AVATAR_ALT;
 
     return ( 
         <nav className="navbar">

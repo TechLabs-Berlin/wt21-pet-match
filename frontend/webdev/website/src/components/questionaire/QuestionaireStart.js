@@ -15,23 +15,21 @@ const QuestionaireStart = (props) => {
     let qIndex = 0, maxPage = 0, actualPage = {}, actualAnswers = [];
     let questionText = '', questionType = 0, questionActValue = 0;
 
-    //console.log("... begin: QuestionaireStart ...");
-    //console.log(localStorage);
-
     useEffect(() => {
         setFirstRenderd(true);
+
+        /* ... re-initialize some local storage as if new questionnaire begins ... */
         localStorage.setItem("chosenAnswer", answerArr);
+
         fetch("/matchquiz")
             .then(res => {
                 if (res.ok) {
                     return res.json();
                 }
                 else {
-                    console.log("QuestionaireStart: /matchquiz - nicht OK, Status: "+res.status+", Msg: "+res.statusText);
+                    console.log("QuestionaireStart: /matchquiz - not OK, state: "+res.status+", msg: "+res.statusText);
                 }
             }).then(jRes => {
-                console.log(" ... QuestionaireStart, useEffect, /matchquiz, then, then, jRes ...");
-                console.log(jRes);
                 setQuestionaireArr(jRes);
             })
             .catch(error => {
@@ -40,24 +38,15 @@ const QuestionaireStart = (props) => {
     }, []);
 
     useEffect(() => {
-        //console.log("... start: useEffect: qP + aA ...");
         if (firstRendered) {
-            //console.log("... fristRendered TRUE ...");
-            //console.log(chosenAnswer);
-            //sessionArr = window.sessionStorage.getItem("chosenAnswer");
-            //console.log(sessionArr);
             setAnswerArr(chosenAnswer);
             setReRender(false);
         }
-        //console.log("... end: useEffect: qP + aA ...");
     }, [reRender, questionairePage, answerArr]);
 
     const onClickNextPage = e => {
         e.preventDefault();
         let newQPage = questionairePage + 1;
-        //console.log("... onClickNextPage ...");
-        //console.log(questionairePage);
-        //console.log(newQPage);
         if (questionairePage === questionaireArr.length) {
             setSeeYourResultsPage(true);
         }
@@ -65,36 +54,23 @@ const QuestionaireStart = (props) => {
             setQuestionairePage(newQPage);
         }
         setReRender(true);
-        //console.log(questionairePage);
     };
 
     const onClickPrevPage = e => {
         e.preventDefault();
         let newQPage = questionairePage - 1;
-        //console.log("... onClickPrevPage ...");
-        //console.log(questionairePage);
-        //console.log(newQPage);
         setQuestionairePage(newQPage);
-        setReRender(true);
-        //console.log(questionairePage);        
+        setReRender(true);       
     };
 
     const fieldChanged = (fieldValue) => {
         let pageToChangeValue = questionairePage - 1;
-        //console.log("... start: fieldChanged ...");
-        //console.log(fieldValue);
         chosenAnswer = answerArr;
         chosenAnswer[0].allChosenAnswer[pageToChangeValue].chosenAnswer = parseInt(fieldValue);
-        //console.log(chosenAnswer);
         localStorage.setItem("chosenAnswer", JSON.stringify(chosenAnswer));
-        //sessionArr = JSON.parse(window.sessionStorage.getItem("chosenAnswer"));
         setAnswerArr(chosenAnswer);
         setReRender(true);
-        //console.log(answerArr);
-        //console.log(sessionArr);
-        //console.log("... end: fieldChanged ...");
     };
-
 
     function renderPreviousButton(actualPage, maxPage, actualValue, questionType) {
         let pageTxt = props.cfgData.Q_QUESTIONAIRE_BTN_PTXT;
@@ -106,7 +82,7 @@ const QuestionaireStart = (props) => {
         }
     }
 
-    function renderNextButton(actualPage, maxPage, actualValue, questionType) {
+    function renderNextButton(actualPage, maxPage, actualValue, questionType) { 
         let pageTxt = props.cfgData.Q_QUESTIONAIRE_BTN_NTXT;
         if (actualPage === maxPage) {
             pageTxt = props.cfgData.Q_QUESTIONAIRE_BTN_FTXT;
@@ -120,32 +96,31 @@ const QuestionaireStart = (props) => {
     }
 
     function renderQuestion(pAnswers, pMaxPage, pActValue, pType) {
-        if (pMaxPage < 1) {
-            return ('');
+        if (pMaxPage >= 1) {
+            return (
+                <div className="container__bottom_questionnaire">
+                    {pAnswers.map((answer, index) => (
+                        <RenderFormField
+                            key={index} f
+                            fieldChanged={fieldChanged}
+                            actValue={pActValue}
+                            answer={answer}
+                            index={index}
+                            qType={pType}
+                        />
+                    ))}
+                </div>
+            )
         }
-        return (
-            <div className="container__bottom_questionnaire">
-                {pAnswers.map((answer, index) => (
-                    <RenderFormField
-                        key={index} f
-                        fieldChanged={fieldChanged}
-                        actValue={pActValue}
-                        answer={answer}
-                        index={index}
-                        qType={pType}
-                    />
-                ))}
-            </div>
-        )
     }
 
     function initializeAnswerArr() {
-        /* if questions already loaded ... */
+        /* if questions already loaded from BE ... */
         if (answerArr.length > 0) {
-            if (answerArr[0].userID === '') {
+            if (answerArr[0].userID === '' || answerArr[0].userID === 0) {
                 answerArr[0].userID = localStorage.getItem("userID");
             }
-            if (answerArr[0].answerID === '') {
+            if (answerArr[0].answerID === '' || answerArr[0].answerID === 0) {
                 answerArr[0].answerID = localStorage.getItem("answerId");
             }
             chosenAnswer = answerArr;
@@ -163,24 +138,22 @@ const QuestionaireStart = (props) => {
         }
     }
 
-    /* Do all this stuff, if useEffect has been executed and state-variables contain data fetched from DB */
+    /* ... do all this stuff, if useEffect has been executed for first time and state-variables contain data fetched from DB ... */
     if (firstRendered && questionaireArr.length > 0) {
         /* Control page navigation and page content to show */
         qIndex = questionairePage - 1;
         maxPage = questionaireArr.length;
         actualPage = questionaireArr[qIndex];
+        
+        /* initialize the array of given answers by the user */
         initializeAnswerArr();
-        //console.log(questionaireArr);
-        //console.log(sessionStorage.chosenAnswer);
         questionActValue = parseInt(chosenAnswer[0].allChosenAnswer[qIndex].chosenAnswer);
         questionText = actualPage.questionText;
         questionType = actualPage.questionType;
         actualAnswers = actualPage.answer;
     }
-    
-    //console.log("... end: QuestionaireStart ...");
 
-    /* last question answered -> show up seeYourResults - page */
+    /* ... last question has been answered -> show up seeYourResults - page ... */
     if (questionairePage === maxPage && seeYourResultsPage) {
         return (
             <Redirect to={props.cfgData.FE_ROUTE_SEEYOURRESULTS} />
@@ -208,4 +181,5 @@ const QuestionaireStart = (props) => {
         );
     }
 };
+
 export default QuestionaireStart;

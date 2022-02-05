@@ -1,5 +1,5 @@
 import React from 'react';
-import privacyCSS from './Privacy.css';
+import privacyCSS from './Privacy.css'; 
 
 const Privacy = (props) => {
     const privacyHeaderImg = props.cfgData.LAYOUT_IMAGES_PATH + props.cfgData.PRIVACY_HEADERIMG;

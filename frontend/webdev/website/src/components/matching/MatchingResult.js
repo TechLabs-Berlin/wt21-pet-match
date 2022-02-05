@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink,useLocation } from 'react-router-dom';
 import RenderCatCard from './RenderCatCard';
-import matchingResultCSS from './MatchingResult.css';
+import matchingResultCSS from './MatchingResult.css'; 
 
 const MatchingResult = (props) => {
     const [filterRecord, setFilterRecord] = useState({
@@ -9,38 +9,30 @@ const MatchingResult = (props) => {
         goodwith: '',
         gender: '',
     });
-    const [resultArr, setResultArr] = useState();
     const [reRender, setReRender] = useState(false);
 
     const location = useLocation();
     let resultArrToPass = location.state.resultArr.resultArr;
     let filterRecToPass = { neutered: null, goodwith: '', gender: '' }
-    //console.log(location);
+
     if (location.state.filterRecord !== undefined) {
         filterRecToPass = location.state.filterRecord;
     }
 
-    //console.log("... begin: MatchingResult ...");
-    //console.log(resultArrToPass);
-
     useEffect(() => {
-        setResultArr(resultArrToPass);
         setFilterRecord(filterRecToPass);
     }, []);
 
     useEffect(() => {
-        //console.log("... begin: MatchingResults, useEffect, [filterRecord] ... ");
-        //console.log("... end: MatchingResults useEffect, [filterRecord] ... ");
     }, [filterRecord]); 
 
     useEffect(() => {
-        //console.log("... begin: MatchingResults, useEffect, [reRender] ... ");
-        //console.log("... end: MatchingResults useEffect, [reRender] ... ");
         setReRender(false);
     }, [reRender]); 
 
     const fieldChanged = e => {
         const { name, value } = e.target;
+
         /* if input-field changed, save new value in state variable filterRecord */
         setFilterRecord(prevRecord => {
             return {
@@ -76,7 +68,6 @@ const MatchingResult = (props) => {
         }
     }
 
-    //console.log("... end: MatchingResult ...");
     return (
         <main className="matching_results">
             <div className="container__filters">

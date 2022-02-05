@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import footerCSS from './Footer.css';
 
 const Footer = (props) => {
@@ -7,8 +7,6 @@ const Footer = (props) => {
     const instaLogoAlt = props.cfgData.FOOTER_ICON_INSTAGRAM_ALT;
     const facebookLogo = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.FOOTER_ICON_FACEBOOK;
     const facebookLogoAlt = props.cfgData.FOOTER_ICON_FACEBOOK_ALT;
-    const paypalLogo = props.cfgData.LAYOUT_ICONS_PATH + props.cfgData.FOOTER_ICON_PAYPAL;
-    const paypalLogoAlt = props.cfgData.FOOTER_ICON_PAYPAL_ALT;
 
     return ( 
         <footer>

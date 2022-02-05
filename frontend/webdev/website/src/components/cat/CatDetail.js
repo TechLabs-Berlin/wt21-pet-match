@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import RenderCatTag from './RenderCatTag';
 import catDetailCSS from './CatDetail.css';
 
@@ -12,7 +12,7 @@ const CatDetails = (props) => {
     const iconArrowLeftAlt = props.cfgData.ICON_ARROW_LEFT_ALT;
     const matchResultPage = props.cfgData.FE_ROUTE_MATCHING_RESULT;
 
-    /* constants -> maybe to move into cfgData-file */
+    /* constants -> maybe to be moved into cfgData.json file */
     const linkTxt = "Return to Matches";
     const hLineGender = 'Gender';
     const hLineAge = 'Age';
@@ -23,32 +23,30 @@ const CatDetails = (props) => {
     const shelterTxtAva = 'Available at: ';
     const shelterTxtBTN = 'Contact Shelter';
     const breedAlternativeTxt = 'Domestic short/longhair';
+    const meetText = 'Meet ';
+    const otherCatsText = 'Other cats';
+    const yesTxt = 'Yes';
+    const noTxt = 'No';
+    const yearsOldTxt = " y.o.";
 
-    /* to go back to machting results ... use history */
-    const history = useHistory();
-    /* read out catData passed as state parameter to CatDetails */
-
+    /* read out catData passed as state parameter to CatDetails page */
     const location = useLocation();
-    //console.log("======== CAT DETAIL ===========");
-    //console.log(location);
     const catData = location.state.resultArr.resultArr;
     const resultArr = location.state.resultArr.resultArr;
     const actIndex = location.state.catIndex;
-    //console.log(actIndex);
-    //console.log(catData);
 
     /* catData from  DB  */
     const catImage = props.cfgData.CAT_IMAGES_PATH + catData.Result[actIndex].catData.img;
     const catImageAlt = catData.Result[actIndex].catData.alttext;
     const catName = catData.Result[actIndex].catData.catName;
-    const catNameTxt = "Meet " + catName;
+    const catNameTxt = meetText + catName;
     const catTags = catData.Result[actIndex].catData.tags;
     const catBreed = catData.Result[actIndex].catData.breed;
     const catNeutered = catData.Result[actIndex].catData.neutered;
     const catHealth = catData.Result[actIndex].catData.healthIssue;
     const catGood = catData.Result[actIndex].catData.goodwith;
     const catLikesCats = catData.Result[actIndex].catData.likesCats;
-    const catAge = catData.Result[actIndex].catData.age + " y.o.";
+    const catAge = catData.Result[actIndex].catData.age + yearsOldTxt;
 
     function renderBreed(pBreed, pHL) {
         let breedTxt = pBreed;
@@ -63,15 +61,12 @@ const CatDetails = (props) => {
                 </div>                
             );
         } 
-        else {
-            return ('');
-        }
     }
 
     function renderGoodWith(pGood, pLikesCats, pHL) {
         let goodTxt = '';
         if (pLikesCats) {
-            goodTxt = 'Other cats';
+            goodTxt = otherCatsText;
         }        
         if (pGood) {
             if (pLikesCats) {
@@ -93,10 +88,10 @@ const CatDetails = (props) => {
     function renderNeutered(pNeutered, pNL) {
         let neuteredTxt = '';
         if (pNeutered) {
-            neuteredTxt = neuteredTxt + 'Yes';
+            neuteredTxt = neuteredTxt + yesTxt;
         }
         else {
-            neuteredTxt = neuteredTxt + 'No';
+            neuteredTxt = neuteredTxt + noTxt;
         }
         return (
             <div className="cat_sterilized">
@@ -109,10 +104,10 @@ const CatDetails = (props) => {
     function renderHealth(pHealth,pHL) {
         let healthIssueTxt = '';
         if (pHealth) {
-            healthIssueTxt = healthIssueTxt + 'Yes';
+            healthIssueTxt = healthIssueTxt + yesTxt;
         }
         else {
-            healthIssueTxt = healthIssueTxt + 'No';
+            healthIssueTxt = healthIssueTxt + noTxt;
         }
         return (
             <div className="cat_health_issues">
@@ -123,10 +118,7 @@ const CatDetails = (props) => {
     }
 
     function renderShelterBTN(pTarget, pLink, pBTNTxt) {
-        if (pLink === '') {
-            return ('');
-        }
-        else {
+        if (pLink !== '') {
             return (
                 <div className="container__button_contact_shelter">    
                     <a target={pTarget} href={pLink}>
@@ -140,8 +132,6 @@ const CatDetails = (props) => {
     function renderLinkTarget(pLink,pShelterName) {
         let actualLink = pLink;
         props.cfgData.SHELTER_LINKS.map((shelterLink, index) => {
-            //console.log(shelterLink.shelterName);
-            //console.log(pShelterName);
             if (shelterLink.shelterName === pShelterName) {
                 actualLink = shelterLink.shelterLink;
             }
@@ -169,9 +159,6 @@ const CatDetails = (props) => {
                     {renderShelterBTN(actualTarget,actualLink,pBTNTxt)}
                 </div>
             );
-        }
-        else {
-            return ('');
         }
     }
 
