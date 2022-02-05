@@ -15,6 +15,8 @@
   margin-block-end: 5px
 }
 
+
+
 /* RETURN */
 .container__return {
   display: flex;
@@ -30,12 +32,15 @@
   color: #9da7a57a;
 }
 
+
+
 /* TOP CONTAINER */
 .container__top_cat_profile {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 50px;
 }
+
 
 
 /* CONTAINER CAT PROFILE PICTURE */
@@ -73,6 +78,7 @@
   position: absolute;
   top: 50%;
 }
+
 
 
 /* CONTAINER CAT DESCRIPTION */
@@ -140,6 +146,7 @@
 }
 
 
+
 /* CONTAINER CONTACT SHELTER */
 .container__contact_shelter {
 display: flex;
@@ -165,6 +172,7 @@ align-items: center;
 .button__contact_shelter:hover {
   background-color: #9e1f11;
 }
+
 
 
 /* TAGS */
@@ -212,6 +220,7 @@ align-items: center;
 .tag_vocal {
   background-color: #ffb0af;
 }
+
 
 
 /* CONTAINER BOTTOM CAT PROFILE */
