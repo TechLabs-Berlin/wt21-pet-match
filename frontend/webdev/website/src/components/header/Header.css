@@ -85,6 +85,8 @@
   color: #FFFFFF;
 }
 
+
+
 /* WHEN USER IS LOGGED IN */
 .navbar__user_logged_in {
   display: flex;

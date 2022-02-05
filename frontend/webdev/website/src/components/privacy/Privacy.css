@@ -17,11 +17,12 @@
 
 .container__text_privacy_policy {
   padding: 40px 200px;
-  background-color: #f0f8fa;
+  background-color: #F0F8FA;
 }
 
-/* MAIN */
 
+
+/* MAIN */
 .h2_privacy_policy {
   font-size: 24px;
   font-family: PT Sans, sans-serif;
@@ -36,11 +37,6 @@
   margin-top: 5px;
 }
 
-/* a {
-    font-size: 20px;
-    font-family: PT Sans, sans-serif;
-} */
-
 .li_privacy_policy {
   font-size: 20px;
   font-family: PT Sans, sans-serif;
@@ -48,6 +44,6 @@
   list-style: square;
 }
 
-address a {
+.address__data_authority a {
   font-size: 16px;
 }

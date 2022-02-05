@@ -1,5 +1,5 @@
 /* MAIN */
-h1 {
+.questionnaire h1 {
   font-size: 50px;
 }
 
@@ -10,7 +10,6 @@ h1 {
   background-color: #50c7f7;
   height: 40vh;
 }
-
 
 .container__bottom_see_your_results {
   display: flex;
@@ -33,9 +32,10 @@ h1 {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  justify-content: flex-end;
+  justify-content: end;
   height: 6vh;
 }
+
 
 
 /* BUTTONS */
@@ -71,6 +71,14 @@ h1 {
 
 
 /* SIGN UP FORM */
+.form__signup {
+  width: 45%;
+}
+
+.form__signup label {
+  font-size: 10px;
+}
+
 .container__signup_option {
   display: flex;
   flex-direction: column;
@@ -87,10 +95,6 @@ h1 {
   font-size: 0.2 em;
   font-family: PT Sans Caption, sans-serif;
   margin-bottom: 0;
-}
-
-.form__signup {
-  width: 45%;
 }
 
 .form__signup input[type="text"], .form__signup input[type="email"], .form__signup input[type="password"] {
@@ -110,10 +114,15 @@ h1 {
   color: #b9b9b9;
 }
 
-.form__signup label {
-  font-size: 12px;
+.error__signup {
+  color: #842029;
+  background-color: #f8d7da;
+  border-radius: 3px;
+  border: 1px solid #f5c2c7;
+  margin: 0px 0px 20px 0px;
+  max-width: 100px;
 }
 
-.form__signup input[type="checkbox"] {
-  transform: scale(0.8);
+.error__signup p {
+  margin: 5px 10px;
 }

@@ -1,9 +1,9 @@
 /* MAIN */
-h1 {
+.questionnaire h1 {
   font-size: 50px;
 }
 
-input[type="number"] {
+.questionnaire input[type="number"] {
   margin: 10px;
   border: 1px solid #ecf9fe;
   border-radius: 3px;
@@ -16,7 +16,7 @@ input[type="number"] {
   color: #463239;
 }
 
-input[type="number"]::placeholder {
+.questionnaire input[type="number"]::placeholder {
   color: #b9b9b9;
 }
 
@@ -74,6 +74,8 @@ input[type="number"]::placeholder {
   padding-left: 20px;
 }
 
+
+
 /* NEXT + BACK BUTTON */
 .container__back_next {
   display: flex;
@@ -111,8 +113,10 @@ input[type="number"]::placeholder {
   color: #9da7a57a;
 }
 
+
+
 /* RADIO BUTTONS */
-/* Customize the label (the container) */
+/* Customizes the label (the container) */
 .container__radio_button {
   display: flex;
   flex-direction: column;
@@ -128,8 +132,7 @@ input[type="number"]::placeholder {
   user-select: none;
 }
 
-/* Hide the browser's default radio button */
-
+/* Hides the browser's default radio button */
 .container__radio_button input {
   position: absolute;
   opacity: 0;
@@ -138,7 +141,7 @@ input[type="number"]::placeholder {
   width: 0;
 }
 
-/* Create a custom radio button */
+/* Creates a custom radio button */
 .checkmark {
   position: absolute;
   top: 0;
@@ -149,12 +152,12 @@ input[type="number"]::placeholder {
   border-radius: 50%;
 }
 
-/* On mouse-over, add a yellow background color */
+/* On mouse-over, adds a yellow background color */
 .container__radio_button:hover input ~ .checkmark {
   background-color: #f9df39;
 }
 
-/* When the radio button is checked, add a red background */
+/* When the radio button is checked, adds a red background */
 .container__radio_button input:checked ~ .checkmark {
   background-color: #eb4b38;
 }
