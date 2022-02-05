@@ -38,7 +38,7 @@
 
 As we lost UX team early in the project, the WD-FE team decided to go on and design the layout on Figma. Since Andrea has a personal interest in layout and design and also some experience with it, she started with the development in Figma.
 
-For this reason we divided up our tasks as follows: Andrea worked on Figma Layouts, Static HTML-pages and CSS, Brigitta on React project, Javascript coding and Coordination with WD-BE.
+For this reason we divided up our tasks as follows: Andrea worked on Figma layouts, static HTML-pages and CSS, Brigitta on React project, Javascript coding and coordination with WD-BE.
 
 As we as a team faced a time problem, we decided not to use any additional UI library or other tools we were not familiar with.
 
