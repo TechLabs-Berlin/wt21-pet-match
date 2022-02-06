@@ -10,7 +10,7 @@ Project status: Phase of development
 
 Launch: 02.2022 (on a local server)
 
-Project documentation url: [wt21-pet-match/Blog Post - Pet Match.md at frontend · TechLabs-Berlin/wt21-pet-match (github.com)](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/frontend/Blog Post - Pet Match.md)
+[Project documentation](https://github.com/TechLabs-Berlin/wt21-pet-match/blob/main/Documentation%20and%20Presentation/Blog%20Post%20-%20Pet%20Match.md).
 
 License name: MIT
 
@@ -33,37 +33,20 @@ We as Pet Match are convinced that by analyzing the traits of a potential adopte
 
 
 
-## Requirements
-
-First of all, make sure you have all prerequisites installed before you start with the setup:
-
-- axios
-- bcrypt
-- cookieParser
-- code editor (we used Visual Studio Code)
-- cors
-- express
-- mongoose
-- Node.js
-- passport
-- Python (Anaconda packages)
-- React App and Router
-- session
-- Webbrowser
-
 ## Setup
 
-To run the code you need to clone the repo in order to have all files downloaded on your computer or server.
+1. Clone the repo in order to have all files downloaded on your computer or server.
 
 ```
 $ git clone https://github.com/TechLabs-Berlin/wt21-pet-match.git
 ```
 
-To Install all the NPM packages mentioned in the section "Requirements" you can use following code:
+2. Make sure to have all npm packages installed. To do this, run `$ npm install` in the `/backend` folder and `$ npm install` in the `/frontend/webdev/website` folder.
 
-`$ npm install` 
+3. Make sure to have a mongoDB database. [See below](#create-a-database).
 
-The website starts on http://localhost:3000 as you can see in the file */wt21-pet-match/frontend/webdev/website/package.json* which is needed to use the backend routes.
+4. Run the server. To run the server, type in the command `$ npm run devStart` in the `/backend` folder.
+5. Run the frontend application. To start the frontend application, run `$ npm start` in the `/frontend/webdev/website` folder. The application will run at `https://localhost:3000`.
 
 
 
@@ -77,7 +60,7 @@ Below you can find an example command for running in the terminal:
 mongoimport --uri <connectionString>/<database> --collection <collection> --type json --file <fileName> --jsonArray
 ```
 
-For the backend-part the npm package DotEnv was used in the server.js file. So to use the code an .env file needs to be created and the URI connetion string to connect to a MongoDB database server needs to be adjusted to the server you have created.
+For the backend-part the npm package DotEnv was used in the server.js file. So to use the code a .env file needs to be created and the URI connetion string to connect to a MongoDB database server needs to be adjusted to the server you have created.
 
 ```
 MONGODB_URI = ``mongodb+srv://server.example.com/``<databaseName>
@@ -102,23 +85,13 @@ chmod +x run_FLASK_appy.py
 ```
 
 
-
-### Correct Linking
-
-Before you can run the index.html file make sure that all directories and folders are not shifted to other repositories. Otherwise the html files can not open the linked pictures or needed files e.g. css-files:
-
-```
- <link rel="stylesheet" href="../webdev/website/public/css/style.css">
-    <link rel="stylesheet" href="../webdev/website/src/components/home/Home.css">
-    <link rel="stylesheet" href="../webdev/website/src/components/header/Header.css">
-    <link rel="stylesheet" href="../webdev/website/src/components/footer/Footer.css">
-```
-
-
-
 ## How to operate the prototype
 
-After you are done with the installation and setup you can run the index.html file on your browser.  Click on the button "Take the quiz" in order to do the questionnaire. At the end you can either register/login or let the website show you the cats which are matching with your personality and lifestyle.
+1. After you are done with the installation and setup you can run the localhost on your browser.
+2. You'll be taken to the main page, where you can click on the  button "Take the quiz" in order to do the questionnaire.
+3. After you respond to the 15 questions, you will see a page where you can either Sign Up to save your matches, or view your matches directly by clicking on the button "View Your Matches".
+4. You will be taken to the "Your Matches" page and be presented with 10 potential cat matches. On this page, you can filter cats by gender, sterelization status and compatibility with kids, cats and experienced tutor. If you wish to reset the filters, you can click on "Reset All Filters".
+5. To check the cat profile, you can click on the cat card, and you will be taken to their profile page.
 
 
 
@@ -138,15 +111,16 @@ https://www.figma.com/file/MYJxeD6diYyffzUC3Yq9r3/Pet-Match-Web
 
 
 
-## List of known bugs
+## Notes
 
-The cat information are predefined (not real) and not linked to any database of a shelter.
+- The cat information are predefined (not real) and not linked to any database of a shelter.
+- The icons to navigate and like a cat on top of the cat image, on the "Cat Profile" page, are static at the moment and don't do anything.
 
 
 
 ## Credits and acknowledgments
 
-There are people worth mentioning who supported us with our project. Leticia Valladares and Siracha who supported the pet match project with their UX designs. Our mentors Allan Jorge and Benedikt Suhr and the other techies from TechLabs Alba, Zubin John, Bogdan Ciobotaru, Daniel da Rocha, Stephanie Mennear, Basan Kuberlinov, Hayden Liu, Laura Dobson and Bruno Costa who helped us as with technical/coding issues.
+There are people worth mentioning who supported us with our project. Leticia Valladares and Siracha who joined the project to support UX tasks at the end. Our mentors Allan Jorge and Benedikt Suhr. All TechLabs volunteers, specially Alba, Zubin John, Bogdan Ciobotaru, Daniel da Rocha, Stephanie Mennear, Basan Kuberlinov, Hayden Liu and Laura Dobson. And Bruno Costa who helped us with technical/coding issues.
 
 
 
